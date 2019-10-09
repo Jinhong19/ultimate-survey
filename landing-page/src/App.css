@@ -2,8 +2,9 @@
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 110px;
+  padding-top: 50px;
 }
 
 .cardStyle {
@@ -13,5 +14,10 @@
 
 .text {
   padding: 50px;
+  padding-top: 30px;
   text-align: center;
+}
+
+#title {
+  padding: 10px;
 }
