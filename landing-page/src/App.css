@@ -1,0 +1,23 @@
+.logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 250px;
+  height: 110px;
+  padding-top: 50px;
+}
+
+.cardStyle {
+  width: 500px;
+  height: 250px;
+}
+
+.text {
+  padding: 50px;
+  padding-top: 30px;
+  text-align: center;
+}
+
+#title {
+  padding: 10px;
+}
