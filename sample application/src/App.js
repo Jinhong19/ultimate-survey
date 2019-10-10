@@ -49,16 +49,16 @@ class App extends Component {
           {
             "type": "radiogroup",
             "name": "position",
-            "title": "Choose job position...",
+            "title": "Are you happy with your job?",
             "isRequired": true,
             "colCount": 0,
-            "choices": ["1|Designer", "2|Front-end Developer", "3|Back-end Developer", "4|Database Administrator", "5|System Engineer"]
+            "choices": ["1|Very mauch yes!!", "2|much yes", "3|yes", "4|ummmm", "5|prefer not to answer"]
           },
           {
             type: "barrating",
             name: "barrating1",
             ratingTheme: "css-stars",
-            title: "Please rate the movie you've just watched",
+            title: "How good was the last question?",
             choices: ["1", "2", "3", "4", "5"]
           },
           {
@@ -278,8 +278,8 @@ class App extends Component {
             onValueChanged={this.onValueChanged}
           />
           {/*If you do not want to show Survey Creator, comment the line below*/}
-          <h1>SurveyJS Creator in action:</h1>
-          <SurveyCreator />
+          {/*<h1>SurveyJS Creator in action:</h1>
+          <SurveyCreator /> */}
         </div>
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
