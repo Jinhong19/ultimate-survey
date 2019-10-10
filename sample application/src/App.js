@@ -267,7 +267,7 @@ class App extends Component {
       <div className="App">
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React with SurveyJS</h2>
+          <h2>We are the Ultimate 3!</h2>
         </div>
         <div className="surveyjs">
           {/*If you want to show survey, uncomment the line below*/}

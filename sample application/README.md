@@ -3,8 +3,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
 ## How to run this sample application
- - git clone https://github.com/surveyjs/surveyjs_react_quickstart.git
- - cd surveyjs_react_quickstart
+ - git clone https://github.com/Jinhong19/ultimate-survey.git
+ - pull from sample app branch
+ - cd sample application
  - npm i
  - npm start
  - open http://localhost:3000/ in your web browser
