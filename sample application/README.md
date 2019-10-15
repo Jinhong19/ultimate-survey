@@ -10,6 +10,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
  - npm start
  - open http://localhost:3000/ in your web browser
 
+ ## For the newest version, also download the following
+ - npm i react-router-dom
+ - npm i @material-ui/core
 
 
 You can find the detailed information on how to perform common tasks in [this guide](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
