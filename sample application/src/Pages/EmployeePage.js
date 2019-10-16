@@ -41,96 +41,36 @@ widgets.bootstrapslider(Survey);
 
 class App extends Component {
   json = {
-    title: "Product Feedback Survey Example",
+    title: "Employee Satisfaction Survey Example",
     showProgressBar: "top",
     pages: [
       {
         elements: [
           {
             "type": "radiogroup",
-            "name": "position",
+            "name": "job happiness",
             "title": "Are you happy with your job?",
-            "isRequired": true,
+            "isRequired": false,
             "colCount": 0,
-            "choices": ["1|Very mauch yes!!", "2|much yes", "3|yes", "4|ummmm", "5|prefer not to answer"]
-          },
-          {
-            type: "barrating",
-            name: "barrating1",
-            ratingTheme: "css-stars",
-            title: "How good was the last question?",
-            choices: ["1", "2", "3", "4", "5"]
-          },
-          {
-            type: "imagepicker",
-            name: "choosepicture",
-            title: "What animal would you like to see first ?",
-            choices: [
-              {
-                value: "lion",
-                imageLink:
-                  "https://surveyjs.io/Content/Images/examples/image-picker/lion.jpg"
-              },
-              {
-                value: "giraffe",
-                imageLink:
-                  "https://surveyjs.io/Content/Images/examples/image-picker/giraffe.jpg"
-              },
-              {
-                value: "panda",
-                imageLink:
-                  "https://surveyjs.io/Content/Images/examples/image-picker/panda.jpg"
-              },
-              {
-                value: "camel",
-                imageLink:
-                  "https://surveyjs.io/Content/Images/examples/image-picker/camel.jpg"
-              }
-            ]
+            "choices": ["1|Very much yes!!", "2|yes", "3|neutral", "4|no"]
           },
           {
             type: "bootstrapslider",
-            name: "bootstrapslider"
-          },
-          {
-            type: "dropdown",
-            renderAs: "select2",
-            choicesByUrl: {
-              url: "https://restcountries.eu/rest/v1/all"
-            },
-            name: "countries",
-            title: "Please select the country you have arrived from:"
-          },
-          {
-            type: "signaturepad",
-            name: "sign",
-            title: "Please enter your signature"
+            name: "bootstrapslider", 
+            title: "What percentage of productivity do you believe you are achieving currently?"
           },
           {
             type: "sortablelist",
-            name: "lifepriopity",
-            title: "Life Priorities ",
-            isRequired: true,
+            name: "positives",
+            title: "What elements of your job are fulfilling/satisfying?",
+            isRequired: false,
             colCount: 0,
-            choices: ["family", "work", "pets", "travels", "games"]
-          },
-          {
-            name: "date",
-            type: "datepicker",
-            inputType: "date",
-            title: "Your favorite date:",
-            dateFormat: "mm/dd/yy",
-            isRequired: true
+            choices: ["the work itself", "the company culture", "the compensation"]
           }
         ]
       },
       {
         questions: [
-          {
-            type: "signaturepad",
-            width: "500px",
-            name: "Signature Pad - you can enter your signature here:"
-          },
           {
             type: "matrix",
             name: "Quality",
@@ -161,92 +101,43 @@ class App extends Component {
             rows: [
               {
                 value: "affordable",
-                text: "Product is affordable"
+                text: "My manger and I communicate frequently"
               },
               {
                 value: "does what it claims",
-                text: "Product does what it claims"
+                text: "When my manager and I communicate, we communicate well"
               },
               {
                 value: "better then others",
-                text: "Product is better than other products on the market"
+                text: "My manager is accessible"
               },
               {
                 value: "easy to use",
-                text: "Product is easy to use"
+                text: "My manager is too involved (ie micromanages) my work"
               }
             ]
           },
           {
             type: "rating",
             name: "satisfaction",
-            title: "How satisfied are you with the Product?",
+            title: "How satisfied are you with the company culture?",
             mininumRateDescription: "Not Satisfied",
             maximumRateDescription: "Completely satisfied"
           },
           {
-            type: "rating",
-            name: "recommend friends",
-            visibleIf: "{satisfaction} > 3",
-            title:
-              "How likely are you to recommend the Product to a friend or co-worker?",
-            mininumRateDescription: "Will not recommend",
-            maximumRateDescription: "I will recommend"
-          },
-          {
             type: "comment",
-            name: "suggestions",
-            title: "What would make you more satisfied with the Product?"
-          }
-        ]
-      },
-      {
-        questions: [
-          {
-            type: "radiogroup",
-            name: "price to competitors",
-            title: "Compared to our competitors, do you feel the Product is",
-            choices: [
-              "Less expensive",
-              "Priced about the same",
-              "More expensive",
-              "Not sure"
-            ]
-          },
-          {
-            type: "radiogroup",
-            name: "price",
-            title: "Do you feel our current price is merited by our product?",
-            choices: [
-              "correct|Yes, the price is about right",
-              "low|No, the price is too low for your product",
-              "high|No, the price is too high for your product"
-            ]
-          },
-          {
-            type: "multipletext",
-            name: "pricelimit",
-            title: "What is the... ",
-            items: [
-              {
-                name: "mostamount",
-                title: "Most amount you would every pay for a product like ours"
-              },
-              {
-                name: "leastamount",
-                title: "The least amount you would feel comfortable paying"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        questions: [
-          {
-            type: "text",
-            name: "email",
+            name: "improvements",
+            visibleIf: "{satisfaction} < 3",
             title:
-              'Thank you for taking our survey. Please enter your email address, then press the "Submit" button.'
+              "What about company culture should improve?"
+          },
+           {
+            type: "barrating",
+            name: "barrating1",
+            ratingTheme: "css-stars",
+            title: "How effective was this survey?", 
+            description: "1 star being not effective, 5 stars being very effective",
+            choices: ["1", "2", "3", "4", "5"]
           }
         ]
       }
@@ -282,7 +173,7 @@ class App extends Component {
           <SurveyCreator /> */}
         </div>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+      {/* To get started, edit <code>src/App.js</code> and save to reload. */}
         </p>
       </div>
     );
