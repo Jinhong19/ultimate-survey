@@ -124,13 +124,6 @@ class App extends Component {
             mininumRateDescription: "Not Satisfied",
             maximumRateDescription: "Completely satisfied"
           },
-          {
-            type: "comment",
-            name: "improvements",
-            visibleIf: "{satisfaction} < 3",
-            title:
-              "What about company culture should improve?"
-          },
            {
             type: "barrating",
             name: "barrating1",
