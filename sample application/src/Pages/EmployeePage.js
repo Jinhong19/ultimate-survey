@@ -6,6 +6,8 @@ import logo from "./logo.png";
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.css";
 
+import { Router, Route, Link } from 'react-router-dom';
+
 import "jquery-ui/themes/base/all.css";
 import "nouislider/distribute/nouislider.css";
 import "select2/dist/css/select2.css";
@@ -56,7 +58,7 @@ class App extends Component {
           },
           {
             type: "bootstrapslider",
-            name: "bootstrapslider", 
+            name: "bootstrapslider",
             title: "What percentage of productivity do you believe you are achieving currently?"
           },
           {
@@ -128,7 +130,7 @@ class App extends Component {
             type: "barrating",
             name: "barrating1",
             ratingTheme: "css-stars",
-            title: "How effective was this survey?", 
+            title: "How effective was this survey?",
             description: "1 star being not effective, 5 stars being very effective",
             choices: ["1", "2", "3", "4", "5"]
           }
@@ -150,7 +152,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <Link to="/employeedashboard"><img src={logo} class="logo" alt="logo" /></Link>
           <h2>We are the Ultimate 3!</h2>
         </div>
         <div className="surveyjs">

@@ -1,10 +1,7 @@
 .logo {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
   width: 250px;
-  height: 110px;
-  padding-top: 50px;
+  height: 100px;
 }
 
 .cardStyle {
@@ -20,4 +17,11 @@
 
 #title {
   padding: 10px;
+}
+
+#landing {
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 50px;
+  height: 150px;
 }

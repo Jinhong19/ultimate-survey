@@ -6,6 +6,8 @@ import logo from "./logo.png";
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.css";
 
+import { Link } from 'react-router-dom';
+
 import "jquery-ui/themes/base/all.css";
 import "nouislider/distribute/nouislider.css";
 import "select2/dist/css/select2.css";
@@ -44,7 +46,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <Link to="/managerdashboard"><img src={logo} class="logo" alt="logo" /></Link>
           <h2>We are the Ultimate 3!</h2>
         </div>
         <div className="surveyjs">
