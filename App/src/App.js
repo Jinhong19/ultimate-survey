@@ -15,13 +15,13 @@ class App extends Component {
         {/*This line is make a page for landingpage */}
         <Route exact path="/" component = {LandingPage} />
         {/*This line is make a page for employeepage */}
-        <Route path="/employeepage" component = {EmployeePage} />
+        <Route path="/EmployeePage" component = {EmployeePage} />
         {/*Brings to manager dashboard -- not completed*/}
-        <Route path="/managerdashboard" component = {ManagerDashboard} />
+        <Route path="/ManagerDashboard" component = {ManagerDashboard} />
         {/*Brings to employee dashboard -- not completed*/}
-        <Route path="/employeedashboard" component = {EmployeeDashboard} />
+        <Route path="/EmployeeDashboard" component = {EmployeeDashboard} />
         {/*This line brings you to the survey creation page*/}
-        <Route path="/managerpage" component = {ManagerPage} />
+        <Route path="/ManagerPage" component = {ManagerPage} />
 
       </Router>
     )
