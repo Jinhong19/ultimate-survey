@@ -9,8 +9,24 @@ import ManagerDashboard from './Pages/ManagerDashboard';
 import EmployeeDashboard from './Pages/EmployeeDashboard';
 
 class App extends Component {
+  state = {
+    contacts: []
+
+  }
+
+  componentDidMount() {
+       fetch('http://127.0.0.1:5000/response/5d9e2b8e1c9d440000ef192c')
+       .then(res => res.json())
+       .then((data) => {
+         this.setState({ contacts: data })
+       })
+       .catch(console.log)
+  }
+
   render() {
+    console.log(this.state)
     return (
+
       <Router>
         {/*This line is make a page for landingpage */}
         <Route exact path="/" component = {LandingPage} />

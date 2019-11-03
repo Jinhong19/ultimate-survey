@@ -2,9 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0ef83c34-9b09-43f7-b93c-957bbf6f3dac" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/ultimate-survey.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ultimate-survey.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flask_backend/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask_backend/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_backend/static/react/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/flask_backend/static/react/asset-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_backend/static/react/css/main.a2ba46de.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_backend/static/react/css/main.a2ba46de.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_backend/static/react/js/main.b5692ca0.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_backend/static/react/js/main.b5692ca0.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_backend/static/react/media/glyphicons-halflings-regular.89889688.svg" beforeDir="false" afterPath="$PROJECT_DIR$/flask_backend/static/react/media/glyphicons-halflings-regular.89889688.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_backend/static/react/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/flask_backend/static/react/service-worker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_backend/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask_backend/templates/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react_frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/react_frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react_frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/react_frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/react_frontend/src/Pages/EmployeeDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/react_frontend/src/Pages/EmployeeDashboard.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +43,7 @@
     <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../db_backend" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunDashboard">
