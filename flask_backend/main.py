@@ -1,6 +1,8 @@
 from flask import Flask, jsonify, request
 import flask
 from flask_pymongo import PyMongo
+import json
+import ast
 from bson.objectid import ObjectId
 from bson.json_util import dumps, loads #used to convert Python MongoDB JSON to/from BSON
 #pip install Flask Flask-PyMongo
@@ -50,6 +52,7 @@ def get_user_id(email):
 
 #GET - return a list of all responses for a certain employeeid
 #POST - pushes a response to the database
+	#example post request - {"surveyid":"5d9e2dea1c9d440000ef1937","answers":["Nice",4]}
 @app.route('/response/<user_id>', methods=['GET', 'POST'])
 def user_response(user_id):
 	if flask.request.method == 'GET':
@@ -61,7 +64,15 @@ def user_response(user_id):
 			return dumps(list(cursor_query))
 	elif flask.request.method == 'POST':
 		#TODO - implement POST response
-		return ""
+		responses = mongo.db.Responses
+		body = request.json
+		_surveyid = ObjectId(body['surveyid'])
+		_answers = body['answers']
+		_employeeid = ObjectId(user_id)
+
+		object_id = responses.insert({'surveyid': _surveyid, 'answers':_answers, 'employeeid':_employeeid})
+		return "Inserted Response for Employee " + str(user_id) 
+
 	else:
 		return ""
 
@@ -93,7 +104,7 @@ def get_created_surveys(manager_id):
 		if cursor_query is None:
 			return []
 		else:
-			return dumps(array_survey_replace_questions(list(cursor_query)))
+			return ast.literal_eval(dumps(array_survey_replace_questions(list(cursor_query))))
 	else:
 		#TODO - implement POST
 		return ''
