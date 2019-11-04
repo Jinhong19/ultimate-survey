@@ -8,7 +8,6 @@ from bson.json_util import dumps, loads #used to convert Python MongoDB JSON to/
 
 app = flask.Flask("__main__")
 
-
 app.config['MONGO_DBNAME'] = 'Platform'
 app.config['MONGO_URI'] = 'mongodb+srv://testUser:testUserUltimate3@ultimatesurvey-74jff.mongodb.net/' + 'Platform' +'?retryWrites=true&w=majority'
 mongo = PyMongo(app)
@@ -34,6 +33,17 @@ def array_survey_replace_questions(array_surveys):
 		array_surveys[x] = survey_replace_questions(array_surveys[x])
 		x = x+1
 	return array_surveys
+
+
+
+#FOR TESTING
+#Get User ID - in the database, Stephany is the manager of Deangelo - there is a survey created and a response in the database
+@app.route('/user/<email>', methods=['GET'])
+def get_user_id(email):
+	user_dictionary = {'Deangelo_Durham@bluesorbetsecurity.com': '5d9f7051269df83d214204b4',
+						'Stephany_Knox@bluesorbetsecurity.com':"5d9f7051269df83d214204b0"}
+	return user_dictionary[email]
+
 
 
 #EMPLOYEEE ----------------------------------------------------------
