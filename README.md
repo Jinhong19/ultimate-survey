@@ -19,10 +19,10 @@ How to use end point in react to fetch data:
 
   }
 
-  componentDidMount() {
-       fetch('http://127.0.0.1:5000/response/5d9f7051269df83d214204b4')
-       .then(res => res.json())
-       .then((data) => {
+ componentDidMount() {
+    fetch('http://127.0.0.1:5000/response/5d9f7051269df83d214204b4')
+    .then(res => res.json())
+    .then((data) => {
          this.setState({ contacts: data })
        })
        .catch(console.log)
