@@ -14,18 +14,15 @@ To run the project:
 
 How to use end point in react to fetch data:
 ```
-  state = {
-    contacts: []
-
-  }
-
- componentDidMount() {
-    fetch('http://127.0.0.1:5000/response/5d9f7051269df83d214204b4')
-    .then(res => res.json())
-    .then((data) => {
-         this.setState({ contacts: data })
-       })
-       .catch(console.log)
-  }
+fetch('https://mywebsite.com/endpoint/', {
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    firstParam: 'yourValue',
+    secondParam: 'yourOtherValue',
+  })
+})
 ```
-  #data stored in this.state
