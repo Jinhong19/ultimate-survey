@@ -14,7 +14,7 @@ To run the project:
 
 How to use end point in react to fetch data:
 ```
-fetch('https://mywebsite.com/endpoint/', {
+fetch('http://127.0.0.1:5000/response/5d9f7051269df83d214204b4', {
   method: 'POST',
   headers: {
     'Accept': 'application/json',
