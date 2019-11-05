@@ -13,7 +13,7 @@ To run the project:
 3. go to local host 5000
 
 How to use end point in react to fetch data:
-
+```
   state = {
     contacts: []
 
@@ -27,5 +27,5 @@ How to use end point in react to fetch data:
        })
        .catch(console.log)
   }
-  
+```
   #data stored in this.state
