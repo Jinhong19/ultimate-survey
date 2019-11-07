@@ -1,13 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import '../App.css';
+import Nav from '../Components/Nav';
+import QuestionCard from '../Components/QuestionCard';
+import SurveyMenu from '../Components/SurveyMenu';
 
 function App() {
   return (
     <div className="App">
+      <Nav words="Manager" />
       <h1>Hello, managers!</h1>
-      <h4>Click <Link to="/managerpage">here</Link> to create a survey.</h4>
-      <p><Link to="/">Back to home</Link></p>
+      <div>
+        <SurveyMenu />
+      </div>
+      <br />
+      <p>Click <a href='/ManagerPage'>here</a> to take a survey</p>
     </div>
   );
 }

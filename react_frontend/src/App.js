@@ -7,39 +7,39 @@ import EmployeePage from './Pages/EmployeePage';
 import ManagerPage from './Pages/ManagerPage';
 import ManagerDashboard from './Pages/ManagerDashboard';
 import EmployeeDashboard from './Pages/EmployeeDashboard';
+import TakeSurvey from './Pages/TakeSurvey';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import green from '@material-ui/core/colors/green';
+
+// Creates the website theme
+const theme = createMuiTheme({
+  palette: {
+    primary: green, // should be #509e2f
+    secondary: {
+      main: '#FFFFFF'
+    }
+  },
+});
 
 class App extends Component {
-  state = {
-    contacts: []
-
-  }
-
-  componentDidMount() {
-       fetch('http://127.0.0.1:5000/response/5d9e2b8e1c9d440000ef192c')
-       .then(res => res.json())
-       .then((data) => {
-         this.setState({ contacts: data })
-       })
-       .catch(console.log)
-  }
-
   render() {
-    console.log(this.state)
     return (
+      <ThemeProvider theme={theme}>
+        <Router>
+          {/*This line is make a page for landingpage */}
+          <Route exact path="/" component = {LandingPage} />
+          {/*This line is make a page for employeepage */}
+          <Route path="/EmployeePage" component = {EmployeePage} />
+          {/*Brings to manager dashboard -- not completed*/}
+          <Route path="/ManagerDashboard" component = {ManagerDashboard} />
+          {/*Brings to employee dashboard -- not completed*/}
+          <Route path="/EmployeeDashboard" component = {EmployeeDashboard} />
+          {/*This line brings you to the survey creation page*/}
+          <Route path="/ManagerPage" component = {ManagerPage} />
 
-      <Router>
-        {/*This line is make a page for landingpage */}
-        <Route exact path="/" component = {LandingPage} />
-        {/*This line is make a page for employeepage */}
-        <Route path="/EmployeePage" component = {EmployeePage} />
-        {/*Brings to manager dashboard -- not completed*/}
-        <Route path="/ManagerDashboard" component = {ManagerDashboard} />
-        {/*Brings to employee dashboard -- not completed*/}
-        <Route path="/EmployeeDashboard" component = {EmployeeDashboard} />
-        {/*This line brings you to the survey creation page*/}
-        <Route path="/ManagerPage" component = {ManagerPage} />
-
-      </Router>
+        </Router>
+      </ThemeProvider>
     )
 
   }

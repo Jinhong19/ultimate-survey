@@ -1,14 +1,15 @@
-import React from 'react';
+ import React from 'react';
 import '../App.css';
-
-
+import Nav from '../Components/Nav'
+import SurveyMenu from '../Components/SurveyMenu'
 
 function App() {
   return (
     <div className="App">
+      <Nav words="Employee" />
       <h1>Hello, employees!</h1>
-      <h4>Click <a href="/employeepage">here</a> to take your survey!</h4>
-      <p><a href="/">Back to home</a></p>
+      <h3>Surveys</h3>
+      <SurveyMenu></SurveyMenu>
     </div>
   );
 }

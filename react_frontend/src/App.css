@@ -1,27 +1,9 @@
-.logo {
-  display: block;
-  width: 250px;
-  height: 100px;
+body {
+  font-size: 1em;
 }
 
-.cardStyle {
-  width: 500px;
-  height: 250px;
-}
-
-.text {
-  padding: 50px;
-  padding-top: 30px;
-  text-align: center;
-}
-
-#title {
-  padding: 10px;
-}
-
-#landing {
-  margin-left: auto;
-  margin-right: auto;
-  padding-top: 50px;
-  height: 150px;
+.logo-small {
+  display: inline-block;
+  width: 100px;
+  height: 50px;
 }

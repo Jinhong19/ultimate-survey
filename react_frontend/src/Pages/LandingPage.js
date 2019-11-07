@@ -1,39 +1,47 @@
 import React, { Component } from 'react';
-import '../App.css';
+import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import AppBar from '@material-ui/core/AppBar';
-import { createMuiTheme } from '@material-ui/core/styles';
-import { ThemeProvider } from '@material-ui/styles';
-import green from '@material-ui/core/colors/green';
-import LoginCard from '../Components/LoginCard'
+import LoginCard from '../Components/LoginCard';
+import Background from '../Media/back.jpeg';
 
-// Creates the website theme
-const theme = createMuiTheme({
-  palette: {
-    primary: green, // should be #509e2f
-    secondary: {
-      main: '#FFFFFF'
-    }
+const styles = theme => ({
+  logo: {
+    display: 'block',
+    width: '20em',
+    height: '9em',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    marginTop: '3em',
+  },
+  background: {
+    backgroundImage: 'url(' + Background + ')',
+    height: '100vh',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
   },
 });
 
-function App() {
-  return (
-    <div>
-      <ThemeProvider theme={theme}>
+class LandingPage extends React.Component {
+  constructor(props){
+    super(props);
+  }
+
+  render() {
+    return (
+      <div className={this.props.classes.background}>
         <AppBar color="primary" position="static">
-          <Typography align="center" variant="h3" color="secondary" id="title">Ultimate Survey</Typography>
+          <Typography align="center" variant="h3" color="secondary" style={{padding: '0.6em'}}>Ultimate Survey</Typography>
         </AppBar>
-        <img class="logo" id="landing" src={require("./logo.png")} alt="company logo" />
-        <Typography class="text">Please login to access your survey software.</Typography>
+        <img className={this.props.classes.logo} src={require("../Media/logo.png")} alt="company logo" />
         <Grid container spacing={9} justify="center">
-          <LoginCard user="Manager" redir="managerdashboard" />
-          <LoginCard user="Employee" redir="employeedashboard" />
+          <LoginCard user="Login" />
         </Grid>
-      </ThemeProvider>
-    </div>
-  );
+        <Typography align='center' variant='h4'>For development: <a href='/ManagerDashboard'>Manager</a>|<a href='/EmployeeDashboard'>Employee</a></Typography>
+      </div>
+    );
+  }
 }
 
-export default App;
+export default withStyles(styles)(LandingPage);
