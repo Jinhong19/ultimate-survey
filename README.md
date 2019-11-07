@@ -1,10 +1,11 @@
 # ultimate-survey
 
 Set up:
-1.npm install
-2.npm i
-4.pip install dnspython Flask Flask-pymongo
-
+```
+npm install
+npm i
+pip install dnspython Flask Flask-pymongo
+```
 To modify frontend:
 1. go to dir react_frontend
 2. npm run build
