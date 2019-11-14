@@ -19,5 +19,5 @@ python3 main.py
 # suggest python 3
 ```
 
-*** Note: ***
+**Note:**
 This version of Frontend may not have everything.
