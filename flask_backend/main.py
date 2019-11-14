@@ -7,7 +7,7 @@ from bson.objectid import ObjectId
 from bson.json_util import dumps, loads  # used to convert Python MongoDB JSON to/from BSON
 
 # pip install Flask Flask-PyMongo
-# Example API URL: http://127.0.0.1:5000/response/5d9e2b8e1c9d440000ef192c
+# Example API URL: http://127.0.0.1:5000/response/5d9f7051269df83d214204b4
 
 app = flask.Flask("__main__")
 
@@ -16,12 +16,12 @@ app.config[
     'MONGO_URI'] = 'mongodb+srv://testUser:testUserUltimate3@ultimatesurvey-74jff.mongodb.net/' + 'Platform' + '?retryWrites=true&w=majority'
 mongo = PyMongo(app)
 
-
+# used to get all the routing in react to work ###
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def catch_all_urls(path):
     return flask.render_template("index.html")
-
+##################################################
 
 # TODO - implement
 def survey_replace_questions(surveys):
@@ -41,11 +41,16 @@ def array_survey_replace_questions(array_surveys):
 
 # FOR TESTING
 # Get User ID - in the database, Stephany is the manager of Deangelo - there is a survey created and a response in the database
-@app.route('/user/<email>', methods=['GET'])
+@app.route('/user/<email>', methods=['GET', 'POST'])
 def get_user_id(email):
-    user_dictionary = {'Deangelo_Durham@bluesorbetsecurity.com': '5d9f7051269df83d214204b4',
-                       'Stephany_Knox@bluesorbetsecurity.com': "5d9f7051269df83d214204b0"}
-    return user_dictionary[email]
+    if request.method == "GET":
+        user_dictionary = {'Deangelo_Durham@bluesorbetsecurity.com': '5d9f7051269df83d214204b4',
+                           'Stephany_Knox@bluesorbetsecurity.com': "5d9f7051269df83d214204b0"}
+        return jsonify({"url_id": user_dictionary[email]})
+    elif request.method == "POST":
+        req_Json = request.json
+        name = req_Json['name']
+        return jsonify({"response": "Hi " + name + ", you can do it!"})
 
 
 # EMPLOYEEE ----------------------------------------------------------

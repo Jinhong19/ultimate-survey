@@ -3,24 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="0ef83c34-9b09-43f7-b93c-957bbf6f3dac" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_backend/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/flask_backend/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flask_backend/static/react/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/flask_backend/static/react/asset-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/flask_backend/static/react/css/main.7bd894a0.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flask_backend/static/react/css/main.7bd894a0.css.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flask_backend/static/react/js/main.5c6fa1d1.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/flask_backend/static/react/js/main.5c6fa1d1.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_backend/static/react/js/main.43d11ec7.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/flask_backend/static/react/js/main.43d11ec7.js.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/flask_backend/static/react/service-worker.js" beforeDir="false" afterPath="$PROJECT_DIR$/flask_backend/static/react/service-worker.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/flask_backend/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/flask_backend/templates/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react_frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/react_frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react_frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/react_frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react_frontend/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/react_frontend/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react_frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/react_frontend/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react_frontend/src/Components/LoginCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/react_frontend/src/Components/LoginCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react_frontend/src/Pages/EmployeeDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/react_frontend/src/Pages/EmployeeDashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react_frontend/src/Pages/EmployeePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/react_frontend/src/Pages/EmployeePage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/react_frontend/src/Pages/LandingPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/react_frontend/src/Pages/LandingPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react_frontend/src/Pages/ManagerDashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/react_frontend/src/Pages/ManagerDashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react_frontend/src/Pages/ManagerPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/react_frontend/src/Pages/ManagerPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/react_frontend/src/Pages/logo.png" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,12 +18,21 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/react_frontend/src/Pages/LandingPage.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="828">
-              <caret line="46" column="47" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
+            <state relative-caret-position="162">
+              <caret line="39" column="21" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/react_frontend/src/Components/LoginCard.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="522">
+              <caret line="29" selection-start-line="29" selection-end-line="29" />
             </state>
           </provider>
         </entry>
@@ -48,10 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/flask_backend/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="846">
+              <caret line="53" selection-start-line="53" selection-end-line="53" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -60,30 +59,17 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/react_frontend/src/Pages/EmployeeDashboard.js">
+        <entry file="file://$PROJECT_DIR$/react_frontend/src/Pages/TakeSurvey.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
+            <state relative-caret-position="900">
+              <caret line="50" column="26" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="26" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/react_frontend/src/Pages/EmployeePage.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="396">
-              <caret line="22" selection-start-line="22" selection-end-line="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/react_frontend/src/Pages/ManagerDashboard.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="21" selection-start-line="21" selection-end-line="21" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/react_frontend/src/SurveyCreator.js">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -91,24 +77,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="360">
               <caret line="20" selection-start-line="20" selection-end-line="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/react_frontend/src/App.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/react_frontend/src/Components/LoginCard.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1280">
-              <caret line="80" selection-start-line="80" selection-end-line="80" />
             </state>
           </provider>
         </entry>
@@ -134,16 +102,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/react_frontend/src/Pages/LandingPage.js" />
         <option value="$PROJECT_DIR$/react_frontend/src/App.js" />
         <option value="$PROJECT_DIR$/react_frontend/src/Pages/EmployeeDashboard.js" />
         <option value="$PROJECT_DIR$/react_frontend/src/Pages/ManagerDashboard.js" />
         <option value="$PROJECT_DIR$/react_frontend/src/App.css" />
+        <option value="$PROJECT_DIR$/flask_backend/main.py" />
         <option value="$PROJECT_DIR$/react_frontend/src/Components/LoginCard.js" />
+        <option value="$PROJECT_DIR$/react_frontend/src/Pages/LandingPage.js" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
     <option name="width" value="976" />
@@ -173,6 +142,12 @@
             <path>
               <item name="ultimate-survey" type="b2602c69:ProjectViewProjectNode" />
               <item name="ultimate-survey" type="462c0819:PsiDirectoryNode" />
+              <item name="flask_backend" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ultimate-survey" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ultimate-survey" type="462c0819:PsiDirectoryNode" />
               <item name="react_frontend" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -187,13 +162,6 @@
               <item name="react_frontend" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ultimate-survey" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ultimate-survey" type="462c0819:PsiDirectoryNode" />
-              <item name="react_frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Media" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ultimate-survey" type="b2602c69:ProjectViewProjectNode" />
@@ -276,7 +244,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13119073" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14910433" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -286,10 +254,10 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Version Control" order="7" weight="0.3297062" />
       <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.3297062" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info anchor="bottom" id="Python Console" order="10" />
+      <window_info anchor="bottom" id="Python Console" order="10" weight="0.3297062" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -329,18 +297,15 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/react_frontend/src/Pages/LandingPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="828">
-          <caret line="46" column="47" selection-start-line="46" selection-start-column="47" selection-end-line="46" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/react_frontend/src/Pages/TakeSurvey.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/react_frontend/src/Components/Nav.js">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react_frontend/src/Pages/ManagerDashboard.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/react_frontend/src/Pages/EmployeeDashboard.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -356,20 +321,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/react_frontend/src/Pages/ManagerDashboard.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/react_frontend/src/Pages/ManagerPage.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="20" selection-start-line="20" selection-end-line="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/react_frontend/src/App.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="162">
@@ -377,10 +328,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/react_frontend/src/Pages/LandingPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="39" column="21" selection-start-line="39" selection-start-column="21" selection-end-line="39" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/react_frontend/src/Components/LoginCard.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1280">
-          <caret line="80" selection-start-line="80" selection-end-line="80" />
+        <state relative-caret-position="522">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
         </state>
       </provider>
     </entry>
@@ -393,10 +351,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/flask_backend/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="846">
+          <caret line="53" selection-start-line="53" selection-end-line="53" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react_frontend/src/Pages/TakeSurvey.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="50" column="26" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react_frontend/src/SurveyCreator.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react_frontend/src/Pages/ManagerPage.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
         </state>
       </provider>
     </entry>

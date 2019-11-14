@@ -26,11 +26,24 @@ const styles = theme => ({
 class LandingPage extends React.Component {
   constructor(props){
     super(props);
+    this.state = {
+    url_id: null
+    }
+  }
+
+  componentDidMount(){
+  fetch("http://127.0.0.1:5000/user/Deangelo_Durham@bluesorbetsecurity.com")
+  .then(res => res.json())
+  .then( result => {
+  this.setState({url_id: result.url_id});
+  })
+  .catch(console.log)
   }
 
   render() {
     return (
       <div className={this.props.classes.background}>
+        <h5>{this.state.url_id}</h5>
         <AppBar color="primary" position="static">
           <Typography align="center" variant="h3" color="secondary" style={{padding: '0.6em'}}>Ultimate Survey</Typography>
         </AppBar>
