@@ -1,11 +1,16 @@
 # ultimate-survey
 
-**jeff is in**
+Run frontend:
+```
+npm i
+npm start
+```
 
-**peilan is here**
-
-**This is Mahendra!**
-
-**kyle's here**
-
-**Nilay's Here**
+Run backend:
+```
+python main.py
+```
+If python3: 
+```
+python3 main.py
+```
