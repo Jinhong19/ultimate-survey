@@ -8,9 +8,9 @@ npm start
 
 Run backend:
 ```
+# for python2
 python main.py
-```
-If python3: 
-```
+# for python3
 python3 main.py
+# suggest python 3
 ```
