@@ -20,4 +20,4 @@ python3 main.py
 ```
 
 **Note:**
-This version of Frontend may not include new features.
+_This version of Frontend may not include new features.
