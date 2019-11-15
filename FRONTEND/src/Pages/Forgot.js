@@ -1,4 +1,22 @@
 import React, { Component } from 'react';
+import { withStyles } from '@material-ui/core';
+import Background from '../Media/back.jpeg';
+import ForgotCard from '../Components/ForgotCard';
+
+const styles = theme => ({
+    background: {
+      backgroundImage: 'url(' + Background + ')',
+      height: '100vh',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+    },
+    container: {
+        position: 'absolute', 
+        left: '50%', 
+        top: '50%',
+        transform: 'translate(-50%, -50%)'
+    }
+  });
 
 class Forgot extends Component {
     constructor(props){
@@ -7,12 +25,13 @@ class Forgot extends Component {
 
     render(){
         return(
-            <div>
-                <h1>Forgot password page</h1>
-                <a href="/">Back to login page</a>
+            <div className={this.props.classes.background} >
+                <div className={this.props.classes.container} >
+                    <ForgotCard />
+                </div>
             </div>
         );
     }
 }
 
-export default Forgot;
+export default withStyles(styles)(Forgot);
