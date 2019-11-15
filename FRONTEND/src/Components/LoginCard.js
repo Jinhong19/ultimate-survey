@@ -16,13 +16,18 @@ const styles = theme => ({
     paddingBottom: '0em',
   },
   card: {
-    height: '20em',
+    minHeight: '21em',
     width: '40em',
     marginTop: "50px",
+    textAlign: 'center'
   },
   entry: {
     paddingTop: "0.7em",
   },
+  password: {
+      marginLeft: 'auto',
+      marginRight: 'auto'
+  }
 });
 
 class LoginCard extends React.Component {
@@ -70,6 +75,15 @@ class LoginCard extends React.Component {
                         >
                             <Typography color="secondary">Login</Typography>
                         </Button>
+                    </CardActions>
+                    <CardActions>
+                    <Button 
+                        className={this.props.classes.password}
+                        size="small"
+                        href="/forgot"
+                    >
+                        Forgot password
+                    </Button>
                     </CardActions>
                 </Card>
             </Grid>
