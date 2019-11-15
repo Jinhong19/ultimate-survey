@@ -7,6 +7,7 @@ import EmployeePage from './Pages/EmployeePage';
 import ManagerPage from './Pages/ManagerPage';
 import ManagerDashboard from './Pages/ManagerDashboard';
 import EmployeeDashboard from './Pages/EmployeeDashboard';
+import Forgot from './Pages/Forgot';
 import TakeSurvey from './Pages/TakeSurvey';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -37,6 +38,8 @@ class App extends Component {
           <Route path="/EmployeeDashboard" component = {EmployeeDashboard} />
           {/*This line brings you to the survey creation page*/}
           <Route path="/ManagerPage" component = {ManagerPage} />
+          {/*Forgot password page*/}
+          <Route path="/forgot" component = {Forgot} />
 
         </Router>
       </ThemeProvider>
