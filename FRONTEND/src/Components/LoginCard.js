@@ -49,13 +49,11 @@ class LoginCard extends React.Component {
                     <TextField
                         className={this.props.classes.entry}
                         label="Username"
-                        variant="outlined"
                         fullWidth="true"
                     />
                     <TextField
                         className={this.props.classes.entry}
                         label="Password"
-                        variant="outlined"
                         type="password"
                         fullWidth="true"
                     />
