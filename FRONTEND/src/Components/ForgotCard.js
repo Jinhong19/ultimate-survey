@@ -41,7 +41,7 @@ class ForgotCard extends Component {
         if(this.state.email.length < 1){
             this.setState({
                 done: <ForgotPre invalid={true} sub={this.onSubmit.bind(this)} onUpdate={this.updateEmail.bind(this)} />
-            })
+            });
         } 
         else {
             this.setState({
