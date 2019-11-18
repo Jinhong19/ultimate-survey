@@ -21,7 +21,7 @@ class QuestionCard extends React.Component {
 
     state = {
         title: "",
-        type: "1"
+        type: "-1"
     };
 
     // hi
@@ -29,11 +29,11 @@ class QuestionCard extends React.Component {
     options = ["Yes or No", "Multiple Choice", "Short Answer", "Long Answer"];
 
     onSubmit = e => {
-        if (this.state.type !== "1") {
+        if (this.state.type !== "-1") {
             e.preventDefault();
             this.props.addItem(this.state);
             this.logState();
-            this.setState({ title: "", type: "1" });
+            this.setState({ title: "", type: "-1" });
         } else {
             // Show warning to select an option
         }
@@ -86,7 +86,7 @@ class QuestionCard extends React.Component {
                                         onChange={this.onChangeT}
                                         value={this.state.type}
                                     >
-                                        <option value="1" disabled>
+                                        <option>
                                             Select
                                         </option>
                                         {this.options.map(o => {
