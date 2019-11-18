@@ -38,7 +38,7 @@ def user_response(user_id):
 		responses = mongo.db.Responses
 		body = request.json
 		_employeeid = ObjectId(user_id)
-		object_id = responses.insert({'surveyid': 'SomeSurveyid', 'response':body, 'employeeid':_employeeid})
+		object_id = responses.insert_one({'surveyid': 'SomeSurveyid', 'response':body, 'employeeid':_employeeid})
 		return "Inserted Response for Employee " + str(user_id) 
 
 #GET - return a list of all surveys available to a employee
@@ -54,20 +54,43 @@ def user_survey(user_id):
 #MANAGER ----------------------------------------------------------------
 
 #GET - return a list of all surveys created by a manager
-#POST - submit a new survey
+#POST - submit a new survey - survey body is not modified - also performs query of employees under manger
 @app.route('/survey/manager/<manager_id>', methods=['GET', 'POST'])
 def get_created_surveys(manager_id):
 	if flask.request.method == 'GET':
 		surveys = mongo.db.Surveys
-		cursor_query = surveys.find({"manager":ObjectId(manager_id)}) #we will need to join question objects here, I'm thinking a function that queries for all the needed questions and replaces each index of the questions array with the proper object, will need this to get single surveys too
+		cursor_query = surveys.find({"manager":ObjectId(manager_id)})
 		return dumps(list(cursor_query))
 	else:
 		#TODO - implement POST
 		surveys = mongo.db.Surveys
 		body = request.json
-		to_send = {'survey': body, 'manager': ObjectId(manager_id), 'Employees':['5d9f7051269df83d214204b4','5d9f7051269df83d214204b0']}
-		object_id = surveys.insert(to_send)
+		employees = userDFS(manager_id)
+		to_send = {'survey': body, 'manager': ObjectId(manager_id), 'Employees':employees}
+		surveys.insert_one(to_send)
 		return "Inserted survey for manger: "+ str(manager_id)
+
+
+def userDFS(manager_id):
+	employees = mongo.db.Employees
+	query = {'_id': ObjectId(manager_id)}
+	manager_data = employees.find(query)
+	manager_count = employees.count_documents(query)
+
+	result = []
+	
+	if manager_count > 0:
+		entry = manager_data.next()
+		manager_employeeid = entry['employeeId']
+
+		query = {'managerId': manager_employeeid}
+		employees_of = employees.find(query)
+		count_employees_of = employees.count_documents(query)
+		
+		for doc in employees_of:
+			result.append(ObjectId(doc['_id']))
+	return result
+
 
 @app.route('/responses/<survey_id>', methods=['GET'])
 def get_survey_respones(survey_id):
