@@ -1,1 +1,1 @@
-web: gunicorn -—pythonpath BACKEND main:ultimate-backend
+web: gunicorn BACKEND.main:ultimate-backend
