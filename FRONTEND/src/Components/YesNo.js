@@ -73,7 +73,7 @@ export class YesNo extends Component {
                         <div className="wrapper" style={padding}>
                             <Form.Group controlId="surveyQuestion">
                                 <FormLabel>
-                                    <h4>{question}</h4>
+                                    <h4> {this.props.qNumber}. {question}</h4>
                                 </FormLabel>
                                 <div key="short-response" style={textBoxMargin}>
                                     <FormControl
@@ -105,7 +105,7 @@ export class YesNo extends Component {
                         <div className="wrapper" style={padding}>
                             <Form.Group controlId="surveyQuestion">
                                 <FormLabel>
-                                    <h4>{question}</h4>
+                                    <h4> {this.props.qNumber}. {question}</h4>
                                 </FormLabel>
                                 <div key="short-response" style={textBoxMargin}>
                                     <FormControl
