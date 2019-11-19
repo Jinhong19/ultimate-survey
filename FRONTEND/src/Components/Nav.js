@@ -1,8 +1,15 @@
 import React, { Component } from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+import { AppBar, Toolbar, Button, withStyles, Typography } from '@material-ui/core';
+
+const styles = theme => ({ 
+    root: {
+        flexGrow: 1
+    },
+    buttons: {
+        margin: '1em',
+        color: 'white'
+    }
+});
 
 class Nav extends React.Component {
     constructor(props) {
@@ -11,12 +18,23 @@ class Nav extends React.Component {
 
     render() {
         return (
-            <div style={{ height: 50 }}>
+            <div className="root" >
                 <AppBar position="static" color="primary">
                     <Toolbar>
-                        <Typography variant="h3" color="secondary">
-                            {this.props.words}
-                        </Typography>
+                        <Button
+                            className={this.props.classes.buttons}
+                            edge="start"
+                            href="/ManagerDashboard"
+                        >
+                            <Typography variant="h6">Home</Typography>
+                        </Button>
+                        <Button
+                            className={this.props.classes.buttons}
+                            align="left"
+                            href="#"
+                        >
+                            <Typography variant="h6">Surveys</Typography>
+                        </Button>
                         <Button
                             style={{ marginLeft: "auto" }}
                             variant="contained"
@@ -32,4 +50,4 @@ class Nav extends React.Component {
     }
 }
 
-export default Nav;
+export default withStyles(styles)(Nav);
