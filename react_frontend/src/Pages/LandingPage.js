@@ -31,14 +31,14 @@ class LandingPage extends React.Component {
     }
   }
 
-  componentDidMount(){
-  fetch("http://127.0.0.1:5000/user/Deangelo_Durham@bluesorbetsecurity.com")
-  .then(res => res.json())
-  .then( result => {
-  this.setState({url_id: result.url_id});
-  })
-  .catch(console.log)
-  }
+//  componentDidMount(){
+//  fetch("http://127.0.0.1:5000/user/Deangelo_Durham@bluesorbetsecurity.com")
+//  .then(res => res.json())
+//  .then( result => {
+//  this.setState({url_id: result.url_id});
+//  })
+//  .catch(console.log)
+//  }
 
   render() {
     return (
