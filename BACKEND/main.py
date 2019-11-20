@@ -8,7 +8,6 @@ from bson.json_util import dumps, loads #used to convert Python MongoDB JSON to/
 from flask_cors import CORS
 
 app = flask.Flask("__main__")
-CORS(app)
 
 app.config['MONGO_DBNAME'] = 'Platform'
 username = "testUser"
