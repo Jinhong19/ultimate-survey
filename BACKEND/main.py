@@ -37,7 +37,7 @@ def user_response(user_id):
 
 	elif flask.request.method == 'POST':
 		responses = mongo.db.Responses
-		body = request.json
+		body = request.get_json(force=True)
 		_employeeid = ObjectId(user_id)
 		object_id = responses.insert({'surveyid': 'SomeSurveyid', 'response':body, 'employeeid':_employeeid})
 		return "Inserted Response for Employee " + str(user_id) 
