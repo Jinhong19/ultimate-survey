@@ -64,7 +64,7 @@ def get_created_surveys(manager_id):
 	else:
 		#TODO - implement POST
 		surveys = mongo.db.Surveys
-		body = request.json
+		body = request.get_json(force=True)
 		to_send = {'survey': body, 'manager': ObjectId(manager_id), 'Employees':['5d9f7051269df83d214204b4','5d9f7051269df83d214204b0']}
 		object_id = surveys.insert(to_send)
 		return "Inserted survey for manger: "+ str(manager_id)
