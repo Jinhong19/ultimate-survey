@@ -6,7 +6,7 @@ import EditableLabel from "react-inline-editing";
 const styles = theme => ({
     card: {
         display: "block",
-        width: "55em",
+        maxWidth: "55em",
         marginLeft: "auto",
         marginRight: "auto",
         marginTop: "3em"
