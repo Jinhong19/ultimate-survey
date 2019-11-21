@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import * as Survey from "survey-react";
 import "survey-react/survey.css";
-import SurveyCreator from "../SurveyCreator";
 import logo from "../Media/logo.png";
-import Nav from '../Components/Nav';
+import Nav from "../Components/Nav";
 import "../App.css";
 import "bootstrap/dist/css/bootstrap.css";
 
-import { Router, Route, Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 import "jquery-ui/themes/base/all.css";
 import "nouislider/distribute/nouislider.css";
@@ -43,138 +42,155 @@ widgets.autocomplete(Survey, $);
 widgets.bootstrapslider(Survey);
 
 class App extends Component {
-  json = {
-    title: "Employee Satisfaction Survey Example",
-    showProgressBar: "top",
-    pages: [
-      {
-        elements: [
-          {
-            "type": "radiogroup",
-            "name": "job happiness",
-            "title": "Are you happy with your job?",
-            "isRequired": false,
-            "colCount": 0,
-            "choices": ["1|Very much yes!!", "2|yes", "3|neutral", "4|no"]
-          },
-          {
-            type: "bootstrapslider",
-            name: "bootstrapslider",
-            title: "What percentage of productivity do you believe you are achieving currently?"
-          },
-          {
-            type: "sortablelist",
-            name: "positives",
-            title: "What elements of your job are fulfilling/satisfying?",
-            isRequired: false,
-            colCount: 0,
-            choices: ["the work itself", "the company culture", "the compensation"]
-          }
+    json = {
+        title: "Employee Satisfaction Survey Example",
+        showProgressBar: "top",
+        pages: [
+            {
+                elements: [
+                    {
+                        type: "radiogroup",
+                        name: "job happiness",
+                        title: "Are you happy with your job?",
+                        isRequired: false,
+                        colCount: 0,
+                        choices: [
+                            "1|Very much yes!!",
+                            "2|yes",
+                            "3|neutral",
+                            "4|no"
+                        ]
+                    },
+                    {
+                        type: "bootstrapslider",
+                        name: "bootstrapslider",
+                        title:
+                            "What percentage of productivity do you believe you are achieving currently?"
+                    },
+                    {
+                        type: "sortablelist",
+                        name: "positives",
+                        title:
+                            "What elements of your job are fulfilling/satisfying?",
+                        isRequired: false,
+                        colCount: 0,
+                        choices: [
+                            "the work itself",
+                            "the company culture",
+                            "the compensation"
+                        ]
+                    }
+                ]
+            },
+            {
+                questions: [
+                    {
+                        type: "matrix",
+                        name: "Quality",
+                        title:
+                            "Please indicate if you agree or disagree with the following statements",
+                        columns: [
+                            {
+                                value: 1,
+                                text: "Strongly Disagree"
+                            },
+                            {
+                                value: 2,
+                                text: "Disagree"
+                            },
+                            {
+                                value: 3,
+                                text: "Neutral"
+                            },
+                            {
+                                value: 4,
+                                text: "Agree"
+                            },
+                            {
+                                value: 5,
+                                text: "Strongly Agree"
+                            }
+                        ],
+                        rows: [
+                            {
+                                value: "affordable",
+                                text: "My manger and I communicate frequently"
+                            },
+                            {
+                                value: "does what it claims",
+                                text:
+                                    "When my manager and I communicate, we communicate well"
+                            },
+                            {
+                                value: "better then others",
+                                text: "My manager is accessible"
+                            },
+                            {
+                                value: "easy to use",
+                                text:
+                                    "My manager is too involved (ie micromanages) my work"
+                            }
+                        ]
+                    },
+                    {
+                        type: "rating",
+                        name: "satisfaction",
+                        title:
+                            "How satisfied are you with the company culture?",
+                        mininumRateDescription: "Not Satisfied",
+                        maximumRateDescription: "Completely satisfied"
+                    },
+                    {
+                        type: "barrating",
+                        name: "barrating1",
+                        ratingTheme: "css-stars",
+                        title: "How effective was this survey?",
+                        description:
+                            "1 star being not effective, 5 stars being very effective",
+                        choices: ["1", "2", "3", "4", "5"]
+                    }
+                ]
+            }
         ]
-      },
-      {
-        questions: [
-          {
-            type: "matrix",
-            name: "Quality",
-            title:
-              "Please indicate if you agree or disagree with the following statements",
-            columns: [
-              {
-                value: 1,
-                text: "Strongly Disagree"
-              },
-              {
-                value: 2,
-                text: "Disagree"
-              },
-              {
-                value: 3,
-                text: "Neutral"
-              },
-              {
-                value: 4,
-                text: "Agree"
-              },
-              {
-                value: 5,
-                text: "Strongly Agree"
-              }
-            ],
-            rows: [
-              {
-                value: "affordable",
-                text: "My manger and I communicate frequently"
-              },
-              {
-                value: "does what it claims",
-                text: "When my manager and I communicate, we communicate well"
-              },
-              {
-                value: "better then others",
-                text: "My manager is accessible"
-              },
-              {
-                value: "easy to use",
-                text: "My manager is too involved (ie micromanages) my work"
-              }
-            ]
-          },
-          {
-            type: "rating",
-            name: "satisfaction",
-            title: "How satisfied are you with the company culture?",
-            mininumRateDescription: "Not Satisfied",
-            maximumRateDescription: "Completely satisfied"
-          },
-           {
-            type: "barrating",
-            name: "barrating1",
-            ratingTheme: "css-stars",
-            title: "How effective was this survey?",
-            description: "1 star being not effective, 5 stars being very effective",
-            choices: ["1", "2", "3", "4", "5"]
-          }
-        ]
-      }
-    ]
-  };
+    };
 
-  onValueChanged(result) {
-    console.log("value changed!");
-  }
+    onValueChanged(result) {
+        console.log("value changed!");
+    }
 
-  onComplete(result) {
-    console.log("Complete! " + result);
-  }
+    onComplete(result) {
+        console.log("Complete! " + result);
+    }
 
-  render() {
-    var model = new Survey.Model(this.json);
-    return (
-      <div className="App">
-        <Nav words="Survey Taker" />
-        <div className="App-header">
-          <Link to="/employeedashboard"><img src={logo} class="logo-medium" alt="logo" /></Link>
-          <h2>We are the Ultimate 3!</h2>
-        </div>
-        <div className="surveyjs">
-          {/*If you want to show survey, uncomment the line below*/}
-          <h1>SurveyJS library in action:</h1>
-          <Survey.Survey
-            model={model}
-            onComplete={this.onComplete}
-            onValueChanged={this.onValueChanged}
-          />
-          {/*If you do not want to show Survey Creator, comment the line below*/}
-          {/*<h1>SurveyJS Creator in action:</h1>
+    render() {
+        var model = new Survey.Model(this.json);
+        return (
+            <div className="App">
+                <Nav words="Survey Taker" />
+                <div className="App-header">
+                    <Link to="/employeedashboard">
+                        <img src={logo} class="logo-medium" alt="logo" />
+                    </Link>
+                    <h2>We are the Ultimate 3!</h2>
+                </div>
+                <div className="surveyjs">
+                    {/*If you want to show survey, uncomment the line below*/}
+                    <h1>SurveyJS library in action:</h1>
+                    <Survey.Survey
+                        model={model}
+                        onComplete={this.onComplete}
+                        onValueChanged={this.onValueChanged}
+                    />
+                    {/*If you do not want to show Survey Creator, comment the line below*/}
+                    {/*<h1>SurveyJS Creator in action:</h1>
           <SurveyCreator /> */}
-        </div>
-        <p className="App-intro">
-      {/* To get started, edit <code>src/App.js</code> and save to reload. */}
-        </p>
-      </div>
-    );
-  }
+                </div>
+                <p className="App-intro">
+                    {/* To get started, edit <code>src/App.js</code> and save to reload. */}
+                </p>
+            </div>
+        );
+    }
 }
 
 export default App;

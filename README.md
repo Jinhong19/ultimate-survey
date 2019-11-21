@@ -2,6 +2,7 @@
 
 Run frontend:
 ```
+cd FRONTEND
 npm i
 npm start
 ```

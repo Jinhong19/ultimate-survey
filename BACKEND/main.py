@@ -5,7 +5,7 @@ import json
 import ast
 from bson.objectid import ObjectId
 from bson.json_util import dumps, loads #used to convert Python MongoDB JSON to/from BSON
-
+from flask_cors import CORS
 
 app = flask.Flask("__main__")
 
@@ -36,7 +36,7 @@ def user_response(user_id):
 
 	elif flask.request.method == 'POST':
 		responses = mongo.db.Responses
-		body = request.json
+		body = request.get_json(force=True)
 		_employeeid = ObjectId(user_id)
 		object_id = responses.insert_one({'surveyid': 'SomeSurveyid', 'response':body, 'employeeid':_employeeid})
 		return "Inserted Response for Employee " + str(user_id) 
@@ -64,10 +64,11 @@ def get_created_surveys(manager_id):
 	else:
 		#TODO - implement POST
 		surveys = mongo.db.Surveys
-		body = request.json
+		body = request.get_json(force=True)
 		employees = userDFS(manager_id)
 		to_send = {'survey': body, 'manager': ObjectId(manager_id), 'Employees':employees}
-		surveys.insert_one(to_send)
+		object_id = surveys.insert(to_send)
+
 		return "Inserted survey for manger: "+ str(manager_id)
 
 

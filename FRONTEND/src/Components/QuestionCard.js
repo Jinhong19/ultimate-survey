@@ -1,39 +1,41 @@
-import React, { Component, useState } from "react";
-import { Container, Button, Modal, Row, Col, Form } from "react-bootstrap";
+import React from "react";
+import { Button, Form } from "react-bootstrap";
 import { withStyles } from "@material-ui/core/styles";
-import { Card, CardContent, Typography } from "@material-ui/core";
-import QuestionModal from "./QuestionModal";
+import { Card, CardContent } from "@material-ui/core";
+import MCMaker from "./MCMaker";
 
 const styles = theme => ({
     card: {
         display: "block",
-        width: "55em",
+        maxWidth: "55em",
         marginLeft: "auto",
         marginRight: "auto",
-        marginTop: "3em"
+        marginTop: "1em"
     }
 });
 
 class QuestionCard extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     state = {
         title: "",
-        type: "1"
+        type: "-1"
     };
 
     // hi
 
-    options = ["Yes or No", "Multiple Choice", "Short Answer", "Long Answer"];
+    options = [
+        "Yes or No",
+        "Multiple Choice",
+        "Short Answer",
+        "Long Answer",
+        "Checkbox"
+    ];
 
     onSubmit = e => {
-        if (this.state.type !== "1") {
+        if (this.state.type !== "-1") {
             e.preventDefault();
             this.props.addItem(this.state);
             this.logState();
-            this.setState({ title: "", type: "1" });
+            this.setState({ title: "", type: "-1" });
         } else {
             // Show warning to select an option
         }
@@ -86,14 +88,14 @@ class QuestionCard extends React.Component {
                                         onChange={this.onChangeT}
                                         value={this.state.type}
                                     >
-                                        <option value="1" disabled>
-                                            Select
-                                        </option>
+                                        <option>Select</option>
                                         {this.options.map(o => {
                                             return <option>{o}</option>;
                                         })}
                                     </Form.Control>
                                 </Form.Group>
+
+                                <MCMaker type={this.state.type} />
 
                                 <Button
                                     variant="success"
