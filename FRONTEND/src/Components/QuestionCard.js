@@ -10,7 +10,7 @@ const styles = theme => ({
         width: "55em",
         marginLeft: "auto",
         marginRight: "auto",
-        marginTop: "3em"
+        marginTop: "1em"
     }
 });
 
@@ -86,9 +86,7 @@ class QuestionCard extends React.Component {
                                         onChange={this.onChangeT}
                                         value={this.state.type}
                                     >
-                                        <option>
-                                            Select
-                                        </option>
+                                        <option>Select</option>
                                         {this.options.map(o => {
                                             return <option>{o}</option>;
                                         })}

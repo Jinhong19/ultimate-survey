@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import QuestionCard from "../Components/QuestionCard";
+import SurveyTitle from "../Components/SurveyTitle";
 import QuestionModal from "../Components/QuestionModal";
 import SurveyState from "../Components/SurveyState";
 import SurveyCreateButton from "../Components/SurveyCreateButton";
@@ -49,6 +50,7 @@ export class Survey extends Component {
     render() {
         return (
             <div style={margin}>
+                <SurveyTitle />
                 <QuestionCard
                     addItem={this.addItem}
                     clearSurvey={this.clearSurvey}
