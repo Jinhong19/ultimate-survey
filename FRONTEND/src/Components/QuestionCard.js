@@ -27,7 +27,7 @@ class QuestionCard extends React.Component {
 
     // hi
 
-    options = ["Yes or No", "Multiple Choice", "Short Answer", "Long Answer"];
+    options = ["Yes or No", "Multiple Choice", "Short Answer", "Long Answer", "Checkbox"];
 
     onSubmit = e => {
         if (this.state.type !== "-1") {
