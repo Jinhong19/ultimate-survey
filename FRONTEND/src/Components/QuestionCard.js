@@ -3,6 +3,7 @@ import { Container, Button, Modal, Row, Col, Form } from "react-bootstrap";
 import { withStyles } from "@material-ui/core/styles";
 import { Card, CardContent, Typography } from "@material-ui/core";
 import QuestionModal from "./QuestionModal";
+import MCMaker from "./MCMaker";
 
 const styles = theme => ({
     card: {
@@ -92,6 +93,8 @@ class QuestionCard extends React.Component {
                                         })}
                                     </Form.Control>
                                 </Form.Group>
+
+                                <MCMaker type={this.state.type} />
 
                                 <Button
                                     variant="success"
