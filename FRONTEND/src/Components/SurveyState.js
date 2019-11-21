@@ -1,13 +1,9 @@
-import React, { Component, useState } from "react";
-import { Form, Button, Modal } from "react-bootstrap";
+import React, { Component } from "react";
+import { Form } from "react-bootstrap";
 import StateQuestions from "./StateQuestions";
 import SurveyCreateButton from "../Components/SurveyCreateButton";
 
 export class SurveyState extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         let itemList = this.props.items;
         console.log("item List-");
@@ -29,7 +25,7 @@ export class SurveyState extends Component {
                             items={this.props.items}
                             removeItem={this.props.removeItem}
                         />
-                        <SurveyCreateButton items={this.props.items}/>
+                        <SurveyCreateButton items={this.props.items} />
                     </Form>
                 </div>
             );
@@ -44,7 +40,7 @@ export class SurveyState extends Component {
                             items={this.props.items}
                             removeItem={this.props.removeItem}
                         />
-                        <SurveyCreateButton items={this.props.items}/>
+                        <SurveyCreateButton items={this.props.items} />
                     </Form>
                 </div>
             );

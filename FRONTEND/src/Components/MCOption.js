@@ -1,11 +1,6 @@
-import React, { Component, useState } from "react";
-import { Form, Button, Modal, Col, Row } from "react-bootstrap";
+import React, { Component } from "react";
 
 export class MCOption extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         console.log("MCO l10: " + this.props.options);
 

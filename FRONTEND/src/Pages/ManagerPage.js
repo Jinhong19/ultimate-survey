@@ -1,10 +1,8 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
-import QuestionCard from "../Components/QuestionCard";
+import React from "react";
 import Nav from "../Components/Nav";
 import "../App.css";
 import Survey from "../Components/Survey";
-import { Container, Button, Modal, Row, Col, Form } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 
 function App() {
     return (

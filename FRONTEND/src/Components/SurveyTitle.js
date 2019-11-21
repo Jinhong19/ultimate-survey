@@ -1,6 +1,6 @@
-import React, { Component, useState } from "react";
+import React from "react";
 import { withStyles } from "@material-ui/core/styles";
-import { Card, CardContent, Typography } from "@material-ui/core";
+import { Card, CardContent } from "@material-ui/core";
 import EditableLabel from "react-inline-editing";
 
 const styles = theme => ({
@@ -54,10 +54,5 @@ class SurveyTitle extends React.Component {
         );
     }
 }
-
-const margin = {
-    marginTop: "1em",
-    marginRight: "1em"
-};
 
 export default withStyles(styles)(SurveyTitle);

@@ -2,13 +2,8 @@ import React, { Component } from "react";
 import QuestionCard from "../Components/QuestionCard";
 import SurveyTitle from "../Components/SurveyTitle";
 import SurveyState from "../Components/SurveyState";
-import SurveyCreateButton from "../Components/SurveyCreateButton";
 
 export class Survey extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     state = {
         survey: []
     };

@@ -1,15 +1,9 @@
-import React, { Component, useState } from "react";
-import { Form, Button, Modal, Row, Col } from "react-bootstrap";
-import StateQuestions from "./StateQuestions";
-import SurveyCreateButton from "../Components/SurveyCreateButton";
+import React, { Component } from "react";
+import { Button, Row, Col } from "react-bootstrap";
 import MCOption from "./MCOption";
 import EditableLabel from "react-inline-editing";
 
 export class MCMaker extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     state = {
         count: 1,
         options: ["1", "2", "3"]
@@ -26,7 +20,7 @@ export class MCMaker extends Component {
     addOption = () => {
         console.log("RECV- addOptions in MCMaker: ");
         this.state.options.push("hello" + this.state.count);
-        this.state.count++;
+        this.state.setState({ count: this.state.count + 1 });
         console.log(this.state.count);
     };
 
@@ -73,11 +67,6 @@ export class MCMaker extends Component {
 
 const margin = {
     marginTop: "2em"
-};
-
-const formStyle = {
-    // textAlign: "center",
-    background: "f5f5f5"
 };
 
 export default MCMaker;

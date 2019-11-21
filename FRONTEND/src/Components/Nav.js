@@ -1,44 +1,56 @@
-import React, { Component } from "react";
-import { AppBar, Toolbar, Button, withStyles, Typography, IconButton, Menu, MenuItem } from '@material-ui/core';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+import React from "react";
+import {
+    AppBar,
+    Toolbar,
+    Button,
+    withStyles,
+    Typography,
+    IconButton,
+    Menu,
+    MenuItem
+} from "@material-ui/core";
+import AccountCircle from "@material-ui/icons/AccountCircle";
 
-const styles = theme => ({ 
+const styles = theme => ({
     root: {
         flexGrow: 1
     },
     menuItem: {
-        margin: '1em',
-        color: 'white'
+        margin: "1em",
+        color: "white"
     },
     account: {
-        marginLeft: 'auto'
+        marginLeft: "auto"
     }
 });
 
 class Nav extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {open: null};
+        this.state = { open: null };
     }
 
     handleClick = event => {
         this.setState({
             open: event.currentTarget
         });
-    }
+    };
 
     handleClose = () => {
         this.setState({
             open: null
         });
-    }
+    };
 
     render() {
         return (
-            <div className="root" >
+            <div className="root">
                 <AppBar position="static" color="primary">
                     <Toolbar>
-                        <Typography className={this.props.classes.menuItem} variant="h5">
+                        <Typography
+                            className={this.props.classes.menuItem}
+                            variant="h5"
+                        >
                             Hello, {this.props.userName}
                         </Typography>
                         <Button
@@ -69,19 +81,25 @@ class Nav extends React.Component {
                                 id="menu-appbar"
                                 anchorEl={this.state.open}
                                 anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
+                                    vertical: "top",
+                                    horizontal: "right"
                                 }}
                                 keepMounted
                                 transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
+                                    vertical: "top",
+                                    horizontal: "right"
                                 }}
                                 open={Boolean(this.state.open)}
                                 onClose={this.handleClose}
                             >
-                                <MenuItem onClick={this.handleClose}>Change password</MenuItem>
-                                <MenuItem onClick={() => window.location.href="/"} >Log Out</MenuItem>
+                                <MenuItem onClick={this.handleClose}>
+                                    Change password
+                                </MenuItem>
+                                <MenuItem
+                                    onClick={() => (window.location.href = "/")}
+                                >
+                                    Log Out
+                                </MenuItem>
                             </Menu>
                         </div>
                     </Toolbar>
@@ -92,7 +110,7 @@ class Nav extends React.Component {
 }
 
 Nav.defaultProps = {
-    userName: 'USER'
-  };
+    userName: "USER"
+};
 
 export default withStyles(styles)(Nav);
