@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import QuestionCard from "../Components/QuestionCard";
 import SurveyTitle from "../Components/SurveyTitle";
-import QuestionModal from "../Components/QuestionModal";
 import SurveyState from "../Components/SurveyState";
 import SurveyCreateButton from "../Components/SurveyCreateButton";
 

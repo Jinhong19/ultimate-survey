@@ -1,27 +1,36 @@
 import React, { Component, useState } from "react";
-import { Form, Button, Modal } from "react-bootstrap";
-import StateQuestions from "./StateQuestions";
-import SurveyCreateButton from "../Components/SurveyCreateButton";
+import { Form, Button, Modal, Col, Row } from "react-bootstrap";
 
 export class MCOption extends Component {
     constructor(props) {
         super(props);
     }
 
-    state = {
-        count: 1
-    };
+    render() {
+        console.log("MCO l10: " + this.props.options);
 
-    render() {}
+        this.props.options.map(function(label) {
+            console.log(label);
+            return <p>{label}</p>;
+        });
+
+        // return this.props.options.map(label => {
+        // <Form.Group controlId="surveyQuestion">
+        //     <div key="inline-radio" className="mb-3">
+        //         <Form.Check
+        //             inline
+        //             name="option"
+        //             label={" " + label}
+        //             type="radio"
+        //             id="inline-radio-1"
+        //         />
+        //     </div>
+        // </Form.Group>;
+        // <p>{label}</p>;
+        // });
+
+        return <div></div>;
+    }
 }
-
-const margin = {
-    marginTop: "4em"
-};
-
-const formStyle = {
-    // textAlign: "center",
-    background: "f5f5f5"
-};
 
 export default MCOption;

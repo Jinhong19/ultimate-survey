@@ -2,7 +2,6 @@ import React, { Component, useState } from "react";
 import { Container, Button, Modal, Row, Col, Form } from "react-bootstrap";
 import { withStyles } from "@material-ui/core/styles";
 import { Card, CardContent, Typography } from "@material-ui/core";
-import QuestionModal from "./QuestionModal";
 import MCMaker from "./MCMaker";
 
 const styles = theme => ({
@@ -27,7 +26,13 @@ class QuestionCard extends React.Component {
 
     // hi
 
-    options = ["Yes or No", "Multiple Choice", "Short Answer", "Long Answer", "Checkbox"];
+    options = [
+        "Yes or No",
+        "Multiple Choice",
+        "Short Answer",
+        "Long Answer",
+        "Checkbox"
+    ];
 
     onSubmit = e => {
         if (this.state.type !== "-1") {
