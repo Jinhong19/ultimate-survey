@@ -5,8 +5,7 @@ import './App.css';
 import LandingPage from './Pages/LandingPage';
 import EmployeePage from './Pages/EmployeePage';
 import ManagerPage from './Pages/ManagerPage';
-import ManagerDashboard from './Pages/ManagerDashboard';
-import EmployeeDashboard from './Pages/EmployeeDashboard';
+import Dashboard from './Pages/Dashboard';
 import Forgot from './Pages/Forgot';
 import TakeSurvey from './Pages/TakeSurvey';
 import { createMuiTheme } from '@material-ui/core/styles';
@@ -32,10 +31,7 @@ class App extends Component {
           <Route exact path="/" component = {LandingPage} />
           {/*This line is make a page for employeepage */}
           <Route path="/EmployeePage" component = {EmployeePage} />
-          {/*Brings to manager dashboard -- not completed*/}
-          <Route path="/ManagerDashboard" component = {ManagerDashboard} />
-          {/*Brings to employee dashboard -- not completed*/}
-          <Route path="/EmployeeDashboard" component = {EmployeeDashboard} />
+          <Route path="/Dashboard" component = {Dashboard} />
           {/*This line brings you to the survey creation page*/}
           <Route path="/ManagerPage" component = {ManagerPage} />
           {/*Forgot password page*/}

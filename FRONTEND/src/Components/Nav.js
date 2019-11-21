@@ -44,7 +44,7 @@ class Nav extends React.Component {
                         <Button
                             className={this.props.classes.menuItem}
                             edge="start"
-                            href="/ManagerDashboard"
+                            href="/Dashboard"
                         >
                             <Typography variant="h5">Home</Typography>
                         </Button>
