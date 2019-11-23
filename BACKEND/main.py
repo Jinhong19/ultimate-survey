@@ -104,5 +104,4 @@ def get_survey_respones(survey_id):
 
 
 if __name__ == '__main__':
-	print(len(userDFS("5dd1cf37a336bb8b6e96a3ef")))
-    #app.run(debug=True)
+    app.run(debug=True)
