@@ -89,7 +89,10 @@ def userDFS(manager_id):
 		count_employees_of = employees.count_documents(query)
 		
 		for doc in employees_of:
+			user_employees = userDFS(doc['_id'])
 			result.append(ObjectId(doc['_id']))
+			for user in user_employees:
+				result.append(user)
 	return result
 
 
