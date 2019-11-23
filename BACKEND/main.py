@@ -89,7 +89,10 @@ def userDFS(manager_id):
 		count_employees_of = employees.count_documents(query)
 		
 		for doc in employees_of:
+			user_employees = userDFS(doc['_id'])
 			result.append(ObjectId(doc['_id']))
+			for user in user_employees:
+				result.append(user)
 	return result
 
 
@@ -101,4 +104,5 @@ def get_survey_respones(survey_id):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+	print(len(userDFS("5dd1cf37a336bb8b6e96a3ef")))
+    #app.run(debug=True)
