@@ -1,5 +1,5 @@
 import React from "react";
-import Nav from "../Components/Nav";
+import AccountButton from '../Components/AccountButton';
 import SurveyMenu from "../Components/SurveyMenu";
 import Survey from "../Components/Survey";
 
@@ -48,12 +48,25 @@ const useStyles = makeStyles(theme => ({
     },
     tabLabel: {
         fontSize: "small"
+    },
+    userGreeting: {
+        float: "left"
+    },
+    tabContainer: {
+        float: "right"
+    },
+    menuItem: {
+        display: "inline-block",
+        margin: "1em",
+        float: "left",
+        color: "white"
     }
 }));
 
 export default function DashboardTabs() {
     const classes = useStyles();
-    const [value, setValue] = React.useState(0);
+    const [value, setValue, username] = React.useState(0);
+    const [open] = React.useState(false);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -61,25 +74,35 @@ export default function DashboardTabs() {
 
     return (
         <div className={classes.root}>
-            <Nav />
             <AppBar position="static">
-                <Tabs value={value} onChange={handleChange}>
-                    <Tab
-                        className={classes.tabLabel}
-                        label="take"
-                        {...a11yProps(0)}
-                    />
-                    <Tab
-                        className={classes.tabLabel}
-                        label="created"
-                        {...a11yProps(1)}
-                    />
-                    <Tab
-                        className={classes.tabLabel}
-                        label="make"
-                        {...a11yProps(2)}
-                    />
-                </Tabs>
+                <div className="userGreeting">
+                    <Typography
+                        className={classes.menuItem}
+                        variant="h5"
+                    >
+                        Hello, {username}
+                    </Typography>
+                </div>
+                <div className="tabContainer">
+                    <Tabs value={value} onChange={handleChange} centered>
+                        <Tab
+                            className={classes.tabLabel}
+                            label="take"
+                            {...a11yProps(0)}
+                        />
+                        <Tab
+                            className={classes.tabLabel}
+                            label="created"
+                            {...a11yProps(1)}
+                        />
+                        <Tab
+                            className={classes.tabLabel}
+                            label="make"
+                            {...a11yProps(2)}
+                        />
+                    </Tabs>
+                </div>
+                <AccountButton />
             </AppBar>
             <TabPanel value={value} index={0}>
                 <SurveyMenu />
