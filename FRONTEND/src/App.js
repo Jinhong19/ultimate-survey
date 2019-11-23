@@ -6,6 +6,7 @@ import EmployeePage from "./Pages/EmployeePage";
 import ManagerPage from "./Pages/ManagerPage";
 import Dashboard from "./Pages/Dashboard";
 import Forgot from "./Pages/Forgot";
+import ChangePassword from "./Pages/ChangePassword";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import green from "@material-ui/core/colors/green";
@@ -36,6 +37,8 @@ class App extends Component {
                     <Route path="/ManagerPage" component={ManagerPage} />
                     {/*Forgot password page*/}
                     <Route path="/forgot" component={Forgot} />
+                    {/*Change password page*/}
+                    <Route path="/changepassword" component={ChangePassword} />
                 </Router>
             </ThemeProvider>
         );
