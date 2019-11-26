@@ -1,21 +1,25 @@
-import React, { Component } from "react";
+import React from "react";
 import { Button } from "react-bootstrap";
 
 class SurveyCreateButton extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
-
         const handleCreate = () => {
             console.log("item List- from Create Button");
-            console.log(this.props.items);
-        }
+            console.log(JSON.stringify(this.props.items));
+            fetch(
+                "https://ultimate-survey.herokuapp.com/survey/manager/5d9f7051269df83d214204b4",
+                {
+                    method: "post",
+                    mode: "no-cors",
+                    body: JSON.stringify(this.props.items)
+                }
+            ); //
+        };
 
         return (
             <div className="text-center" style={marginBtn}>
-                <Button onClick = {handleCreate}
+                <Button
+                    onClick={handleCreate}
                     size="lg"
                     variant="success"
                     // href="/"

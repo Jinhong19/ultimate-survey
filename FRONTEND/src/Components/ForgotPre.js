@@ -1,33 +1,35 @@
-import React, { Component } from 'react';
-import { CardContent, Typography, CardActions, Button, TextField, withStyles, Input } from '@material-ui/core';
+import React, { Component } from "react";
+import {
+    CardContent,
+    Typography,
+    CardActions,
+    Button,
+    TextField,
+    withStyles
+} from "@material-ui/core";
 
 const styles = theme => ({
     text: {
-        margin: '1em',
-        marginBottom: '0em',
-        marginBottom: '0'
+        margin: "1em",
+        marginBottom: "0em"
     },
     entry: {
-        marginTop: '0.7em'
+        marginTop: "0.7em"
     },
     submit: {
-        color: 'white'
+        color: "white"
     }
 });
 
 class ForgotPre extends Component {
-    constructor(props){
-        super(props);
-    }
-
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 <CardContent>
-                    <Typography className={this.props.classes.text} variant="p" >
+                    <Typography className={this.props.classes.text} variant="p">
                         Enter your email below to reset your password
                     </Typography>
-                    <TextField 
+                    <TextField
                         required
                         className={this.props.classes.entry}
                         name="emailInput"
@@ -55,4 +57,4 @@ class ForgotPre extends Component {
     }
 }
 
-export default withStyles(styles)(ForgotPre)
+export default withStyles(styles)(ForgotPre);

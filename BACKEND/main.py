@@ -125,6 +125,23 @@ def user_response(user_id):
     # GET - return a list of all surveys available to a employee
 
 
+#GET - return responses for a certain employeeid
+#POST - pushes a survey response to the database
+@app.route('/response/<user_id>', methods=['GET', 'POST'])
+def user_response(user_id):
+	if flask.request.method == 'GET':
+		responses = mongo.db.Responses
+		cursor_query= responses.find({"employeeid":ObjectId(user_id)})
+		return dumps(list(cursor_query))
+
+	elif flask.request.method == 'POST':
+		responses = mongo.db.Responses
+		body = request.get_json(force=True)
+		_employeeid = ObjectId(user_id)
+		object_id = responses.insert_one({'surveyid': 'SomeSurveyid', 'response':body, 'employeeid':_employeeid})
+		return "Inserted Response for Employee " + str(user_id) 
+
+#GET - return a list of all surveys available to a employee
 @app.route('/survey/employee/<user_id>', methods=['GET'])
 @login_required
 def user_survey(user_id):
@@ -135,9 +152,8 @@ def user_survey(user_id):
 
 
 # MANAGER ----------------------------------------------------------------
-
-# GET - return a list of all surveys created by a manager
-# POST - submit a new survey
+#GET - return a list of all surveys created by a manager
+#POST - submit a new survey - survey body is not modified - also performs query of employees under manger
 @app.route('/survey/manager/<manager_id>', methods=['GET', 'POST'])
 @login_required
 def get_created_surveys(manager_id):
@@ -154,6 +170,30 @@ def get_created_surveys(manager_id):
                    'Employees': ['5d9f7051269df83d214204b4', '5d9f7051269df83d214204b0']}
         object_id = surveys.insert(to_send)
         return "Inserted survey for manger: " + str(manager_id)
+
+
+def userDFS(manager_id):
+	employees = mongo.db.Employees
+	query = {'_id': ObjectId(manager_id)}
+	manager_data = employees.find(query)
+	manager_count = employees.count_documents(query)
+
+	result = []
+	
+	if manager_count > 0:
+		entry = manager_data.next()
+		manager_employeeid = entry['employeeId']
+
+		query = {'managerId': manager_employeeid}
+		employees_of = employees.find(query)
+		count_employees_of = employees.count_documents(query)
+		
+		for doc in employees_of:
+			user_employees = userDFS(doc['_id'])
+			result.append(ObjectId(doc['_id']))
+			for user in user_employees:
+				result.append(user)
+	return result
 
 
 @app.route('/responses/<survey_id>', methods=['GET'])

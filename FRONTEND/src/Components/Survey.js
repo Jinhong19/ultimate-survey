@@ -1,14 +1,10 @@
 import React, { Component } from "react";
 import QuestionCard from "../Components/QuestionCard";
-import QuestionModal from "../Components/QuestionModal";
+import SurveyTitle from "../Components/SurveyTitle";
 import SurveyState from "../Components/SurveyState";
-import SurveyCreateButton from "../Components/SurveyCreateButton";
+import { Container } from "react-bootstrap";
 
 export class Survey extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     state = {
         survey: []
     };
@@ -48,16 +44,19 @@ export class Survey extends Component {
 
     render() {
         return (
-            <div style={margin}>
-                <QuestionCard
-                    addItem={this.addItem}
-                    clearSurvey={this.clearSurvey}
-                />
-                <SurveyState
-                    items={this.state.survey}
-                    removeItem={this.removeItem}
-                />
-            </div>
+            <Container>
+                <div style={margin}>
+                    <SurveyTitle />
+                    <QuestionCard
+                        addItem={this.addItem}
+                        clearSurvey={this.clearSurvey}
+                    />
+                    <SurveyState
+                        items={this.state.survey}
+                        removeItem={this.removeItem}
+                    />
+                </div>
+            </Container>
         );
     }
 }
