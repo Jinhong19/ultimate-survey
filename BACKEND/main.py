@@ -46,15 +46,15 @@ def login():
         if person['password'] == request.get_json(force=True)['password']:
             user_obj = User(person)
             login_user(user_obj)
-            return 'You have logged in!'
+            return flask.jsonify({'message':'You have logged in!'})
 
-    return 'Invalid username or password'
+    return flask.jsonify({'message':"Invalid username or password"})
 
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
-    return 'You logged out!'
+    return flask.jsonify({'message':'You logged out!'})
 
 @app.errorhandler(401)
 def page_not_found():
@@ -79,14 +79,14 @@ def user_response():
 	if flask.request.method == 'GET':
 		responses = mongo.db.Responses
 		cursor_query= responses.find({"employeeid":ObjectId(current_user._id)})
-		return dumps(list(cursor_query))
+		return flask.jsonify(dumps(list(cursor_query)))
 
 	elif flask.request.method == 'POST':
 		responses = mongo.db.Responses
 		body = request.get_json(force=True)
 		_employeeid = ObjectId(current_user._id)
 		object_id = responses.insert_one({'surveyid': 'SomeSurveyid', 'response':body, 'employeeid':_employeeid})
-		return "Inserted Response for Employee " + str(current_user._id) 
+		return flask.jsonify({'message':"Inserted Response for Employee " + str(current_user._id)})
 
 #GET - return a list of all surveys available to a employee
 @app.route('/survey/employee', methods=['GET'])
@@ -95,7 +95,7 @@ def user_survey():
     if flask.request.method == 'GET':
         surveys = mongo.db.Surveys
         cursor_query = surveys.find({'Employees': ObjectId(current_user._id)})
-        return dumps(list(cursor_query))
+        return flask.jsonify(dumps(list(cursor_query)))
 
 
 # MANAGER ----------------------------------------------------------------
@@ -108,14 +108,14 @@ def get_created_surveys():
     if flask.request.method == 'GET':
         surveys = mongo.db.Surveys
         cursor_query = surveys.find({"manager": ObjectId(current_user._id)})  
-        return dumps(list(cursor_query))
+        return flask.jsonify(dumps(list(cursor_query)))
     else:
         surveys = mongo.db.Surveys
         body = request.get_json(force=True)
         to_send = {'survey': body, 'manager': ObjectId(current_user._id),
                    'Employees': userDFS(current_user._id)}
         object_id = surveys.insert(to_send)
-        return "Inserted survey for manger: " + str(current_user._id)
+        return flask.jsonify({'message':"Inserted survey for manger: " + str(current_user._id)})
 
 
 def userDFS(manager_id):
@@ -146,7 +146,7 @@ def userDFS(manager_id):
 def get_survey_respones(survey_id):
     responses = mongo.db.Responses
     cursor_query = responses.find({'surveyid': ObjectId(survey_id)})
-    return dumps(list(cursor_query))
+    return flask.jsonify(dumps(list(cursor_query)))
 
 
 if __name__ == '__main__':
