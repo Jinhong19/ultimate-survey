@@ -17,8 +17,7 @@ app.config.update(
     DEBUG=True,
     SECRET_KEY='the_biggest_secret'
 )
-mongo = PyMongo(app,
-                     uri='mongodb+srv://testUser:testUserUltimate3@ultimatesurvey-74jff.mongodb.net/Platform?retryWrites=true&w=majority')
+mongo = PyMongo(app, uri='mongodb+srv://testUser:testUserUltimate3@ultimatesurvey-74jff.mongodb.net/Platform?retryWrites=true&w=majority')
 
 
 # flask-login
@@ -105,25 +104,6 @@ def get_user_id():
     return 'You are In'
 
 # -----------------------------------------------------------------------------------------
-# GET - return responses for a certain employeeid
-# POST - pushes a survey response to the database
-@app.route('/response/<user_id>', methods=['GET', 'POST'])
-@login_required
-def user_response(user_id):
-    if flask.request.method == 'GET':
-        responses = mongo.db.Responses
-        cursor_query = responses.find({"employeeid": ObjectId(user_id)})
-        return dumps(list(cursor_query))
-
-    elif flask.request.method == 'POST':
-        responses = mongo.db.Responses
-        body = request.json
-        _employeeid = ObjectId(user_id)
-        object_id = responses.insert({'surveyid': 'SomeSurveyid', 'response': body, 'employeeid': _employeeid})
-        return "Inserted Response for Employee " + str(user_id)
-
-    # GET - return a list of all surveys available to a employee
-
 
 #GET - return responses for a certain employeeid
 #POST - pushes a survey response to the database
