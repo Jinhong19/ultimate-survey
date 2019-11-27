@@ -69,7 +69,6 @@ class LoginCard extends React.Component {
 
         // TODO - implement redirect to /Dashboard upon {message:'success'} return
         
-            
     }
 
 
