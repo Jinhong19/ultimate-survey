@@ -6,12 +6,14 @@ class SurveyCreateButton extends React.Component {
         const handleCreate = () => {
             console.log("item List- from Create Button");
             console.log(JSON.stringify(this.props.items));
+            // TODO - implement display message upon insert into database
             fetch(
-                "http://127.0.0.1:5000/survey/manager",
+                "http://ultimate-survey.herokuapp.com//survey/manager",
                 {
                     method: "post",
                     headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(this.props.items)
+                    body: JSON.stringify(this.props.items),
+                    credentials: 'include'
                 }
             )
             .then(response => response.json())

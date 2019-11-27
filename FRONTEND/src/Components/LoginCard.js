@@ -57,26 +57,21 @@ class LoginCard extends React.Component {
         event.preventDefault();
         const username = this.state.username;
         const password = this.state.password;
-        //TODO uncommon next two line can check the value being submitted to the api call
-        //console.log(username)
-        //console.log(password)
+        
         console.log(this.state)
-        fetch("http://127.0.0.1:5000/login", 
+        fetch("https://ultimate-survey.herokuapp.com/login", 
             {method:'POST',
              headers: {'Content-Type': 'application/json'},
-             body: JSON.stringify(this.state)})
+             body: JSON.stringify(this.state),
+             credentials: 'include'})
             .then(response => response.json())
             .then(data => console.log(data));
 
-        // TODO - implement redirect upon 'success' return
+        // TODO - implement redirect to /Dashboard upon {message:'success'} return
         
             
     }
 
-    //    handleClick(){
-    //    axios.get("http://127.0.0.1:5000/login")
-    //    .then(response => this.setState({result: response}))
-    //    }
 
     render() {
         return (

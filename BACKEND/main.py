@@ -39,7 +39,7 @@ class User(UserMixin):
 # AUTHENTICATION -------------------------------------------------------
 
 @app.route("/login", methods=["GET", "POST"])
-@cross_origin()
+@cross_origin(supports_credentials=True)
 def login():
     users = mongo.db.Employees
     person = users.find_one({'email': request.get_json(force=True)['username']})
@@ -57,7 +57,7 @@ def login():
 
 @app.route('/logout')
 @login_required
-@cross_origin()
+@cross_origin(supports_credentials=True)
 def logout():
     logout_user()
     return flask.jsonify({'message':'success'})
@@ -81,7 +81,7 @@ def load_user(username):
 #POST - pushes a survey response to the database
 @app.route('/response', methods=['GET', 'POST'])
 @login_required
-@cross_origin()
+@cross_origin(supports_credentials=True)
 def user_response():
 	if flask.request.method == 'GET':
 		responses = mongo.db.Responses
@@ -97,7 +97,7 @@ def user_response():
 
 #GET - return a list of all surveys available to a employee
 @app.route('/survey/employee', methods=['GET'])
-@cross_origin()
+@cross_origin(supports_credentials=True)
 @login_required
 def user_survey():
     if flask.request.method == 'GET':
@@ -111,7 +111,7 @@ def user_survey():
 #GET - return a list of all surveys created by a manager
 #POST - submit a new survey - survey body is not modified - also performs query of employees under manger
 @app.route('/survey/manager', methods=['GET', 'POST'])
-@cross_origin()
+@cross_origin(supports_credentials=True)
 @login_required
 def get_created_surveys():
     if flask.request.method == 'GET':
@@ -151,7 +151,7 @@ def userDFS(manager_id):
 
 
 @app.route('/responses/<survey_id>', methods=['GET'])
-@cross_origin()
+@cross_origin(supports_credentials=True)
 @login_required
 def get_survey_respones(survey_id):
     responses = mongo.db.Responses
