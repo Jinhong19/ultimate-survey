@@ -1,4 +1,5 @@
 import flask
+from flask_cors import cross_origin
 from flask import Flask, Response, redirect, url_for, request, session, abort
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user, current_user
 from flask_pymongo import PyMongo
@@ -27,6 +28,9 @@ class User(UserMixin):
     def __init__(self, person):
         self.username = person['email']
         self._id = str(person['_id'])
+        self.isManager = True #TODO - grab attribute from database once implemented
+        self.fname = person['firstName']
+        self.lname = person['lastName']
     def get_id(self):
         return self.username
     def get_objectid(self):
@@ -35,6 +39,7 @@ class User(UserMixin):
 # AUTHENTICATION -------------------------------------------------------
 
 @app.route("/login", methods=["GET", "POST"])
+@cross_origin(supports_credentials=True)
 def login():
     users = mongo.db.Employees
     person = users.find_one({'email': request.get_json(force=True)['username']})
@@ -46,15 +51,16 @@ def login():
         if person['password'] == request.get_json(force=True)['password']:
             user_obj = User(person)
             login_user(user_obj)
-            return flask.jsonify({'message':'You have logged in!'})
+            return flask.jsonify({'message':'success', 'isManager':user_obj.isManager, 'fname':user_obj.fname, 'lname':user_obj.lname})
 
-    return flask.jsonify({'message':"Invalid username or password"})
+    return flask.jsonify({'message':"failure"})
 
 @app.route('/logout')
 @login_required
+@cross_origin(supports_credentials=True)
 def logout():
     logout_user()
-    return flask.jsonify({'message':'You logged out!'})
+    return flask.jsonify({'message':'success'})
 
 @app.errorhandler(401)
 def page_not_found():
@@ -75,6 +81,7 @@ def load_user(username):
 #POST - pushes a survey response to the database
 @app.route('/response', methods=['GET', 'POST'])
 @login_required
+@cross_origin(supports_credentials=True)
 def user_response():
 	if flask.request.method == 'GET':
 		responses = mongo.db.Responses
@@ -90,6 +97,7 @@ def user_response():
 
 #GET - return a list of all surveys available to a employee
 @app.route('/survey/employee', methods=['GET'])
+@cross_origin(supports_credentials=True)
 @login_required
 def user_survey():
     if flask.request.method == 'GET':
@@ -103,6 +111,7 @@ def user_survey():
 #GET - return a list of all surveys created by a manager
 #POST - submit a new survey - survey body is not modified - also performs query of employees under manger
 @app.route('/survey/manager', methods=['GET', 'POST'])
+@cross_origin(supports_credentials=True)
 @login_required
 def get_created_surveys():
     if flask.request.method == 'GET':
@@ -142,6 +151,7 @@ def userDFS(manager_id):
 
 
 @app.route('/responses/<survey_id>', methods=['GET'])
+@cross_origin(supports_credentials=True)
 @login_required
 def get_survey_respones(survey_id):
     responses = mongo.db.Responses
