@@ -7,7 +7,7 @@ import MCMaker from "./MCMaker";
 const styles = theme => ({
     card: {
         display: "block",
-        width: "55em",
+        maxWidth: "55em",
         marginLeft: "auto",
         marginRight: "auto",
         marginTop: "1em"

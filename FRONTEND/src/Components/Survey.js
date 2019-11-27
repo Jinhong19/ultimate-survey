@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import QuestionCard from "../Components/QuestionCard";
 import SurveyTitle from "../Components/SurveyTitle";
 import SurveyState from "../Components/SurveyState";
+import { Container } from "react-bootstrap";
 
 export class Survey extends Component {
     state = {
@@ -43,17 +44,19 @@ export class Survey extends Component {
 
     render() {
         return (
-            <div style={margin}>
-                <SurveyTitle />
-                <QuestionCard
-                    addItem={this.addItem}
-                    clearSurvey={this.clearSurvey}
-                />
-                <SurveyState
-                    items={this.state.survey}
-                    removeItem={this.removeItem}
-                />
-            </div>
+            <Container>
+                <div style={margin}>
+                    <SurveyTitle />
+                    <QuestionCard
+                        addItem={this.addItem}
+                        clearSurvey={this.clearSurvey}
+                    />
+                    <SurveyState
+                        items={this.state.survey}
+                        removeItem={this.removeItem}
+                    />
+                </div>
+            </Container>
         );
     }
 }

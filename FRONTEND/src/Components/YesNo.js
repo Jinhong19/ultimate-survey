@@ -349,7 +349,7 @@ const padding = {
 
 const cardStyle = {
     display: "block",
-    width: "55em",
+    maxWidth: "55em",
     marginLeft: "auto",
     marginRight: "auto",
     marginTop: "3em",

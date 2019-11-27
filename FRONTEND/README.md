@@ -2,6 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
 
+## Live version on Netlify
+**Link:** [https://umass-cs320-ultimate-survey.netlify.com/](https://umass-cs320-ultimate-survey.netlify.com/)
+
 ## How to run this sample application
  - git clone https://github.com/Jinhong19/ultimate-survey.git
  - pull from sample app branch
