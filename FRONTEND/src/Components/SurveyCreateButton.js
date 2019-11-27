@@ -7,13 +7,15 @@ class SurveyCreateButton extends React.Component {
             console.log("item List- from Create Button");
             console.log(JSON.stringify(this.props.items));
             fetch(
-                "https://ultimate-survey.herokuapp.com/survey/manager/5d9f7051269df83d214204b4",
+                "http://127.0.0.1:5000/survey/manager",
                 {
                     method: "post",
-                    mode: "no-cors",
+                    headers: {'Content-Type': 'application/json'},
                     body: JSON.stringify(this.props.items)
                 }
-            ); //
+            )
+            .then(response => response.json())
+            .then(data => console.log(data));
         };
 
         return (

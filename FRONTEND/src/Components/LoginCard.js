@@ -37,7 +37,7 @@ class LoginCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            email: "",
+            username: "",
             password: ""
         };
         this.handleChange_password = this.handleChange_password.bind(this);
@@ -60,9 +60,17 @@ class LoginCard extends React.Component {
         //TODO uncommon next two line can check the value being submitted to the api call
         //console.log(username)
         //console.log(password)
-        axios
-            .post("https://ultimate-survey.herokuapp.com/login", this.state)
-            .then(res => console.log(res));
+        console.log(this.state)
+        fetch("http://127.0.0.1:5000/login", 
+            {method:'POST',
+             headers: {'Content-Type': 'application/json'},
+             body: JSON.stringify(this.state)})
+            .then(response => response.json())
+            .then(data => console.log(data));
+
+        // TODO - implement redirect upon 'success' return
+        
+            
     }
 
     //    handleClick(){
