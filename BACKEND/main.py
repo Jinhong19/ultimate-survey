@@ -31,7 +31,8 @@ class User(UserMixin):
     def __init__(self, person):
         self.username = person['email']
         self._id = str(person['_id'])
-        self.isManager = True  # TODO - grab attribute from database once implemented
+        # check if word "manager" is in positionTitle field
+        self.isManager = "Manager" in person['positionTitle'] or "manager" in person['positionTitle']
         self.fname = person['firstName']
         self.lname = person['lastName']
 
@@ -61,6 +62,7 @@ def login():
     return flask.jsonify({'message': "failure"})
 
 
+# Get request to logout
 @app.route('/logout')
 @login_required
 @cross_origin(supports_credentials=True)
@@ -69,9 +71,9 @@ def logout():
     return flask.jsonify({'message': 'success'})
 
 
-@app.errorhandler(401)
-def page_not_found():
-    return Response('<p>Login failed</p>')
+@app.errorhandler(400)
+def not_log_in(a):
+    return flask.jsonify({'message': "Please login first."})
 
 
 # callback to reload the user object
