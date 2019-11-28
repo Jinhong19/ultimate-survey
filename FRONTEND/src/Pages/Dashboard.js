@@ -12,6 +12,9 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
+import Snackbar from '@material-ui/core/Snackbar';
+import Slide from '@material-ui/core/Slide';
+
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -67,8 +70,27 @@ const useStyles = makeStyles(theme => ({
 export default function DashboardTabs() {
     const classes = useStyles();
     const [value, setValue, username] = React.useState(0);
-    const[test] = React.useState(true);
-    const [open] = React.useState(false);
+    const [state, setState] = React.useState({
+        open: false,
+        username: "ERROR"
+    });
+
+    const componentDidMount = () => {
+        let receivedSubmission = this.props.location.state.submit;
+        updateSubmit(receivedSubmission);
+    }
+
+    const updateSubmit = (updatedState) => {
+        setState({
+            open: updatedState
+        });
+    }
+
+    const handleClose = () => {
+        setState({
+            open: false
+        });
+    }
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -76,6 +98,15 @@ export default function DashboardTabs() {
 
     return (
         <div className={classes.root}>
+            <Snackbar
+                open={state.open}
+                onClose={handleClose}
+                TransitionComponent={Slide}
+                ContentProps={{
+                    'aria-describedby': 'message-id',
+                }}
+                message={<span id="message-id">Survey submitted!</span>}
+            />
             <AppBar position="static">
                 <div className="userGreeting">
                     <Typography
@@ -109,6 +140,7 @@ export default function DashboardTabs() {
             <TabPanel value={value} index={0}>
                 <SurveyMenu />
                 <Link to={{pathname: '/takesurvey', state: {surveyID: "0001"}}}>Survey 1</Link>
+                <br />
                 <Link to={{pathname: '/takesurvey', state: {surveyID: "0002"}}}>Survey 2</Link>
             </TabPanel>
             <TabPanel value={value} index={1}>

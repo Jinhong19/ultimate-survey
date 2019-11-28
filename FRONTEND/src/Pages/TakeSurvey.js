@@ -25,7 +25,7 @@ class TakeSurvey extends React.Component {
                 <Button style={{float: "left", margin: "0.7em", marginTop: "0em"}} href="/dashboard">Back to dashboard</Button>
                 <h1>{this.props.surveyName}</h1>
                 <p>The survey you clicked: {this.state.surveyID}</p>
-                <Button>Submit</Button>
+                <Link to={{pathname: "/dashboard", state: {submit: true}}}><Button>Submit</Button></Link>
             </div>
         );
     }
@@ -35,4 +35,4 @@ export default TakeSurvey;
 
 TakeSurvey.defaultProps = {
     surveyName: "ERROR LOADING SURVEY"
-  }
+}
