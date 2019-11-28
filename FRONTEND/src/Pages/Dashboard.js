@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import AccountButton from '../Components/AccountButton';
 import SurveyMenu from "../Components/SurveyMenu";
 import Survey from "../Components/Survey";
@@ -66,6 +67,7 @@ const useStyles = makeStyles(theme => ({
 export default function DashboardTabs() {
     const classes = useStyles();
     const [value, setValue, username] = React.useState(0);
+    const[test] = React.useState(true);
     const [open] = React.useState(false);
 
     const handleChange = (event, newValue) => {
@@ -106,6 +108,8 @@ export default function DashboardTabs() {
             </AppBar>
             <TabPanel value={value} index={0}>
                 <SurveyMenu />
+                <Link to={{pathname: '/takesurvey', state: {surveyID: "0001"}}}>Survey 1</Link>
+                <Link to={{pathname: '/takesurvey', state: {surveyID: "0002"}}}>Survey 2</Link>
             </TabPanel>
             <TabPanel value={value} index={1}>
                 Created surveys
