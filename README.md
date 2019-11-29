@@ -3,7 +3,8 @@
 Run frontend:
 ```
 cd FRONTEND
-npm i
+npm i 
+npm install --save rc-slider
 npm start
 ```
 
