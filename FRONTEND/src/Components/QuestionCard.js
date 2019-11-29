@@ -27,7 +27,8 @@ class QuestionCard extends React.Component {
         "Multiple Choice",
         "Short Answer",
         "Long Answer",
-        "Checkbox"
+        "Checkbox", 
+        "Rating Slider"
     ];
 
     onSubmit = e => {
