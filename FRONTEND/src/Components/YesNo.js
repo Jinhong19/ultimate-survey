@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Form, FormLabel, FormControl, Button } from "react-bootstrap";
 import { Card } from "@material-ui/core";
+import Slider from 'rc-slider/lib/Slider'; 
+import 'rc-slider/assets/index.css'; 
 
 export class YesNo extends Component {
     state = {
