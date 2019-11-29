@@ -327,39 +327,39 @@ export class YesNo extends Component {
                 </div>
             );
     } else if (type === "Rating Slider"){ 
-			return( 
-				<div className="addQuestion" style={margin}>
-                    <Card style={cardStyle}>
-                        <div className="wrapper" style={padding}>
-                            <Form.Group controlId="surveyQuestion">
-                                <FormLabel>
-                                    <h4>
-                                        {this.props.qNumber}. {question}
-                                    </h4>  
-									</FormLabel>  
-									<div style = {sliderMargin}> 
-										<Slider  
-											marks = {markings} 
-											onChange = {this.handleChange}
-										/>  
-									</div>
-									<div style={removeBtn}>
-									<Button 
-                                        variant="danger"
-                                        size="sm"
-                                        onClick={this.props.removeItem.bind(
-                                            this,
-                                            id
-                                        )}
-                                    >
-                                        Delete
-                                    </Button>
-                                </div>
-                            </Form.Group>
-                        </div>
-                    </Card>
-                </div>	
-			);    
+        return( 
+	    <div className="addQuestion" style={margin}>
+                <Card style={cardStyle}>
+                     <div className="wrapper" style={padding}>
+                         <Form.Group controlId="surveyQuestion">
+                              <FormLabel>
+                                  <h4>
+                                      {this.props.qNumber}. {question}
+                                  </h4>  
+			      </FormLabel>  
+			      <div style = {sliderMargin}> 
+			          <Slider				
+			              marks = {markings} 
+				      onChange = {this.handleChange}
+			          />  
+			      </div>
+				  <div style={removeBtn}>
+				      <Button 
+                                          variant="danger"
+                                          size="sm"
+                                          onClick={this.props.removeItem.bind(
+                                           	     this,
+                                                     id
+                                       	 	   )}
+                                    	    >
+                                            Delete
+                                      </Button>
+                                  </div>
+                         </Form.Group>
+                    </div>
+                </Card>
+            </div>	
+	);    
     } else {
             return (
                 <div>
