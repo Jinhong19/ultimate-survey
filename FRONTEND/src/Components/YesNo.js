@@ -8,7 +8,8 @@ export class YesNo extends Component {
         value1: "enter an option here",
         value2: "enter an option here",
         value3: "enter an option here",
-        value4: "enter an option here"
+        value4: "enter an option here", 
+        sliderValue: 0
     };
 
     //one handleChange per option for multiple choice and checkbox questions
@@ -24,6 +25,12 @@ export class YesNo extends Component {
     handleChange4(event) {
         this.setState({ value4: event.target.value });
     }
+
+    //handles changes for Rating Slider 
+	handleChange = sliderValue => { 
+		this.setState({sliderValue});  
+		console.log(this.state.sliderValue)
+	}
 
     render() {
         const { question, type, id } = this.props.question;
@@ -319,7 +326,41 @@ export class YesNo extends Component {
                     </Card>
                 </div>
             );
-        } else {
+    } else if (type === "Rating Slider"){ 
+			return( 
+				<div className="addQuestion" style={margin}>
+                    <Card style={cardStyle}>
+                        <div className="wrapper" style={padding}>
+                            <Form.Group controlId="surveyQuestion">
+                                <FormLabel>
+                                    <h4>
+                                        {this.props.qNumber}. {question}
+                                    </h4>  
+									</FormLabel>  
+									<div style = {sliderMargin}> 
+										<Slider  
+											marks = {markings} 
+											onChange = {this.handleChange}
+										/>  
+									</div>
+									<div style={removeBtn}>
+									<Button 
+                                        variant="danger"
+                                        size="sm"
+                                        onClick={this.props.removeItem.bind(
+                                            this,
+                                            id
+                                        )}
+                                    >
+                                        Delete
+                                    </Button>
+                                </div>
+                            </Form.Group>
+                        </div>
+                    </Card>
+                </div>	
+			);    
+    } else {
             return (
                 <div>
                     <h1>Error</h1>
@@ -336,6 +377,10 @@ const margin = {
 const textBoxMargin = {
     marginBottom: "1em"
 };
+
+const sliderMargin = { 
+	marginBottom: "3em"
+}; 
 
 const removeBtn = {
     marginBottom: "1em",
@@ -355,5 +400,19 @@ const cardStyle = {
     marginTop: "3em",
     background: "f5f5f5"
 };
+
+const markings = { 
+	'0' : '0', 
+	'10' : '10', 
+	'20' : '20',
+	'30' : '30',
+	'40' : '40', 
+	'50' : '50', 
+	'60' : '60', 
+	'70' : '70', 
+	'80' : '80', 
+	'90' : '90', 
+	'100' : '100'
+}
 
 export default YesNo;
