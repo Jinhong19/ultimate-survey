@@ -178,9 +178,7 @@ export default function DashboardTabs(props) {
             </AppBar>
             <TabPanel value={value} index={0}>
                 <SurveyMenu />
-                <Link to={{pathname: '/takesurvey', state: {surveyID: "0001"}}}>Survey 1</Link>
-                <br />
-                <Link to={{pathname: '/takesurvey', state: {surveyID: "0002"}}}>Survey 2</Link>
+                <a href="/takesurvey">Click here to take a survey</a>
             </TabPanel>
             <TabPanel value={value} index={1}>
                 Created surveys

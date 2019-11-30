@@ -1,52 +1,84 @@
-import React from 'react';
-import Link from 'react-router-dom/Link';
-import { Button } from 'react-bootstrap';
+import React, { Component } from "react";
+import * as Survey from "survey-react";
+import "survey-react/survey.css";
+import logo from "../Media/logo.png";
+import Nav from "../Components/Nav";
+import "../App.css";
+import "bootstrap/dist/css/bootstrap.css";
 
-class TakeSurvey extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {surveyID: "0000", surveyName: ""};
-        this.updateState = this.updateState.bind(this);
+import { Link } from "react-router-dom";
+
+import "jquery-ui/themes/base/all.css";
+import "nouislider/distribute/nouislider.css";
+import "select2/dist/css/select2.css";
+import "bootstrap-slider/dist/css/bootstrap-slider.css";
+
+import "jquery-bar-rating/dist/themes/css-stars.css";
+
+import $ from "jquery";
+import "jquery-ui/ui/widgets/datepicker.js";
+import "select2/dist/js/select2.js";
+import "jquery-bar-rating";
+
+import * as widgets from "surveyjs-widgets";
+
+import "icheck/skins/square/blue.css";
+window["$"] = window["jQuery"] = $;
+require("icheck");
+
+Survey.StylesManager.applyTheme("default");
+
+widgets.icheck(Survey, $);
+widgets.select2(Survey, $);
+widgets.inputmask(Survey);
+widgets.jquerybarrating(Survey, $);
+widgets.jqueryuidatepicker(Survey, $);
+widgets.nouislider(Survey);
+widgets.select2tagbox(Survey, $);
+widgets.signaturepad(Survey);
+widgets.sortablejs(Survey);
+widgets.ckeditor(Survey);
+widgets.autocomplete(Survey, $);
+widgets.bootstrapslider(Survey);
+
+class App extends Component {
+    onValueChanged(result) {
+        console.log("value changed!");
     }
 
-    componentDidMount = () => {
-        if(this.props.location.state === undefined){
-            this.updateState("BAD");
-        }
-        else {
-            let receivedID = this.props.location.state.surveyID;
-            this.updateState(receivedID);
-        }
-    }
-
-    updateState(prevState) {
-        this.setState({
-            surveyID: prevState,
-            surveyName: "Survey " + prevState // for testing
-        });
+    onComplete(result) {
+        console.log("Complete! " + result);
     }
 
     render() {
-        if(this.state.surveyID === "BAD"){  // This should only trigger if user types in the URL rather than picking a survey
-            return(
-                <div style={{textAlign: "center"}}>
-                    <h1>ERROR: PLEASE PICK A SURVEY</h1>
-                    <a href="/dashboard">Back to dashboard</a>
+        var model = new Survey.Model(this.props.json);
+        return (
+            <div className="App">
+                <Nav words="Survey Taker" />
+                <div className="App-header">
+                    <Link to="/employeedashboard">
+                        <img src={logo} class="logo-medium" alt="logo" />
+                    </Link>
+                    <h2>We are the Ultimate 3!</h2>
                 </div>
-            );
-        }
-        return(
-            <div style={{textAlign: "center"}}>
-                <Link to={{pathname: "/dashboard", state: {submit: false}}}>Back to Dashboard</Link>
-                <h1>{this.state.surveyName}</h1>
-                <Link to={{pathname: "/dashboard", state: {submit: true}}}>Submit</Link>
+                <div className="surveyjs">
+                    {/*If you want to show survey, uncomment the line below*/}
+                    <h1>SurveyJS library in action:</h1>
+                    <Survey.Survey
+                        model={model}
+                        onComplete={this.onComplete}
+                        onValueChanged={this.onValueChanged}
+                    />
+                    {/*If you do not want to show Survey Creator, comment the line below*/}
+                    {/*<h1>SurveyJS Creator in action:</h1>
+          <SurveyCreator /> */}
+                </div>
+                <p className="App-intro">
+                    {/* To get started, edit <code>src/App.js</code> and save to reload. */}
+                </p>
             </div>
         );
     }
 }
 
-export default TakeSurvey;
-
-TakeSurvey.defaultProps = {
-    surveyName: "ERROR LOADING SURVEY"
-}
+export default App;
