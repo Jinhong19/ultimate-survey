@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { Link } from "react-router-dom";
 import AccountButton from '../Components/AccountButton';
 import SurveyMenu from "../Components/SurveyMenu";
@@ -13,7 +13,11 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
 import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 import Slide from '@material-ui/core/Slide';
+import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -64,26 +68,43 @@ const useStyles = makeStyles(theme => ({
         margin: "1em",
         float: "left",
         color: "white"
+    },
+    snack: {
+        backgroundColor: "#509e2f" // background color not working
+    },
+    message: {
+        display: "flex",
+        alignItems: "center"
+    },
+    icon: {
+        fontSize: 20,
+        opacity: 0.9,
+        marginRight: "1em"
     }
 }));
 
-export default function DashboardTabs() {
+export default function DashboardTabs(props) {
     const classes = useStyles();
-    const [value, setValue, username] = React.useState(0);
+    const [value, setValue] = React.useState(0);
     const [state, setState] = React.useState({
         open: false,
         username: "ERROR"
     });
 
-    const componentDidMount = () => {
-        let receivedSubmission = this.props.location.state.submit;
-        updateSubmit(receivedSubmission);
-    }
+    useEffect(() => {
+        if(props.location.state != undefined) {
+            let receivedSubmission = props.location.state.submit;
+            console.log("received submission status: " + receivedSubmission);
+            updateSubmit(receivedSubmission);
+        }
+    }, []);
 
     const updateSubmit = (updatedState) => {
         setState({
             open: updatedState
         });
+        
+        console.log("received state! new OPEN state: " + state.open);
     }
 
     const handleClose = () => {
@@ -99,21 +120,39 @@ export default function DashboardTabs() {
     return (
         <div className={classes.root}>
             <Snackbar
-                open={state.open}
-                onClose={handleClose}
-                TransitionComponent={Slide}
-                ContentProps={{
-                    'aria-describedby': 'message-id',
+                anchorOrigin={{ 
+                    vertical: "top", horizontal: "center" 
                 }}
-                message={<span id="message-id">Survey submitted!</span>}
-            />
+                open={state.open}
+                autoHideDuration={6000}
+                onClose={handleClose}
+            >
+                <SnackbarContent 
+                    className={classes.snack}
+                    TransitionComponent={Slide}
+                    ContentProps={{
+                        'aria-describedby': 'message-id',
+                    }}
+                    message={<span id="message-id" className={classes.message}>
+                        <Typography variant="h5">
+                            <CheckCircleIcon className={classes.icon} />
+                            Survey submitted!
+                        </Typography>
+                    </span>}
+                    action={[
+                        <IconButton key="close" aria-label="close" color="secondary" onClick={handleClose}>
+                        <CloseIcon className={classes.icon} />
+                        </IconButton>,
+                    ]}
+                />
+            </Snackbar>
             <AppBar position="static">
                 <div className="userGreeting">
                     <Typography
                         className={classes.menuItem}
                         variant="h5"
                     >
-                        Hello, {username}
+                        Hello, {state.username}
                     </Typography>
                 </div>
                 <div className="tabContainer">
