@@ -4,4 +4,4 @@ flask_pymongo
 gunicorn
 flask_cors
 flask_login
-passlib.hash
+passlib
