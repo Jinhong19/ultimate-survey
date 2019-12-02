@@ -7,6 +7,7 @@ import ManagerBoard from "../Components/ManagerBoard";
 import EmployeeBoard from "../Components/EmployeeBoard";
 
 
+import EmployeeDisplaySurvey from "../Components/EmployeeDisplaySurvey";
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
