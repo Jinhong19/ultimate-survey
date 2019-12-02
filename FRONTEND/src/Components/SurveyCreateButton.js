@@ -8,7 +8,7 @@ class SurveyCreateButton extends React.Component {
             console.log(JSON.stringify(this.props.items));
             // TODO - implement display message upon insert into database
             fetch(
-                "http://ultimate-survey.herokuapp.com//survey/manager",
+                "http://ultimate-survey.herokuapp.com/survey/manager",
                 {
                     method: "post",
                     headers: {'Content-Type': 'application/json'},
