@@ -6,6 +6,8 @@ import EmployeePage from "./Pages/EmployeePage";
 import ManagerPage from "./Pages/ManagerPage";
 import Dashboard from "./Pages/Dashboard";
 import Forgot from "./Pages/Forgot";
+import ChangePassword from "./Pages/ChangePassword";
+import TakeSurvey from "./Pages/TakeSurvey";
 import { createMuiTheme } from "@material-ui/core/styles";
 import { ThemeProvider } from "@material-ui/styles";
 import green from "@material-ui/core/colors/green";
@@ -13,7 +15,9 @@ import green from "@material-ui/core/colors/green";
 // Creates the website theme
 const theme = createMuiTheme({
     palette: {
-        primary: green, // should be #509e2f
+        primary: {
+            main: '#509e2f'
+        },
         secondary: {
             main: "#FFFFFF"
         }
@@ -34,6 +38,10 @@ class App extends Component {
                     <Route path="/ManagerPage" component={ManagerPage} />
                     {/*Forgot password page*/}
                     <Route path="/forgot" component={Forgot} />
+                    {/*Change password page*/}
+                    <Route path="/changepassword" component={ChangePassword} />
+                    {/* Take survey page */}
+                    <Route path="/takesurvey" component={TakeSurvey} />
                 </Router>
             </ThemeProvider>
         );
