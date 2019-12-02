@@ -54,7 +54,7 @@ def login():
     users = mongo.db.Employees
     person = users.find_one({'email': request.get_json(force=True)['username']})
     if person:
-        if sha256_crypt.verify(request.get_json(force=True)['password'], person['password']):
+        if sha256_crypt.verify(person['password'], request.get_json(force=True)['password']):
             user_obj = User(person)
             login_user(user_obj)
             return flask.jsonify({'message': 'success', 'isManager': user_obj.isManager, 'fname': user_obj.fname,

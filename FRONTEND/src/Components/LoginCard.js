@@ -56,10 +56,11 @@ class LoginCard extends React.Component {
     handleSubmit(event) {
         event.preventDefault();
         const username = this.state.username;
-        const password = this.state.password;
+        var sha256crypt = require('sha256crypt');
+        const password = sha256crypt.hash(this.state.password, 535000, 'helloworld');
         
         console.log(this.state)
-        fetch("https://ultimate-survey.herokuapp.com/login", 
+        fetch("http://127.0.0.1:5000/login", 
             {method:'POST',
              headers: {'Content-Type': 'application/json'},
              body: JSON.stringify(this.state),
