@@ -32,7 +32,15 @@ class User(UserMixin):
         self.username = person['email']
         self._id = str(person['_id'])
         # check if word "manager" is in positionTitle field
-        self.isManager = "Manager" in person['positionTitle'] or "manager" in person['positionTitle']
+        # self.isManager = "Manager" in person['positionTitle'] or "manager" in person['positionTitle']
+        # check if any employees in the same company has managerId equals to person['employeeId]
+        def isManager():
+            employees = mongo.db.Employees
+            employeeId = person['employeeId']
+            companyId = person['companyId']
+            has_one_employee = employees.find_one({'managerId': employeeId, 'companyId': companyId}) is not None
+            return has_one_employee
+        self.isManager = isManager()
         self.fname = person['firstName']
         self.lname = person['lastName']
 
