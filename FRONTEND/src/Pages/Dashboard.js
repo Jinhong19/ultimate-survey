@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AccountButton from '../Components/AccountButton';
 import SurveyMenu from "../Components/SurveyMenu";
@@ -88,22 +88,31 @@ export default function DashboardTabs(props) {
     const [value, setValue] = React.useState(0);
     const [state, setState] = React.useState({
         open: false,
-        username: "ERROR"
+    });
+    const [user, setUser] = React.useState({
+        fname: "please log in",
+        isManager: false,
     });
 
     useEffect(() => {
-        if(props.location.state != undefined) {
+        console.log(props);
+        if (props.location.state != undefined) {
             let receivedSubmission = props.location.state.submit;
             console.log("received submission status: " + receivedSubmission);
             updateSubmit(receivedSubmission);
+            setUser({
+                fname: props.location.state.fname,
+                isManager: props.location.state.isManager,
+            })
         }
+        console.log(user);
     }, []);
 
     const updateSubmit = (updatedState) => {
         setState({
             open: updatedState
         });
-        
+
         console.log("received state! new OPEN state: " + state.open);
     }
 
@@ -120,14 +129,14 @@ export default function DashboardTabs(props) {
     return (
         <div className={classes.root}>
             <Snackbar
-                anchorOrigin={{ 
-                    vertical: "top", horizontal: "center" 
+                anchorOrigin={{
+                    vertical: "top", horizontal: "center"
                 }}
                 open={state.open}
                 autoHideDuration={6000}
                 onClose={handleClose}
             >
-                <SnackbarContent 
+                <SnackbarContent
                     className={classes.snack}
                     TransitionComponent={Slide}
                     ContentProps={{
@@ -141,7 +150,7 @@ export default function DashboardTabs(props) {
                     </span>}
                     action={[
                         <IconButton key="close" aria-label="close" color="secondary" onClick={handleClose}>
-                        <CloseIcon className={classes.icon} />
+                            <CloseIcon className={classes.icon} />
                         </IconButton>,
                     ]}
                 />
@@ -152,27 +161,37 @@ export default function DashboardTabs(props) {
                         className={classes.menuItem}
                         variant="h5"
                     >
-                        Hello, {state.username}
+                        Hello, {user.fname}
                     </Typography>
                 </div>
                 <div className="tabContainer">
-                    <Tabs value={value} onChange={handleChange} centered>
-                        <Tab
-                            className={classes.tabLabel}
-                            label="take"
-                            {...a11yProps(0)}
-                        />
-                        <Tab
-                            className={classes.tabLabel}
-                            label="created"
-                            {...a11yProps(1)}
-                        />
-                        <Tab
-                            className={classes.tabLabel}
-                            label="make"
-                            {...a11yProps(2)}
-                        />
-                    </Tabs>
+                    {user.isManager ?
+                        <Tabs value={value} onChange={handleChange} centered>
+                            <Tab
+                                className={classes.tabLabel}
+                                label="take"
+                                {...a11yProps(0)}
+                            />
+                            <Tab
+                                className={classes.tabLabel}
+                                label="created"
+                                {...a11yProps(1)}
+                            />
+                            <Tab
+                                className={classes.tabLabel}
+                                label="make"
+                                {...a11yProps(2)}
+                            />
+                        </Tabs>
+                        :
+                        <Tabs value={value} onChange={handleChange} centered>
+                            <Tab
+                                className={classes.tabLabel}
+                                label="take"
+                                {...a11yProps(0)}
+                            />
+                        </Tabs>
+                    }
                 </div>
                 <AccountButton />
             </AppBar>
@@ -186,6 +205,7 @@ export default function DashboardTabs(props) {
             <TabPanel value={value} index={2}>
                 <Survey />
             </TabPanel>
+
         </div>
     );
 }

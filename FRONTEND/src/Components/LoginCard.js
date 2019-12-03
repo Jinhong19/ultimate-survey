@@ -1,4 +1,6 @@
 import React from "react";
+import {Redirect} from 'react-router-dom'
+
 import {
     withStyles,
     Card,
@@ -38,7 +40,10 @@ class LoginCard extends React.Component {
         super(props);
         this.state = {
             username: "",
-            password: ""
+            password: "",
+            loggedIn: false,
+            isManager: false,
+            fname: ""
         };
         this.handleChange_password = this.handleChange_password.bind(this);
         this.handleChange_username = this.handleChange_username.bind(this);
@@ -65,15 +70,29 @@ class LoginCard extends React.Component {
              body: JSON.stringify(this.state),
              credentials: 'include'})
             .then(response => response.json())
-            .then(data => console.log(data));
-
-        // TODO - implement redirect to /Dashboard upon {message:'success'} return
-        
+            .then(data => {
+                const loggedIn = data.message === "success";
+                const isManager = data.isManager === true;
+                const fname = data.fname;
+                this.setState({loggedIn: loggedIn, isManager: isManager, fname:fname});
+                console.log(this.state);
+            }); 
     }
 
 
     render() {
         return (
+            this.state.loggedIn ?
+            <Redirect to={{
+                    pathname:"/Dashboard",
+                    state:{ 
+                        isManager: this.state.isManager,
+                        fname: this.state.fname,
+                        loggedIn: this.state.loggedIn
+                    }
+                }}
+            />
+            :
             <Card className={this.props.classes.card}>
                 <CardContent>
                     <Typography align="center" component="h4" variant="h4">
