@@ -19,7 +19,7 @@ app.config.update(
 
 # DB connection
 mongo = PyMongo(app,
-                uri='mongodb+srv://testUser:testUserUltimate3@ultimatesurvey-74jff.mongodb.net/Platform?retryWrites=true&w=majority')
+                uri='mongodb+srv://testUser:testUserUltimate3@ultimatesurvey-74jff.mongodb.net/Production?retryWrites=true&w=majority')
 
 # flask-login
 login_manager = LoginManager()
