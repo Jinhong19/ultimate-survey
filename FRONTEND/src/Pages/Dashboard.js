@@ -178,12 +178,12 @@ export default function DashboardTabs(props) {
                 <AccountButton />
             </AppBar>
             <TabPanel value={value} index={0}>
-                <Link to={{pathname: "/takesurvey", state: {surveyID: "0001"}}}>
-                    <Typography variant="p">Survey 1</Typography>
+                <Link to={{pathname: "/takesurvey", state: {surveyName: "1", surveyID: "5ddeed2f23c378cad56c7a68"}}}>
+                    <Typography>Survey 1</Typography>
                 </Link>
                 <br />
-                <Link to={{pathname: "/takesurvey", state: {surveyID: "0002"}}}>
-                    <Typography variant="p">Survey 2</Typography>
+                <Link to={{pathname: "/takesurvey", state: {surveyName: "1", surveyID: "5de574fcefd170c51d50fe1a"}}}>
+                    <Typography>Survey 2</Typography>
                 </Link>
             </TabPanel>
             <TabPanel value={value} index={1}>
