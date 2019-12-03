@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+/*import React, {Component} from "react";
 import {TableCell, TableRow} from '@material-ui/core';
 import Survey from '../Components/Survey';
 import SurveyMenu from '../Components/SurveyMenu';
@@ -52,4 +52,4 @@ class EmployeeDisplaySurvey extends React.Component{
 	}
 }
 
-export default EmployeeDisplaySurvey;
+export default EmployeeDisplaySurvey;*/
