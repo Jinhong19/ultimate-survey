@@ -60,6 +60,14 @@ class ForgotCard extends Component {
                 )
             });
         } else {
+            fetch("https://ultimate-survey.herokuapp.com/resetPassword", 
+            {method:'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: this.state.email,
+            credentials: 'include'})
+            .then(response => response.json())
+            .then(data => console.log(data));
+
             this.setState({
                 done: <ForgotPost />
             });
