@@ -70,9 +70,9 @@ const useStyles = makeStyles(theme => ({
         float: "left",
         color: "white"
     },
-    snack: {
+    /*snack: {
         backgroundColor: "#509e2f" // background color not working
-    },
+    },*/
     message: {
         display: "flex",
         alignItems: "center"
@@ -93,7 +93,7 @@ export default function DashboardTabs(props) {
     });
 
     useEffect(() => {
-        if(props.location.state != undefined) {
+        if(props.location.state !== undefined) {
             let receivedSubmission = props.location.state.submit;
             console.log("received submission status: " + receivedSubmission);
             updateSubmit(receivedSubmission);
@@ -178,7 +178,13 @@ export default function DashboardTabs(props) {
                 <AccountButton />
             </AppBar>
             <TabPanel value={value} index={0}>
-                <EmployeeDisplaySurvey/>
+                <Link to={{pathname: "/takesurvey", state: {surveyID: "0001"}}}>
+                    <Typography variant="p">Survey 1</Typography>
+                </Link>
+                <br />
+                <Link to={{pathname: "/takesurvey", state: {surveyID: "0002"}}}>
+                    <Typography variant="p">Survey 2</Typography>
+                </Link>
             </TabPanel>
             <TabPanel value={value} index={1}>
                 Created surveys
