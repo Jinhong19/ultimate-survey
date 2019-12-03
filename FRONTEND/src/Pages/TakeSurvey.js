@@ -11,55 +11,62 @@ const styles = theme => ({
 class TakeSurvey extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {surveyID: "ERROR", user: null};
-        this.getSurvey = this.getSurvey.bind(this);
+        this.state = {surveyName: "ERROR", surveyID: "ERROR", uData: "ERROR"};
+        this.findSurvey = this.findSurvey.bind(this);
     }
 
     componentDidMount(){
-        if(this.props.location.state !== undefined) {
-            let eData = null;
-            let receivedSurvey = this.props.location.state.surveyID;
+        // Get states from other pages
+        if(this.props.location.state !== undefined){
+            if(this.props.location.state.surveyName !== undefined) {
+                let receivedName = this.props.location.state.surveyName;
 
-            fetch("https://ultimate-survey.herokuapp.com/survey/employee", 
-            {method:'GET',
-            headers: {'Content-Type': 'application/json'},
-            credentials: 'include'})
-            .then(response => response.json())
-            .then(data => eData);
+                this.setState({
+                    surveyName: receivedName
+                });
+            }
+            if(this.props.location.state.surveyID !== undefined) {
+                let receivedSurvey = this.props.location.state.surveyID;
 
-            console.log(eData);
-
-            this.setState({
-                surveyID: receivedSurvey,
-                user: eData
-            });
+                this.setState({
+                    surveyID: receivedSurvey
+                });
+            }
         }
-    }
 
-    getSurvey(){
-        let eData;
-
+        // Fetch user data
         fetch("https://ultimate-survey.herokuapp.com/survey/employee", 
         {method:'GET',
         headers: {'Content-Type': 'application/json'},
         credentials: 'include'})
         .then(response => response.json())
-        .then(data => eData);
-
-        this.setState({
-            user: eData
-        });
+        .then(data => this.setState({uData: JSON.parse(data)}));
     }
 
-    printSurvey = () => {
-        console.log(this.state.user);
+    findSurvey(){
+        if(this.state.surveyID === "ERROR"){
+            console.error("Error loading survey");
+        }
+        else{
+            for(let i=0; i < this.state.uData.length; i++){
+                if(this.state.uData[i]._id.$oid === this.state.surveyID){
+                    console.log("Question 1 id: " + this.state.uData[i].survey[0].id);
+                }
+            }
+        }
+    }
+
+    printUInfo = () => {
+        console.log(this.state.uData);
     }
 
     render() {
         return(
             <div className={this.props.classes.root}>
-                <h1>Survey {this.state.surveyID}</h1>
-                <button onClick={this.printSurvey}>User info</button>
+                <h1>Survey {this.state.surveyName}</h1>
+                <button onClick={this.printUInfo}>User Info</button>
+                <br />
+                <button onClick={this.findSurvey}>Survey Info</button>
                 <br />
                 <Link to={{pathname: "/dashboard", state: {submit: true}}}>
                     <Typography>Submit</Typography>
