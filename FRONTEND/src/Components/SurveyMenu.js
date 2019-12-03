@@ -17,7 +17,7 @@ class SurveyMenu extends React.Component {
                     >
                         <TableHead>
                             <TableRow>
-                                <TableCell>Name</TableCell>
+                                <TableCell>survey id</TableCell>
                                 <TableCell align="right">Owner</TableCell>
                                 <TableCell align="right">Assigned</TableCell>
                                 <TableCell align="right">Due</TableCell>

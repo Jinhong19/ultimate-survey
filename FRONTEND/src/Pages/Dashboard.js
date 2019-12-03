@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 import AccountButton from '../Components/AccountButton';
 import SurveyMenu from "../Components/SurveyMenu";
 import Survey from "../Components/Survey";
+import ManagerBoard from "../Components/ManagerBoard";
+import EmployeeBoard from "../Components/EmployeeBoard";
+
+
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -197,10 +201,12 @@ export default function DashboardTabs(props) {
             </AppBar>
             <TabPanel value={value} index={0}>
                 <SurveyMenu />
+                <EmployeeBoard />
                 <a href="/takesurvey">Click here to take a survey</a>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                Created surveys
+            <SurveyMenu />
+                <ManagerBoard />
             </TabPanel>
             <TabPanel value={value} index={2}>
                 <Survey />
