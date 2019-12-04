@@ -24,7 +24,8 @@ class EmployeeDisplaySurvey extends React.Component{
 		for(let i=0; i<=this.state.surveys.length; i++){
 			console.log("in for loop");
 			<DashboardComponent component = {this.state.surveys, i, this.state.pastDate}></DashboardComponent>
-		}
+		} 
+		console.log("existed for loop"); 
 	}
 	render(){
 		return(

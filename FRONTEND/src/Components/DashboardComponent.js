@@ -13,7 +13,6 @@ class DashboardComponent extends React.Component{
     }
 
     render(){
-        console.log("in componenet");
         return(
             <div>
 				<TableRow>
