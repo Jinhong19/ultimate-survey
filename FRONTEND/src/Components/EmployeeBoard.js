@@ -6,12 +6,16 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import { Link } from "react-router-dom";
 import { withStyles, Typography } from "@material-ui/core";
+import { getDynamicStyles } from "jss";
 class ManagerBoard extends React.Component {
     constructor() {
         super();
         this.state = {
             surveys: [],
-            surveyIds:[]
+            surveyIds:[],
+            surveyOwners: [],
+            surveyDueDates: [],
+            surveyOver: []
         }
     }
     state1 = {
@@ -42,8 +46,20 @@ class ManagerBoard extends React.Component {
     }
     render() {
         const surveyIds = []
+        const surveyOwners = []
+        const surveyDueDates = []
+        const surveyOver = []
+        var date = new Date()
         for(let i = 0; i < this.state.surveys.length; i++){
             surveyIds.push(this.state.surveys[i]._id.$oid)
+            surveyOwners.push(this.state.surveys[i].Manager.$oid)
+            surveyDueDates.push(this.state.surveys[i].exDate.$oid)
+            if(date.toString().equals(surveyDueDates[i])||date.toString().localeCompare(surveyDueDates[i])>0){
+                surveyOver.push(true);
+            }
+            else{
+                surveyOver.push(false);
+            }
         }
         return (
             <div className={"SurveyMenu"}>
@@ -56,10 +72,41 @@ class ManagerBoard extends React.Component {
                         {surveyIds.map(id => (
                             <TableHead>
                               <TableRow>
-                                    <TableCell>{id}</TableCell>                        
+                                    <TableCell align = "right">{id}</TableCell>                        
                                 </TableRow>
                             </TableHead>
                         ))}
+                        {surveyOwners.map(owner => (
+                            <TableHead>
+                              <TableRow>
+                                    <TableCell align = "right">{owner}</TableCell>                        
+                                </TableRow>
+                            </TableHead>
+                        ))}
+                        <TableHead>
+                              <TableRow>
+                                    <TableCell align = "right">{"12/4/19"}</TableCell>                        
+                                </TableRow>
+                            </TableHead>
+                        {surveyDueDates.map(due => (
+                            <TableHead>
+                              <TableRow>
+                                    <TableCell align = "right">{due}</TableCell>                        
+                                </TableRow>
+                            </TableHead>
+                        ))}
+                        {surveyOver.map(over => (
+                            <TableHead>
+                              <TableRow>
+                                    <TableCell align = "right">{over}</TableCell>                        
+                                </TableRow>
+                            </TableHead>
+                        ))}
+                        <TableHead>
+                              <TableRow>
+                                   <SurveyTakeButton/>                        
+                                </TableRow>
+                            </TableHead>
                     </Table>
                 </Paper>
             </div>
