@@ -4,9 +4,6 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { Link } from "react-router-dom";
-import { withStyles, Typography } from "@material-ui/core";
-import { getDynamicStyles } from "jss";
 import SurveyTakeButton from "../Components/SurveyTakeButton";
 class ManagerBoard extends React.Component {
     constructor() {
@@ -75,16 +72,16 @@ class ManagerBoard extends React.Component {
                             <TableRow>
                             
                             {this.state.surveys.map(survey => (
-                                <TableCell>
+                                <TableCell align = "left">
                                     <SurveyTakeButton json = {survey.json}></SurveyTakeButton>
                                 </TableCell>                   
                             ))}
                             {surveyOwners.map(owner => (
                                 <TableCell align = "left">{owner}</TableCell>                        
                              ))}
-                                <TableCell>{"12/4/19"}</TableCell>                        
+                                <TableCell align = "left">{"12/4/19"}</TableCell>                        
                             {surveyDueDates.map(due => (
-                                <TableCell>{due}</TableCell>                        
+                                <TableCell align = "left">{due}</TableCell>                        
                             ))}
                             {surveyOver.map(over => (
                                 <TableCell align = "right">{over.toString()}</TableCell>                        

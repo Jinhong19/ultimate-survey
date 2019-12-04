@@ -4,8 +4,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { Link } from "react-router-dom";
-import { withStyles, Typography } from "@material-ui/core";
+import SurveyTakeButton from "../Components/SurveyTakeButton";
 class ManagerBoard extends React.Component {
     constructor() {
         super();
@@ -42,27 +41,55 @@ class ManagerBoard extends React.Component {
     }
     render() {
         const surveyIds = []
+        const surveyOwners = []
+        const surveyDueDates = []
+        const surveyOver = []
+        const json = []
+        var date = new Date()
         for(let i = 0; i < this.state.surveys.length; i++){
             surveyIds.push(this.state.surveys[i]._id.$oid)
+            surveyOwners.push(this.state.surveys[i].manager.$oid)
+            surveyDueDates.push("12/10/19")
+            if(date.toString().localeCompare(surveyDueDates[i])==0||date.toString().localeCompare(surveyDueDates[i])>0){
+                surveyOver.push(true)
+            }
+            else{
+                surveyOver.push(false)
+            }
         }
         return (
             <div className={"SurveyMenu"}>
-                <Paper className={"Survey Menu"}>
-                    <Table
-                        className={"Surveys"}
-                        size="small"
-                        aria-label="a dense table"
-                    >
-                        {surveyIds.map(id => (
-                            <TableHead>
-                              <TableRow>
-                                    <TableCell>{id}</TableCell>                        
-                                </TableRow>
-                            </TableHead>
+            <Paper className={"Survey Menu"}>
+                <Table
+                    className={"Surveys"}
+                    size="small"
+                    aria-label="a dense table"
+                >
+                    <TableHead>
+                        <TableRow>
+                        
+                        {this.state.surveys.map(survey => (
+                            <TableCell align = "left">
+                                <SurveyTakeButton json = {survey.json}></SurveyTakeButton>
+                            </TableCell>                   
                         ))}
-                    </Table>
-                </Paper>
-            </div>
+                        {surveyOwners.map(owner => (
+                            <TableCell align = "left">{owner}</TableCell>                        
+                         ))}
+                            <TableCell align = "left">{"12/4/19"}</TableCell>                        
+                        {surveyDueDates.map(due => (
+                            <TableCell align = "left">{due}</TableCell>                        
+                        ))}
+                        {surveyOver.map(over => (
+                            <TableCell align = "right">{over.toString()}</TableCell>                        
+                        ))}
+                        
+                        </TableRow>
+                    </TableHead>
+                                   
+                </Table>
+            </Paper>
+        </div>
         );
     }
 }
