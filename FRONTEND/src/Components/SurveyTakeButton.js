@@ -15,7 +15,7 @@ class SurveyTakeButton extends React.Component {
             <div className="text-center" style={marginBtn}>
             <Link to={{pathname: '/TakeSurvey', json: this.props.json}}>
                 <Button size = "small">
-                    Take survey!
+                    Take
                 </Button>
             </Link>
             </div>
