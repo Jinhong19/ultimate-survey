@@ -47,6 +47,7 @@ class LoginCard extends React.Component {
         };
         this.handleChange_password = this.handleChange_password.bind(this);
         this.handleChange_username = this.handleChange_username.bind(this);
+        this.handleKeypress = this.handleKeypress.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -58,8 +59,16 @@ class LoginCard extends React.Component {
         this.setState({ password: event.target.value });
     }
 
+    handleKeypress(event) {
+        if(event.charCode === 13) {
+            this.handleSubmit();
+        }
+    }
+
     handleSubmit(event) {
-        event.preventDefault();
+        if(event !== undefined){
+            event.preventDefault();
+        }
         const username = this.state.username;
         const password = this.state.password;
         
@@ -112,6 +121,7 @@ class LoginCard extends React.Component {
                         label="Username"
                         fullWidth="true"
                         onChange={this.handleChange_username}
+                        onKeyPress={this.handleKeypress}
                     />
                     <TextField
                         className={this.props.classes.entry}
@@ -119,6 +129,7 @@ class LoginCard extends React.Component {
                         type="password"
                         fullWidth="true"
                         onChange={this.handleChange_password}
+                        onKeyPress={this.handleKeypress}
                     />
                 </CardContent>
                 <CardActions>
