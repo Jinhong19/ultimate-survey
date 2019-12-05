@@ -6,8 +6,8 @@ import SurveyCreateButton from "../Components/SurveyCreateButton";
 export class SurveyState extends Component {
     render() {
         let itemList = this.props.items;
-        console.log("item List-");
-        console.log(itemList);
+        // console.log("item List-");
+        // console.log(itemList);
         if (itemList.length === 0) {
             return (
                 <div style={margin}>

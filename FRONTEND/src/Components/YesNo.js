@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Form, FormLabel, FormControl, Button } from "react-bootstrap";
 import { Card } from "@material-ui/core";
+import Boolean from "./QuestionTypes/Boolean";
+import ShortAnswer from "./QuestionTypes/ShortAnswer";
+import LongAnswer from "./QuestionTypes/LongAnswer";
 
 export class YesNo extends Component {
     state = {
@@ -32,120 +35,15 @@ export class YesNo extends Component {
 
         if (type === "Yes or No") {
             return (
-                <div className="addQuestion" style={margin}>
-                    <Card style={cardStyle}>
-                        <div className="wrapper" style={padding}>
-                            <Form.Group controlId="surveyQuestion">
-                                <FormLabel>
-                                    {/* <h3>Question {this.props.qNumber}</h3> */}
-                                    <h4>
-                                        {this.props.qNumber}. {question}
-                                    </h4>
-                                </FormLabel>
-                                <div key="inline-radio" className="mb-3">
-                                    <Form.Check
-                                        inline
-                                        name="qCheck"
-                                        label="  Yes"
-                                        type="radio"
-                                        id="inline-radio-1"
-                                    />
-                                    <Form.Check
-                                        inline
-                                        name="qCheck"
-                                        label="  No"
-                                        type="radio"
-                                        id="inline-radio-2"
-                                    />
-                                </div>
-                                <div style={removeBtn}>
-                                    <Button
-                                        variant="danger"
-                                        size="sm"
-                                        onClick={this.props.removeItem.bind(
-                                            this,
-                                            id
-                                        )}
-                                    >
-                                        Delete
-                                    </Button>
-                                </div>
-                            </Form.Group>
-                        </div>
-                    </Card>
-                </div>
+                <Boolean question={this.question} qNumber={this.props.qNumber} />
             );
         } else if (type === "Short Answer") {
             return (
-                <div className="addQuestion" style={margin}>
-                    <Card style={cardStyle}>
-                        <div className="wrapper" style={padding}>
-                            <Form.Group controlId="surveyQuestion">
-                                <FormLabel>
-                                    <h4>
-                                        {" "}
-                                        {this.props.qNumber}. {question}
-                                    </h4>
-                                </FormLabel>
-                                <div key="short-response" style={textBoxMargin}>
-                                    <FormControl
-                                        placeholder="Short Response"
-                                        aria-describedby="basic-addon1"
-                                    />
-                                </div>
-                                <div style={removeBtn}>
-                                    <Button
-                                        variant="danger"
-                                        size="sm"
-                                        onClick={this.props.removeItem.bind(
-                                            this,
-                                            id
-                                        )}
-                                    >
-                                        Delete
-                                    </Button>
-                                </div>
-                            </Form.Group>
-                        </div>
-                    </Card>
-                </div>
+                <ShortAnswer question={this.question} qNumber={this.props.qNumber} />
             );
         } else if (type === "Long Answer") {
             return (
-                <div className="addQuestion" style={margin}>
-                    <Card style={cardStyle}>
-                        <div className="wrapper" style={padding}>
-                            <Form.Group controlId="surveyQuestion">
-                                <FormLabel>
-                                    <h4>
-                                        {" "}
-                                        {this.props.qNumber}. {question}
-                                    </h4>
-                                </FormLabel>
-                                <div key="short-response" style={textBoxMargin}>
-                                    <FormControl
-                                        as="textarea"
-                                        aria-label="With textarea"
-                                        placeholder="Long Response"
-                                        rows="4"
-                                    />
-                                </div>
-                                <div style={removeBtn}>
-                                    <Button
-                                        variant="danger"
-                                        size="sm"
-                                        onClick={this.props.removeItem.bind(
-                                            this,
-                                            id
-                                        )}
-                                    >
-                                        Delete
-                                    </Button>
-                                </div>
-                            </Form.Group>
-                        </div>
-                    </Card>
-                </div>
+                <LongAnswer question={this.question} qNumber={this.props.qNumber} />
             );
         } else if (type === "Multiple Choice") {
             return (
