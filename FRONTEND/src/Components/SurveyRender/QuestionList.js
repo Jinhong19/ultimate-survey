@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import YesNo from "./YesNo";
+import QuestionMatcher from "../SurveyAssets/QuestionMatcher";
 
-export class SurveyState extends Component {
+export class QuestionList extends Component {
     render() {
         return this.props.items.map(item => (
-            <YesNo
+            <QuestionMatcher
                 qNumber={this.props.items.indexOf(item) + 1}
                 question={item}
                 removeItem={this.props.removeItem}
@@ -13,4 +13,4 @@ export class SurveyState extends Component {
     }
 }
 
-export default SurveyState;
+export default QuestionList;

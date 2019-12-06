@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AccountButton from '../Components/AccountButton';
 import SurveyMenu from "../Components/SurveyMenu";
-import Survey from "../Components/Survey";
+import SurveyBuilder from "../Components/SurveyBuilder/SurveyBuilder";
 import ManagerBoard from "../Components/ManagerBoard";
 import EmployeeBoard from "../Components/EmployeeBoard";
 
@@ -209,7 +209,7 @@ export default function DashboardTabs(props) {
                 <ManagerBoard />
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <Survey />
+                <SurveyBuilder />
             </TabPanel>
 
         </div>

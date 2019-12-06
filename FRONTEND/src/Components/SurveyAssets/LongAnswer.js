@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, FormLabel, FormControl, Button } from "react-bootstrap";
+import { Form, FormLabel, FormControl } from "react-bootstrap";
 import { Card } from "@material-ui/core";
 
 export class Boolean extends Component {
@@ -37,11 +37,6 @@ const margin = {
 
 const textBoxMargin = {
     marginBottom: "1em"
-};
-
-const removeBtn = {
-    marginBottom: "1em",
-    textAlign: "right"
 };
 
 const padding = {

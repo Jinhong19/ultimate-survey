@@ -1,7 +1,7 @@
 import React from "react";
 import Nav from "../Components/Nav";
 import "../App.css";
-import Survey from "../Components/Survey";
+import SurveyBuilder from "../Components/SurveyBuilder/SurveyBuilder";
 import { Container } from "react-bootstrap";
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
         <div className="App">
             <Nav words="Manager" />
             <Container>
-                <Survey />
+                <SurveyBuilder />
             </Container>
         </div>
     );

@@ -11,7 +11,7 @@ const styles = theme => ({
         maxWidth: "55em",
         marginLeft: "auto",
         marginRight: "auto",
-        marginTop: "3em"
+        marginTop: "1em"
     }
 });
 

@@ -37,11 +37,6 @@ const textBoxMargin = {
     marginBottom: "1em"
 };
 
-const removeBtn = {
-    marginBottom: "1em",
-    textAlign: "right"
-};
-
 const padding = {
     paddingLeft: "2em",
     paddingRight: "2em"

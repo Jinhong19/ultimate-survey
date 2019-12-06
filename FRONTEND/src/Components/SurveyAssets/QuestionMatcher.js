@@ -1,32 +1,11 @@
 import React, { Component } from "react";
-import { Form, FormLabel, FormControl, Button } from "react-bootstrap";
+import { Form, FormLabel, Button } from "react-bootstrap";
 import { Card } from "@material-ui/core";
-import Boolean from "./QuestionTypes/Boolean";
-import ShortAnswer from "./QuestionTypes/ShortAnswer";
-import LongAnswer from "./QuestionTypes/LongAnswer";
+import Boolean from "./Boolean";
+import ShortAnswer from "./ShortAnswer";
+import LongAnswer from "./LongAnswer";
 
-export class YesNo extends Component {
-    state = {
-        //1 value per option for multiple choice and checkbox questions
-        value1: "enter an option here",
-        value2: "enter an option here",
-        value3: "enter an option here",
-        value4: "enter an option here"
-    };
-
-    //one handleChange per option for multiple choice and checkbox questions
-    handleChange1(event) {
-        this.setState({ value1: event.target.value });
-    }
-    handleChange2(event) {
-        this.setState({ value2: event.target.value });
-    }
-    handleChange3(event) {
-        this.setState({ value3: event.target.value });
-    }
-    handleChange4(event) {
-        this.setState({ value4: event.target.value });
-    }
+export class QuestionMatcher extends Component {
 
     render() {
         const { question, type, id } = this.props.question;
@@ -231,10 +210,6 @@ const margin = {
     marginBottom: "0.5em"
 };
 
-const textBoxMargin = {
-    marginBottom: "1em"
-};
-
 const removeBtn = {
     marginBottom: "1em",
     textAlign: "right"
@@ -254,4 +229,4 @@ const cardStyle = {
     background: "f5f5f5"
 };
 
-export default YesNo;
+export default QuestionMatcher;

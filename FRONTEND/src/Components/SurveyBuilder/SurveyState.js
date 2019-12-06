@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form } from "react-bootstrap";
 import StateQuestions from "./StateQuestions";
-import SurveyCreateButton from "../Components/SurveyCreateButton";
+import SurveyCreateButton from "./SurveyCreateButton";
 
 export class SurveyState extends Component {
     render() {

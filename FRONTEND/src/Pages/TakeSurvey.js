@@ -1,7 +1,7 @@
 // Components
 import React, { Component } from "react";
 import Nav from "../Components/Nav";
-import SurveyRender from "../Components/SurveyRender";
+import SurveyRender from "../Components/SurveyRender/SurveyRender";
 import { Container } from "react-bootstrap"
 
 // CSS
