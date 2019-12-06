@@ -43,20 +43,20 @@ class QuestionCard extends React.Component {
 
     onChangeQ = e => {
         this.setState({ title: e.target.value });
-        this.logState();
+        // this.logState();
     };
 
     onChangeT = e => {
-        this.logState();
+        // this.logState();
         this.setState({ type: e.target.value });
-        this.logState();
+        // this.logState();
 
         // Add a box to create multiple choice
     };
 
     // Use this function to debug. Uncomment the console.log below
     logState = () => {
-        // console.log(this.state);
+        console.log(this.state);
     };
 
     render() {

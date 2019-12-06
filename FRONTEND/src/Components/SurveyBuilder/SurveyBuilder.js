@@ -8,7 +8,8 @@ export class Survey extends Component {
     state = {
         title: "Untitled Survey",
         deadline: new Date(),
-        survey: []
+        survey: [],
+        edit: true
     };
 
     addItem = o => {
@@ -18,17 +19,11 @@ export class Survey extends Component {
             id: Date.now()
         };
         this.setState({ survey: [...this.state.survey, newSurvey] });
-        console.log(this.state);
-        // axios.post('https://jsonplaceholder.typicode.com/todos', {
-        //   title: title,
-        //   completed: false
-        // })
-        //   .then(res => this.setState({
-        //     todos: [...this.state.todos, res.data]
-        //   }));
+        // console.log(this.state);
     };
 
     removeItem = id => {
+        console.log(id);
         this.setState({
             survey: [...this.state.survey.filter(s => s.id !== id)]
         });

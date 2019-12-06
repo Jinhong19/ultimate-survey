@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
-import QuestionList from "./QuestionList";
 import { Card, CardContent } from "@material-ui/core";
+import StateQuestions from "../SurveyAssets/StateQuestions";
 
 export class SurveyState extends Component {
     state = {
@@ -22,7 +22,11 @@ export class SurveyState extends Component {
                     </CardContent>
                 </Card>
                 <Form style={formStyle} onSubmit={this.submitResponse}>
-                    <QuestionList items={this.state.items} />
+                    <StateQuestions
+                        items={this.state.items}
+                        removeItem={null}
+                        edit={false}
+                    />
                     <div className="text-center">
                         <Button variant="success" style={marginBtn}>
                             Submit

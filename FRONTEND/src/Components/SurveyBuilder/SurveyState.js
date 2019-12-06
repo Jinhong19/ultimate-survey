@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Form } from "react-bootstrap";
-import StateQuestions from "./StateQuestions";
+import StateQuestions from "../SurveyAssets/StateQuestions";
 import SurveyCreateButton from "./SurveyCreateButton";
 
 export class SurveyState extends Component {
@@ -25,6 +25,7 @@ export class SurveyState extends Component {
                         <StateQuestions
                             items={this.props.items}
                             removeItem={this.props.removeItem}
+                            edit={true}
                         />
                         <SurveyCreateButton items={this.props.items} />
                     </Form>
@@ -41,6 +42,7 @@ export class SurveyState extends Component {
                         <StateQuestions
                             items={this.props.items}
                             removeItem={this.props.removeItem}
+                            edit={true}
                         />
                         <SurveyCreateButton
                             title={this.props.title}

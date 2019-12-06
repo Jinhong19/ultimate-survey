@@ -3,16 +3,52 @@ import { Form, FormLabel, FormControl, Button } from "react-bootstrap";
 import { Card } from "@material-ui/core";
 
 export class Boolean extends Component {
-    
     render() {
-        return (
-            <div className="shortQ" style={margin}>
+        if (this.props.edit) {
+            return (
+                <div className="shortQ" style={margin}>
                     <Card style={cardStyle}>
                         <div className="wrapper" style={padding}>
                             <Form.Group controlId="surveyQuestion">
                                 <FormLabel>
                                     <h4>
-                                        {this.props.qNumber}. {this.props.question}
+                                        {this.props.qNumber}.{" "}
+                                        {this.props.question}
+                                    </h4>
+                                </FormLabel>
+                                <div key="short-response" style={textBoxMargin}>
+                                    <FormControl
+                                        placeholder="Short Response"
+                                        aria-describedby="basic-addon1"
+                                    />
+                                </div>
+                                <div style={removeBtn}>
+                                    <Button
+                                        variant="danger"
+                                        size="sm"
+                                        onClick={this.props.removeItem.bind(
+                                            this,
+                                            this.props.id
+                                        )}
+                                    >
+                                        Delete
+                                    </Button>
+                                </div>
+                            </Form.Group>
+                        </div>
+                    </Card>
+                </div>
+            );
+        } else {
+            return (
+                <div className="shortQ" style={margin}>
+                    <Card style={cardStyle}>
+                        <div className="wrapper" style={padding}>
+                            <Form.Group controlId="surveyQuestion">
+                                <FormLabel>
+                                    <h4>
+                                        {this.props.qNumber}.{" "}
+                                        {this.props.question}
                                     </h4>
                                 </FormLabel>
                                 <div key="short-response" style={textBoxMargin}>
@@ -25,7 +61,8 @@ export class Boolean extends Component {
                         </div>
                     </Card>
                 </div>
-        );
+            );
+        }
     }
 }
 
@@ -35,6 +72,11 @@ const margin = {
 
 const textBoxMargin = {
     marginBottom: "1em"
+};
+
+const removeBtn = {
+    marginBottom: "1em",
+    textAlign: "right"
 };
 
 const padding = {

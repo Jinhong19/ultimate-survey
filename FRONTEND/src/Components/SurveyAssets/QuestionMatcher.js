@@ -6,23 +6,39 @@ import ShortAnswer from "./ShortAnswer";
 import LongAnswer from "./LongAnswer";
 
 export class QuestionMatcher extends Component {
-
     render() {
+        // console.log(this.props);
         const { question, type, id } = this.props.question;
-
-        console.log(this.props.question);
 
         if (type === "Yes or No") {
             return (
-                <Boolean question={this.question} qNumber={this.props.qNumber} />
+                <Boolean
+                    question={question}
+                    id={id}
+                    qNumber={this.props.qNumber}
+                    removeItem={this.props.removeItem}
+                    edit={this.props.edit}
+                />
             );
         } else if (type === "Short Answer") {
             return (
-                <ShortAnswer question={this.question} qNumber={this.props.qNumber} />
+                <ShortAnswer
+                    question={question}
+                    id={id}
+                    qNumber={this.props.qNumber}
+                    removeItem={this.props.removeItem}
+                    edit={this.props.edit}
+                />
             );
         } else if (type === "Long Answer") {
             return (
-                <LongAnswer question={this.question} qNumber={this.props.qNumber} />
+                <LongAnswer
+                    question={question}
+                    id={id}
+                    qNumber={this.props.qNumber}
+                    removeItem={this.props.removeItem}
+                    edit={this.props.edit}
+                />
             );
         } else if (type === "Multiple Choice") {
             return (
