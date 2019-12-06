@@ -5,31 +5,22 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import SurveyTakeButton from "../Components/SurveyTakeButton";
-class ManagerBoard extends React.Component {
+import TableBody from "@material-ui/core/TableBody";
+const createButton = (id) => {
+    return <div><SurveyTakeButton>{id}</SurveyTakeButton></div>
+}
+const createData = (name, owner, due, completed, id) => {
+    return { name, owner, due, completed, id}
+  }
+class EmployeeBoard extends React.Component {
     constructor() {
         super();
         this.state = {
             surveys: [],
-            surveyIds:[],
-            surveyOwners: [],
-            surveyDueDates: [],
-            surveyOver: []
+            rows: []
         }
     }
-    state1 = {
-        surveys: [{
-            name: "Survey1",
-            dueDate: "3/07"
-        }, 
-        {
-            name: "Survey2",
-            dueDate: "2/10"
-        },
-        {
-            name: "Survey3",
-            dueDate: "5/30"
-        }]
-    };
+    
     componentDidMount() {
         console.log("hello")
         fetch("https://ultimate-survey.herokuapp.com/survey/employee", 
@@ -42,22 +33,16 @@ class ManagerBoard extends React.Component {
             console.log(this.state)
         });
     }
+    
+
     render() {
-        const surveyIds = []
-        const surveyOwners = []
-        const surveyDueDates = []
-        const surveyOver = []
-        const json = []
-        var date = new Date()
-        for(let i = 0; i < this.state.surveys.length; i++){
-            surveyIds.push(this.state.surveys[i]._id.$oid)
-            surveyOwners.push(this.state.surveys[i].manager.$oid)
-            surveyDueDates.push("12/10/19")
-            if(date.toString().localeCompare(surveyDueDates[i])==0||date.toString().localeCompare(surveyDueDates[i])>0){
-                surveyOver.push(true)
-            }
-            else{
-                surveyOver.push(false)
+        console.log(this.state.surveys);
+        if(this.state.surveys.length==0){
+            this.state.rows = [];
+        }
+        else{
+            for(let i=0; i<this.state.surveys.length; i++){
+                this.state.rows[i]=createData("Survey", this.state.surveys[i].manager.$oid, "12/10/19", true, this.state.surveys[i]._id.$oid);
             }
         }
         return (
@@ -67,33 +52,32 @@ class ManagerBoard extends React.Component {
                         className={"Surveys"}
                         size="small"
                         aria-label="a dense table"
+                        
                     >
                         <TableHead>
                             <TableRow>
-                            
-                            {this.state.surveys.map(survey => (
-                                <TableCell align = "left">
-                                    <SurveyTakeButton json = {survey.json}></SurveyTakeButton>
-                                </TableCell>                   
-                            ))}
-                            {surveyOwners.map(owner => (
-                                <TableCell align = "left">{owner}</TableCell>                        
-                             ))}
-                                <TableCell align = "left">{"12/4/19"}</TableCell>                        
-                            {surveyDueDates.map(due => (
-                                <TableCell align = "left">{due}</TableCell>                        
-                            ))}
-                            {surveyOver.map(over => (
-                                <TableCell align = "right">{over.toString()}</TableCell>                        
-                            ))}
-                            
+                                <TableCell>Name</TableCell>
+                                <TableCell>Owner</TableCell>
+                                <TableCell>Due</TableCell>
+                                <TableCell>Completed</TableCell> 
+                                <TableCell>Take</TableCell>  
                             </TableRow>
                         </TableHead>
-                                       
+                        <TableBody>
+                            {this.state.rows.map(row => (
+                                <TableRow>
+                                    <TableCell align = "left">{row.name}</TableCell>
+                                    <TableCell align="left">{row.owner}</TableCell>
+                                    <TableCell align="left">{row.due}</TableCell>
+                                    <TableCell align="left">{row.completed.toString()}</TableCell>
+                                    <TableCell align = "left"><SurveyTakeButton>{row.id}</SurveyTakeButton></TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
                     </Table>
                 </Paper>
             </div>
         );
     }
 }
-export default ManagerBoard;
+export default EmployeeBoard;

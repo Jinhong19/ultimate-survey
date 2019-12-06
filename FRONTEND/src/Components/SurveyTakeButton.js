@@ -5,15 +5,15 @@ import {Link} from "react-router-dom";
 class SurveyTakeButton extends React.Component {
     constructor(props) {
         super(props);
-        state: {
-            json: this.props.json
-        }
+        this.state = {
+            surveyid: this.props.surveyid
+        };
     }
 
     render() {
         return (
             <div className="text-center" style={marginBtn}>
-            <Link to={{pathname: '/TakeSurvey', json: this.props.json}}>
+            <Link to={{pathname: '/TakeSurvey', surveyid: this.state.surveyid}}>
                 <Button size = "small">
                     Take
                 </Button>

@@ -200,7 +200,6 @@ export default function DashboardTabs(props) {
                 <AccountButton />
             </AppBar>
             <TabPanel value={value} index={0}>
-                <SurveyMenu />
                 <EmployeeBoard />
             </TabPanel>
             <TabPanel value={value} index={1}>
