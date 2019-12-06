@@ -152,6 +152,7 @@ def get_created_surveys():
     if flask.request.method == 'GET':
         surveys = mongo.db.Surveys
         cursor_query = surveys.find({"manager": ObjectId(current_user._id)})
+        print(current_user._id)
         return flask.jsonify(dumps(list(cursor_query)))
     else:
         surveys = mongo.db.Surveys
