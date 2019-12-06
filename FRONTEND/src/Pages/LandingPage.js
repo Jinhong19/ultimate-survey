@@ -39,7 +39,7 @@ class LandingPage extends React.Component {
                     src={require("../Media/logo.png")}
                     alt="company logo"
                 />
-                <LoginCard user="Login" />
+                <LoginCard />
                 <Typography align="center" variant="h4">
                     For development: <a href="/Dashboard">Dashboard</a>
                 </Typography>
