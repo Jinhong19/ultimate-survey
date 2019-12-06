@@ -1,5 +1,5 @@
 import React from "react";
-import {Redirect} from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 
 import {
     withStyles,
@@ -13,6 +13,9 @@ import {
 } from "@material-ui/core";
 import axios from "axios";
 const styles = theme => ({
+    title: {
+        marginBottom: "0.5em"
+    },
     text: {
         margin: "1em",
         marginTop: "2em",
@@ -43,11 +46,15 @@ class LoginCard extends React.Component {
             password: "",
             loggedIn: false,
             isManager: false,
-            fname: ""
+            fname: "",
+            bad: false
         };
+        this.userRef = React.createRef();
         this.handleChange_password = this.handleChange_password.bind(this);
         this.handleChange_username = this.handleChange_username.bind(this);
+        this.handleKeypress = this.handleKeypress.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.badLogin = this.badLogin.bind(this);
     }
 
     handleChange_username(event) {
@@ -58,8 +65,25 @@ class LoginCard extends React.Component {
         this.setState({ password: event.target.value });
     }
 
+    handleKeypress(event) {
+        if(event.charCode === 13) {
+            this.handleSubmit();
+        }
+    }
+
+    badLogin() {
+        this.setState({
+            bad: true,
+            username: "",
+            password: ""
+        });
+        this.userRef.current.focus();
+    }
+
     handleSubmit(event) {
-        event.preventDefault();
+        if(event !== undefined){
+            event.preventDefault();
+        }
         const username = this.state.username;
         const password = this.state.password;
         
@@ -76,9 +100,12 @@ class LoginCard extends React.Component {
                 const fname = data.fname;
                 this.setState({loggedIn: loggedIn, isManager: isManager, fname:fname});
                 console.log(this.state);
-            }); 
-    }
+            });
 
+            if(this.state.loggedIn === false) {
+                this.badLogin();
+            }
+    }
 
     render() {
         return (
@@ -95,38 +122,44 @@ class LoginCard extends React.Component {
             :
             <Card className={this.props.classes.card}>
                 <CardContent>
-                    <Typography align="center" component="h4" variant="h4">
-                        {this.props.user}
+                    <Typography align="center" component="h4" variant="h4" className={this.props.classes.title}>
+                        Login
                     </Typography>
                     <Divider />
                     <Typography
                         className={this.props.classes.text}
                         align="center"
                         component="p"
-                        variant="p"
                     >
                         Please login to be directed to your survey center.
                     </Typography>
                     <TextField
                         className={this.props.classes.entry}
                         label="Username"
-                        fullWidth="true"
+                        value={this.state.username}
+                        fullWidth={true}
+                        error={this.state.bad}
+                        inputRef={this.userRef}
+                        autoFocus
                         onChange={this.handleChange_username}
+                        onKeyPress={this.handleKeypress}
                     />
                     <TextField
                         className={this.props.classes.entry}
                         label="Password"
                         type="password"
-                        fullWidth="true"
+                        value={this.state.password}
+                        fullWidth={true}
+                        error={this.state.bad}
                         onChange={this.handleChange_password}
+                        onKeyPress={this.handleKeypress}
                     />
                 </CardContent>
                 <CardActions>
                     <Button
                         variant="contained"
                         color="primary"
-                        fullWidth="true"
-                        href={this.props.redir}
+                        fullWidth={true}
                         onClick={this.handleSubmit}
                     >
                         <Typography color="secondary">Login</Typography>
