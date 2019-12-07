@@ -126,6 +126,7 @@ def user_response():
         responses = mongo.db.Responses
         body = request.get_json(force=True)
         _employeeid = ObjectId(current_user._id)
+        # TODO - PARSE SURVEY ID ATTRIBUTE
         object_id = responses.insert_one({'surveyid': 'SomeSurveyid', 'response': body, 'employeeid': _employeeid})
         return flask.jsonify({'message': "Inserted Response for Employee " + str(current_user._id)})
 
@@ -136,10 +137,31 @@ def user_response():
 @login_required
 def user_survey():
     if flask.request.method == 'GET':
+        managers = get_managers(current_user._id)
+        print(dumps(managers))
         surveys = mongo.db.Surveys
-        cursor_query = surveys.find({'Employees': ObjectId(current_user._id)})
-        return flask.jsonify(dumps(list(cursor_query)))
+        available = []
+        for manager_id in managers:
+            surveys_for_curr = list(surveys.find({'manager': manager_id}))
+            for survey in surveys_for_curr:
+                available.append(survey)
+        return flask.jsonify(dumps(available))
 
+# finds all managers of a certain employee
+def get_managers(employee_id):
+    employees = mongo.db.Employees
+    employee = employees.find_one({'_id': ObjectId(employee_id)})
+    managerid = employee.get('managerId')
+    print(managerid)
+    if managerid != None:
+        manager = employees.find_one({'employeeId':managerid})
+        print(managerid,manager)
+        recursive = get_managers(manager['_id'])
+        recursive.append(manager['_id'])
+        return recursive
+    return []
+
+#GET - return status for a given employees response for a certain survey
 @app.route('/submitted/<survey_id>', methods=['GET'])
 @cross_origin(supports_credential=True)
 @login_required
@@ -147,7 +169,7 @@ def check_if_submitted(survey_id):
     if flask.request.method == 'GET':
         surveys = mongo.db.Surveys
         responses = mongo.db.Responses
-        survey_object = surveys.find_one({'_id':ObjectId(survey_id),'Employees':ObjectId(current_user._id)}) 
+        survey_object = surveys.find_one({'_id':ObjectId(survey_id)}) 
         survey_exists = (survey_object != None)
         if survey_exists:
             response_object = responses.find_one({'employeeid':ObjectId(current_user._id), 'surveyid':ObjectId(survey_id)})
@@ -156,12 +178,7 @@ def check_if_submitted(survey_id):
             response_object = None
             responded_to = False
         return flask.jsonify(dumps({'survey_exists':survey_exists, 'survey_object':survey_object, 'responded_to':responded_to, 'response_object':response_object}))
-        
-
-
-        #how will this be impacted by changing getting surveys functionality?
-
-
+    
 
 # MANAGER ----------------------------------------------------------------
 
@@ -179,34 +196,11 @@ def get_created_surveys():
     else:
         surveys = mongo.db.Surveys
         body = request.get_json(force=True)
-        to_send = {'survey': body, 'manager': ObjectId(current_user._id),
-                   'Employees': userDFS(current_user._id)}
+        to_send = {'survey': body, 'manager': ObjectId(current_user._id), 'manager_name':(current_user.fname + " "+ current_user.lname)}
         object_id = surveys.insert(to_send)
         return flask.jsonify({'message': "Inserted survey for manger: " + str(current_user._id)})
 
-
-def userDFS(manager_id):
-    employees = mongo.db.Employees
-    query = {'_id': ObjectId(manager_id)}
-    manager_data = employees.find(query)
-    manager_count = employees.count_documents(query)
-
-    result = []
-    if manager_count > 0:
-        entry = manager_data.next()
-        manager_employeeid = entry['employeeId']
-
-        query = {'managerId': manager_employeeid}
-        employees_of = employees.find(query)
-        count_employees_of = employees.count_documents(query)
-
-        for doc in employees_of:
-            user_employees = userDFS(doc['_id'])
-            result.append(ObjectId(doc['_id']))
-            for user in user_employees:
-                result.append(user)
-    return result
-
+ # OTHER ----------------------------------------------------------------
 
 @app.route('/responses/<survey_id>', methods=['GET'])
 @cross_origin(supports_credentials=True)
@@ -215,7 +209,6 @@ def get_survey_respones(survey_id):
     responses = mongo.db.Responses
     cursor_query = responses.find({'surveyid': ObjectId(survey_id)})
     return flask.jsonify(dumps(list(cursor_query)))
-
 
 @app.route('/user/info',methods=['GET'])
 @cross_origin(supports_credentials=True)
