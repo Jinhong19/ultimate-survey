@@ -197,13 +197,12 @@ def get_complete_dashboard_status():
                 responded_to = (response_object != None)
                 dashboard_info.append({'survey':survey,'response':response_object,"responded_to":responded_to})
         return flask.jsonify(dumps(dashboard_info))
-
         
 # MANAGER ----------------------------------------------------------------
 
 # GET - return a list of all surveys created by a manager
 # POST - submit a new survey - survey body is not modified - also performs query of employees under manger
-@app.route('/survey/manager', methods=['GET', 'POST'])
+@app.route('/survey/manager', methods=['GET', 'POST','DELETE'])
 @cross_origin(supports_credentials=True)
 @login_required
 def get_created_surveys():
@@ -211,12 +210,21 @@ def get_created_surveys():
         surveys = mongo.db.Surveys
         cursor_query = surveys.find({"manager": ObjectId(current_user._id)})
         return flask.jsonify(dumps(list(cursor_query)))
-    else:
+    elif flask.request.method =='POST':
         surveys = mongo.db.Surveys
         body = request.get_json(force=True)
         to_send = {'survey': body, 'manager': ObjectId(current_user._id), 'manager_name':(current_user.fname + " "+ current_user.lname), 'create_date':str(datetime.datetime.now().isoformat())}
         object_id = surveys.insert(to_send)
         return flask.jsonify({'message': "Inserted survey for manger: " + str(current_user._id)})
+    elif flask.request.method == 'DELETE':
+        body = request.get_json(force=True)
+        survey_id = body.get('survey_id')
+        if survey_id:
+            surveys=mongo.db.Surveys
+            surveys.delete_one({'_id':ObjectId(survey_id)})
+            return flask.jsonify({'message':'Survey ' + str(survey_id) + ' deleted from database'})
+        else:
+            return flask.jsonify({'message':'REJECTED - please specify survey_id in the body to delete survey'})
 
  # OTHER ----------------------------------------------------------------
 
