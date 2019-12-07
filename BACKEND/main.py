@@ -143,7 +143,6 @@ def user_response():
 def user_survey():
     if flask.request.method == 'GET':
         managers = get_managers(current_user._id)
-        print(dumps(managers))
         surveys = mongo.db.Surveys
         available = []
         for manager_id in managers:
@@ -157,10 +156,8 @@ def get_managers(employee_id):
     employees = mongo.db.Employees
     employee = employees.find_one({'_id': ObjectId(employee_id)})
     managerid = employee.get('managerId')
-    print(managerid)
     if managerid != None:
         manager = employees.find_one({'employeeId':managerid})
-        print(managerid,manager)
         recursive = get_managers(manager['_id'])
         recursive.append(manager['_id'])
         return recursive
@@ -168,7 +165,7 @@ def get_managers(employee_id):
 
 #GET - return status for a given employees response for a certain survey
 @app.route('/submitted/<survey_id>', methods=['GET'])
-@cross_origin(supports_credential=True)
+@cross_origin(supports_credentials=True)
 @login_required
 def check_if_submitted(survey_id):
     if flask.request.method == 'GET':
@@ -183,27 +180,51 @@ def check_if_submitted(survey_id):
             response_object = None
             responded_to = False
         return flask.jsonify(dumps({'survey_exists':survey_exists, 'survey_object':survey_object, 'responded_to':responded_to, 'response_object':response_object}))
-    
 
+@app.route('/dashboard', methods=['GET'])
+@cross_origin(supports_credentials=True)
+@login_required
+def get_complete_dashboard_status():
+    if flask.request.method == 'GET':
+        managers = get_managers(current_user._id)
+        surveys = mongo.db.Surveys
+        responses = mongo.db.Responses
+        dashboard_info = []
+        for manager_id in managers:
+            surveys_for_curr = list(surveys.find({'manager': manager_id}))
+            for survey in surveys_for_curr:
+                response_object = responses.find_one({'employeeid':ObjectId(current_user._id), 'surveyid':ObjectId(survey['_id'])})
+                responded_to = (response_object != None)
+                dashboard_info.append({'survey':survey,'response':response_object,"responded_to":responded_to})
+        return flask.jsonify(dumps(dashboard_info))
+        
 # MANAGER ----------------------------------------------------------------
 
 # GET - return a list of all surveys created by a manager
 # POST - submit a new survey - survey body is not modified - also performs query of employees under manger
-@app.route('/survey/manager', methods=['GET', 'POST'])
+@app.route('/survey/manager', methods=['GET', 'POST','DELETE'])
 @cross_origin(supports_credentials=True)
 @login_required
 def get_created_surveys():
     if flask.request.method == 'GET':
         surveys = mongo.db.Surveys
         cursor_query = surveys.find({"manager": ObjectId(current_user._id)})
-        print(current_user._id)
         return flask.jsonify(dumps(list(cursor_query)))
-    else:
+    elif flask.request.method =='POST':
         surveys = mongo.db.Surveys
         body = request.get_json(force=True)
         to_send = {'survey': body, 'manager': ObjectId(current_user._id), 'manager_name':(current_user.fname + " "+ current_user.lname), 'create_date':str(datetime.datetime.now().isoformat())}
         object_id = surveys.insert(to_send)
         return flask.jsonify({'message': "Inserted survey for manger: " + str(current_user._id)})
+    elif flask.request.method == 'DELETE':
+        body = request.get_json(force=True)
+        survey_id = body.get('survey_id')
+        if survey_id:
+            surveys=mongo.db.Surveys
+            surveys.delete_one({'_id':ObjectId(survey_id)})
+            return flask.jsonify({'message':'Survey ' + str(survey_id) + ' deleted from database'})
+        else:
+            return flask.jsonify({'message':'REJECTED - please specify survey_id in the body to delete survey'})
 
  # OTHER ----------------------------------------------------------------
 
