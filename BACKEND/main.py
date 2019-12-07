@@ -140,7 +140,26 @@ def user_survey():
         cursor_query = surveys.find({'Employees': ObjectId(current_user._id)})
         return flask.jsonify(dumps(list(cursor_query)))
 
-#'submitted/employee'
+@app.route('/submitted/<survey_id>', methods=['GET'])
+@cross_origin(supports_credential=True)
+@login_required
+def check_if_submitted(survey_id):
+    if flask.request.method == 'GET':
+        surveys = mongo.db.Surveys
+        responses = mongo.db.Responses
+        survey_object = surveys.find_one({'_id':ObjectId(survey_id),'Employees':ObjectId(current_user._id)}) 
+        survey_exists = (survey_object != None)
+        if survey_exists:
+            response_object = responses.find_one({'employeeid':ObjectId(current_user._id), 'surveyid':ObjectId(survey_id)})
+            responded_to = (response_object != None)
+        else:
+            response_object = None
+            responded_to = False
+        return flask.jsonify(dumps({'survey_exists':survey_exists, 'survey_object':survey_object, 'responded_to':responded_to, 'response_object':response_object}))
+        
+
+
+        #how will this be impacted by changing getting surveys functionality?
 
 
 
