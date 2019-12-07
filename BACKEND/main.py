@@ -9,6 +9,8 @@ from bson.json_util import dumps, loads  # used to convert Python MongoDB JSON t
 from flask import Flask, Response, redirect, url_for, request, session, abort
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user
 from passlib.hash import sha256_crypt
+import datetime
+
 
 # Flask App
 app = flask.Flask("__main__")
@@ -199,7 +201,7 @@ def get_created_surveys():
     else:
         surveys = mongo.db.Surveys
         body = request.get_json(force=True)
-        to_send = {'survey': body, 'manager': ObjectId(current_user._id), 'manager_name':(current_user.fname + " "+ current_user.lname)}
+        to_send = {'survey': body, 'manager': ObjectId(current_user._id), 'manager_name':(current_user.fname + " "+ current_user.lname), 'create_date':str(datetime.datetime.now().isoformat())}
         object_id = surveys.insert(to_send)
         return flask.jsonify({'message': "Inserted survey for manger: " + str(current_user._id)})
 
