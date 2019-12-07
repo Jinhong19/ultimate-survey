@@ -16,6 +16,7 @@ export class Survey extends Component {
         const newSurvey = {
             question: o.title,
             type: o.type,
+            options: o.options,
             id: Date.now()
         };
         this.setState({ survey: [...this.state.survey, newSurvey] });
@@ -27,6 +28,7 @@ export class Survey extends Component {
         this.setState({
             survey: [...this.state.survey.filter(s => s.id !== id)]
         });
+        console.log(this.state.survey);
     };
 
     clearSurvey = () => {

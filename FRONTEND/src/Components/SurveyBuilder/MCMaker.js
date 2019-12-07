@@ -1,62 +1,58 @@
 import React, { Component } from "react";
-import { Button, Row, Col } from "react-bootstrap";
-import MCOption from "./MCOption";
-import EditableLabel from "react-inline-editing";
+import { Row, Col } from "react-bootstrap";
+import { Form } from "react-bootstrap";
+import Options from "./Options";
 
 export class MCMaker extends Component {
     state = {
-        count: 1,
-        options: ["1", "2", "3"]
+        count: 0,
+        options: []
     };
 
-    _handleFocus(text) {
-        console.log("Focused with text: " + text);
-    }
+    options = [2, 3, 4, 5, 6];
 
-    _handleFocusOut(text) {
-        console.log("Left editor with text: " + text);
-    }
+    onChangeOption = e => {
+        let index = Number(e.target.className.split(" ")[0]) - 1;
+        this.props.onChangeOption(index, e.target.value);
+    };
 
-    addOption = () => {
-        console.log("RECV- addOptions in MCMaker: ");
-        this.state.options.push("hello" + this.state.count);
-        this.state.setState({ count: this.state.count + 1 });
-        console.log(this.state.count);
+    onChangeNumber = e => {
+        this.props.onChangeNumber(e);
     };
 
     render() {
         if (this.props.type === "Multiple Choice") {
             return (
                 <div style={margin}>
-                    <h4>Select options</h4>
-                    <Row>
-                        <Col xs="10">
-                            <EditableLabel
-                                text="Type your option"
-                                labelClassName="myLabelClass"
-                                inputClassName="myInputClass"
-                                inputWidth="100%"
-                                onFocus={this._handleFocus}
-                                onFocusOut={this._handleFocusOut}
-                            />
-                        </Col>
-                        <Col xs="2">
-                            <Button
-                                onClick={() => {
-                                    this.setState({
-                                        options: [...this.state.options, "lol"]
-                                    });
-                                    // this.state.options.push("lol");
-                                    console.log(this.state.options);
-                                }}
-                            >
-                                +
-                            </Button>
-                        </Col>
-                    </Row>
-                    <div>
-                        <MCOption options={this.state.options} />
-                    </div>
+                    <Form.Group controlId="responseType">
+                        <Row>
+                            <Col xs={6}>
+                                <Form.Label>
+                                    <h4>Select number of options</h4>
+                                </Form.Label>
+                            </Col>
+                            <Col xs={2}>
+                                <Form.Control
+                                    as="select"
+                                    onChange={this.onChangeNumber}
+                                    value={this.props.count}
+                                >
+                                    <option>Select</option>
+                                    {this.options.map(o => {
+                                        return <option>{o}</option>;
+                                    })}
+                                </Form.Control>
+                            </Col>
+                        </Row>
+                    </Form.Group>
+
+                    <h4>Enter the options</h4>
+                    <ul>
+                        <Options
+                            options={this.props.options}
+                            onChange={this.onChangeOption}
+                        />
+                    </ul>
                 </div>
             );
         } else {

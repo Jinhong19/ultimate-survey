@@ -2,6 +2,8 @@ import React from "react";
 import { withStyles, Typography, AppBar } from "@material-ui/core";
 import LoginCard from "../Components/LoginCard";
 import Background from "../Media/back.jpeg";
+import "../App.css";
+import "bootstrap/dist/css/bootstrap.css";
 
 const styles = theme => ({
     logo: {
