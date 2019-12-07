@@ -126,9 +126,12 @@ def user_response():
         responses = mongo.db.Responses
         body = request.get_json(force=True)
         _employeeid = ObjectId(current_user._id)
-        # TODO - PARSE SURVEY ID ATTRIBUTE
-        object_id = responses.insert_one({'surveyid': 'SomeSurveyid', 'response': body, 'employeeid': _employeeid})
-        return flask.jsonify({'message': "Inserted Response for Employee " + str(current_user._id)})
+        survey_id = body.get('survey_id')
+        if survey_id != None:
+            object_id = responses.insert_one({'surveyid': ObjectId(survey_id), 'response': body, 'employeeid': _employeeid})
+            return flask.jsonify({'message': "Inserted Response for Employee " + str(current_user._id)})
+        else:
+            return flask.jsonify({'message': "REJECTED - include 'survey_id' attribute in body including string ObjectId for survey responding to"})
 
 
 # GET - return a list of all surveys available to a employee
