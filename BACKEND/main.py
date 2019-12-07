@@ -140,6 +140,9 @@ def user_survey():
         cursor_query = surveys.find({'Employees': ObjectId(current_user._id)})
         return flask.jsonify(dumps(list(cursor_query)))
 
+#'submitted/employee'
+
+
 
 # MANAGER ----------------------------------------------------------------
 
@@ -194,6 +197,17 @@ def get_survey_respones(survey_id):
     cursor_query = responses.find({'surveyid': ObjectId(survey_id)})
     return flask.jsonify(dumps(list(cursor_query)))
 
+
+@app.route('/user/info',methods=['GET'])
+@cross_origin(supports_credentials=True)
+@login_required
+def get_user_info():
+    return flask.jsonify({
+        "firstName": current_user.fname,
+        "lastName": current_user.lname,
+        "_id": current_user._id,
+        "isManager": current_user.isManager
+    })
 
 if __name__ == '__main__':
     app.run(debug=True)
