@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import AccountButton from '../Components/AccountButton';
 import SurveyMenu from "../Components/SurveyMenu";
@@ -94,23 +94,39 @@ export default function DashboardTabs(props) {
         open: false,
     });
     const [user, setUser] = React.useState({
-        fname: "please log in",
+        firstName: "please log in",
         isManager: false,
+        _id: "",
+        lastName: "",
     });
 
     useEffect(() => {
-        console.log(props);
         if (props.location.state != undefined) {
             let receivedSubmission = props.location.state.submit;
             console.log("received submission status: " + receivedSubmission);
             updateSubmit(receivedSubmission);
-            setUser({
-                fname: props.location.state.fname,
-                isManager: props.location.state.isManager,
-            })
         }
-        console.log(user);
+        // fetch user info from endpoint
+        fetch("https://ultimate-survey.herokuapp.com/user/info", 
+            {method:'GET',
+             headers: {'Content-Type': 'application/json'},
+             credentials: 'include'})
+            .then(response => response.json())
+            .then(data => {
+                updateUser(data);
+            });
+        
     }, []);
+
+
+    const updateUser = (data) => {
+        setUser({
+            _id: data._id,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            isManager: data.isManager,
+        });
+    }
 
     const updateSubmit = (updatedState) => {
         setState({
@@ -165,7 +181,7 @@ export default function DashboardTabs(props) {
                         className={classes.menuItem}
                         variant="h5"
                     >
-                        Hello, {user.fname}
+                        Hello, {user.firstName}
                     </Typography>
                 </div>
                 <div className="tabContainer">
