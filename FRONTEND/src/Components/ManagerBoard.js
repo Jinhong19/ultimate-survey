@@ -32,6 +32,7 @@ class ManagerBoard extends React.Component {
         for(let i = 0; i < this.state.surveys.length; i++){
             this.state.rows.push(this.state.surveys[i]._id.$oid)
         }
+        console.log(this.state.rows);
         return (
             <div className={"SurveyMenu"}>
                 <Paper className={"Survey Menu"}>
@@ -48,14 +49,13 @@ class ManagerBoard extends React.Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            <TableRow>
                             {this.state.rows.map(id => (
-                                <TableCell>{id}</TableCell>,   
-                                <TableCell align = "right"> <Button size = "small">Analytics</Button></TableCell>,
-                                <TableCell> <Button size = "small" color  = "RED">Delete </Button></TableCell>                     
-                            ))}
-                            
-                            </TableRow>
+                                <TableRow>
+                                    <TableCell>{id}</TableCell>  
+                                    <TableCell align = "left"> <Button>Analytics</Button></TableCell>
+                                    <TableCell> <Button> Delete </Button></TableCell>      
+                                </TableRow>
+                            ))} 
                         </TableBody>
                     </Table>
                 </Paper>

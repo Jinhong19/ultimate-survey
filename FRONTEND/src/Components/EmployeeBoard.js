@@ -6,12 +6,11 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import SurveyTakeButton from "../Components/SurveyTakeButton";
 import TableBody from "@material-ui/core/TableBody";
-const createButton = (id) => {
-    return <div><SurveyTakeButton>{id}</SurveyTakeButton></div>
-}
 const createData = (name, owner, due, completed, id) => {
     return { name, owner, due, completed, id}
   }
+let surveyid = ""
+let over  = true
 class EmployeeBoard extends React.Component {
     constructor() {
         super();
@@ -22,7 +21,6 @@ class EmployeeBoard extends React.Component {
     }
     
     componentDidMount() {
-        console.log("hello")
         fetch("https://ultimate-survey.herokuapp.com/survey/employee", 
         {method:'GET',
         headers: {'Content-Type': 'application/json'},
@@ -30,19 +28,19 @@ class EmployeeBoard extends React.Component {
         .then(response => response.json())
         .then(data => {
             this.setState({surveys: JSON.parse(data)})
-            console.log(this.state)
         });
     }
     
+    
 
     render() {
-        console.log(this.state.surveys);
         if(this.state.surveys.length==0){
             this.state.rows = [];
         }
         else{
+            var date = new Date();
             for(let i=0; i<this.state.surveys.length; i++){
-                this.state.rows[i]=createData("Survey", this.state.surveys[i].manager.$oid, "12/10/19", true, this.state.surveys[i]._id.$oid);
+                this.state.rows[i]=createData("Survey", this.state.surveys[i].manager.$oid, "12/8/2019", date.toLocaleDateString().localeCompare("12/8/2019") <= 0, this.state.surveys[i]._id.$oid);
             }
         }
         return (
@@ -70,7 +68,7 @@ class EmployeeBoard extends React.Component {
                                     <TableCell align="left">{row.owner}</TableCell>
                                     <TableCell align="left">{row.due}</TableCell>
                                     <TableCell align="left">{row.completed.toString()}</TableCell>
-                                    <TableCell align = "left"><SurveyTakeButton>{row.id}</SurveyTakeButton></TableCell>
+                                    <TableCell align = "left"><SurveyTakeButton>{{surveyid: row.id}, {over: row.completed}}</SurveyTakeButton></TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
