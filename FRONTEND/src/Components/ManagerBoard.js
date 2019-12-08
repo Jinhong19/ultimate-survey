@@ -55,7 +55,7 @@ class ManagerBoard extends React.Component {
                                             survey: 
                                             {_id:{}, survey: {}, manager:{}, manager_name: "", create_date:""}
                                         */}
-                                        <Link to={{ pathname: '/AnalyticsPage', survey: survey }}>
+                                        <Link to={{ pathname: '/AnalyticsPage', state: {survey: survey} }}>
                                                 Analytics
                                         </Link>
                                     </TableCell>
