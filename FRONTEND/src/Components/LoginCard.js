@@ -45,8 +45,6 @@ class LoginCard extends React.Component {
             username: "",
             password: "",
             loggedIn: false,
-            isManager: false,
-            fname: "",
             bad: false
         };
         this.userRef = React.createRef();
@@ -84,8 +82,6 @@ class LoginCard extends React.Component {
         if(event !== undefined){
             event.preventDefault();
         }
-        const username = this.state.username;
-        const password = this.state.password;
         
         console.log(this.state)
         fetch("https://ultimate-survey.herokuapp.com/login", 
@@ -96,10 +92,7 @@ class LoginCard extends React.Component {
             .then(response => response.json())
             .then(data => {
                 const loggedIn = data.message === "success";
-                const isManager = data.isManager === true;
-                const fname = data.fname;
-                this.setState({loggedIn: loggedIn, isManager: isManager, fname:fname});
-                console.log(this.state);
+                this.setState({loggedIn: loggedIn});
             });
 
             if(this.state.loggedIn === false) {
@@ -112,11 +105,6 @@ class LoginCard extends React.Component {
             this.state.loggedIn ?
             <Redirect to={{
                     pathname:"/Dashboard",
-                    state:{ 
-                        isManager: this.state.isManager,
-                        fname: this.state.fname,
-                        loggedIn: this.state.loggedIn
-                    }
                 }}
             />
             :
