@@ -17,11 +17,11 @@ class SurveyMenu extends React.Component {
                     >
                         <TableHead>
                             <TableRow>
-                                <TableCell>survey id</TableCell>
+                                <TableCell>Take</TableCell>
                                 <TableCell align="right">Owner</TableCell>
                                 <TableCell align="right">Assigned</TableCell>
                                 <TableCell align="right">Due</TableCell>
-                                <TableCell align="right">Completed</TableCell>
+                                <TableCell align="right">Completed</TableCell>   
                             </TableRow>
                         </TableHead>
                     </Table>

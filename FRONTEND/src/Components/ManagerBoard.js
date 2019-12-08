@@ -4,6 +4,8 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
+import TableBody from "@material-ui/core/TableBody";
 import { Link } from "react-router-dom";
 import { withStyles, Typography } from "@material-ui/core";
 class ManagerBoard extends React.Component {
@@ -11,23 +13,9 @@ class ManagerBoard extends React.Component {
         super();
         this.state = {
             surveys: [],
-            surveyIds:[]
+            rows:[]
         }
     }
-    state1 = {
-        surveys: [{
-            name: "Survey1",
-            dueDate: "3/07"
-        }, 
-        {
-            name: "Survey2",
-            dueDate: "2/10"
-        },
-        {
-            name: "Survey3",
-            dueDate: "5/30"
-        }]
-    };
     componentDidMount() {
         console.log("hello")
         fetch("https://ultimate-survey.herokuapp.com/survey/manager", 
@@ -41,9 +29,8 @@ class ManagerBoard extends React.Component {
         });
     }
     render() {
-        const surveyIds = []
         for(let i = 0; i < this.state.surveys.length; i++){
-            surveyIds.push(this.state.surveys[i]._id.$oid)
+            this.state.rows.push(this.state.surveys[i]._id.$oid)
         }
         return (
             <div className={"SurveyMenu"}>
@@ -53,13 +40,23 @@ class ManagerBoard extends React.Component {
                         size="small"
                         aria-label="a dense table"
                     >
-                        {surveyIds.map(id => (
-                            <TableHead>
-                              <TableRow>
-                                    <TableCell>{id}</TableCell>                        
-                                </TableRow>
-                            </TableHead>
-                        ))}
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Survey Name</TableCell>
+                                <TableCell>Analytics</TableCell>
+                                <TableCell>Delete</TableCell>
+                            </TableRow>
+                        </TableHead>
+                        <TableBody>
+                            <TableRow>
+                            {this.state.rows.map(id => (
+                                <TableCell>{id}</TableCell>,   
+                                <TableCell align = "right"> <Button size = "small">Analytics</Button></TableCell>,
+                                <TableCell> <Button size = "small" color  = "RED">Delete </Button></TableCell>                     
+                            ))}
+                            
+                            </TableRow>
+                        </TableBody>
                     </Table>
                 </Paper>
             </div>
