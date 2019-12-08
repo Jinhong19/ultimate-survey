@@ -13,26 +13,23 @@ class ManagerBoard extends React.Component {
         super();
         this.state = {
             surveys: [],
-            rows:[]
         }
     }
     componentDidMount() {
-        console.log("hello")
-        fetch("https://ultimate-survey.herokuapp.com/survey/manager", 
-        {method:'GET',
-        headers: {'Content-Type': 'application/json'},
-        credentials: 'include'})
-        .then(response => response.json())
-        .then(data => {
-            this.setState({surveys: JSON.parse(data)})
-            console.log(this.state)
-        });
+        fetch("https://ultimate-survey.herokuapp.com/survey/manager",
+            {
+                method: 'GET',
+                headers: { 'Content-Type': 'application/json' },
+                credentials: 'include'
+            })
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ surveys: JSON.parse(data) })
+                // console.log('all surveys in state')
+                // console.log(this.state.surveys)
+            });
     }
     render() {
-        for(let i = 0; i < this.state.surveys.length; i++){
-            this.state.rows.push(this.state.surveys[i]._id.$oid)
-        }
-        console.log(this.state.rows);
         return (
             <div className={"SurveyMenu"}>
                 <Paper className={"Survey Menu"}>
@@ -49,13 +46,24 @@ class ManagerBoard extends React.Component {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {this.state.rows.map(id => (
+                            {this.state.surveys.map(survey => (
                                 <TableRow>
-                                    <TableCell>{id}</TableCell>  
-                                    <TableCell align = "left"> <Button>Analytics</Button></TableCell>
-                                    <TableCell> <Button> Delete </Button></TableCell>      
+                                    {/* A survey with no title will show its id */}
+                                    <TableCell>{survey.survey.title || survey._id.$oid}</TableCell>
+                                    <TableCell align="left">
+                                        {console.log('each survey')}
+                                        {console.log(survey.survey)}
+                                        {/* 
+                                            survey is {title: surveyTitle, survey: []} when it has title
+                                            survey is [] when it has no title
+                                        */}
+                                        <Link to={{ pathname: '/AnalyticsPage', survey: survey.survey }}>
+                                                Analytics
+                                        </Link>
+                                    </TableCell>
+                                    <TableCell> <Button> Delete </Button></TableCell>
                                 </TableRow>
-                            ))} 
+                            ))}
                         </TableBody>
                     </Table>
                 </Paper>
