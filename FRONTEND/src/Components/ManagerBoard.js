@@ -51,8 +51,6 @@ class ManagerBoard extends React.Component {
                                     {/* A survey with no title will show its id */}
                                     <TableCell>{survey.survey.title || survey._id.$oid}</TableCell>
                                     <TableCell align="left">
-                                        {console.log('each survey')}
-                                        {console.log(survey)}
                                         {/* 
                                             survey: 
                                             {_id:{}, survey: {}, manager:{}, manager_name: "", create_date:""}
