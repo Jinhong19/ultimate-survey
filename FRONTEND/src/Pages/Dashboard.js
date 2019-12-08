@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import AccountButton from '../Components/AccountButton';
+import AccountButton from "../Components/AccountButton";
 import SurveyMenu from "../Components/SurveyMenu";
 import SurveyBuilder from "../Components/SurveyBuilder/SurveyBuilder";
 import ManagerBoard from "../Components/ManagerBoard";
 import EmployeeBoard from "../Components/EmployeeBoard";
-
-
 
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
@@ -16,12 +14,16 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 
-import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
-import Slide from '@material-ui/core/Slide';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import Snackbar from "@material-ui/core/Snackbar";
+import SnackbarContent from "@material-ui/core/SnackbarContent";
+import Slide from "@material-ui/core/Slide";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+
+// CSS
+import "../App.css";
+import "bootstrap/dist/css/bootstrap.css";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -91,11 +93,11 @@ export default function DashboardTabs(props) {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
     const [state, setState] = React.useState({
-        open: false,
+        open: false
     });
     const [user, setUser] = React.useState({
         fname: "please log in",
-        isManager: false,
+        isManager: false
     });
 
     useEffect(() => {
@@ -106,25 +108,25 @@ export default function DashboardTabs(props) {
             updateSubmit(receivedSubmission);
             setUser({
                 fname: props.location.state.fname,
-                isManager: props.location.state.isManager,
-            })
+                isManager: props.location.state.isManager
+            });
         }
         console.log(user);
     }, []);
 
-    const updateSubmit = (updatedState) => {
+    const updateSubmit = updatedState => {
         setState({
             open: updatedState
         });
 
         console.log("received state! new OPEN state: " + state.open);
-    }
+    };
 
     const handleClose = () => {
         setState({
             open: false
         });
-    }
+    };
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -134,7 +136,8 @@ export default function DashboardTabs(props) {
         <div className={classes.root}>
             <Snackbar
                 anchorOrigin={{
-                    vertical: "top", horizontal: "center"
+                    vertical: "top",
+                    horizontal: "center"
                 }}
                 open={state.open}
                 autoHideDuration={6000}
@@ -144,32 +147,36 @@ export default function DashboardTabs(props) {
                     className={classes.snack}
                     TransitionComponent={Slide}
                     ContentProps={{
-                        'aria-describedby': 'message-id',
+                        "aria-describedby": "message-id"
                     }}
-                    message={<span id="message-id" className={classes.message}>
-                        <Typography variant="h5">
-                            <CheckCircleIcon className={classes.icon} />
-                            Survey submitted!
-                        </Typography>
-                    </span>}
+                    message={
+                        <span id="message-id" className={classes.message}>
+                            <Typography variant="h5">
+                                <CheckCircleIcon className={classes.icon} />
+                                Survey submitted!
+                            </Typography>
+                        </span>
+                    }
                     action={[
-                        <IconButton key="close" aria-label="close" color="secondary" onClick={handleClose}>
+                        <IconButton
+                            key="close"
+                            aria-label="close"
+                            color="secondary"
+                            onClick={handleClose}
+                        >
                             <CloseIcon className={classes.icon} />
-                        </IconButton>,
+                        </IconButton>
                     ]}
                 />
             </Snackbar>
             <AppBar position="static">
                 <div className="userGreeting">
-                    <Typography
-                        className={classes.menuItem}
-                        variant="h5"
-                    >
+                    <Typography className={classes.menuItem} variant="h5">
                         Hello, {user.fname}
                     </Typography>
                 </div>
                 <div className="tabContainer">
-                    {user.isManager ?
+                    {user.isManager ? (
                         <Tabs value={value} onChange={handleChange} centered>
                             <Tab
                                 className={classes.tabLabel}
@@ -187,7 +194,7 @@ export default function DashboardTabs(props) {
                                 {...a11yProps(2)}
                             />
                         </Tabs>
-                        :
+                    ) : (
                         <Tabs value={value} onChange={handleChange} centered>
                             <Tab
                                 className={classes.tabLabel}
@@ -195,7 +202,7 @@ export default function DashboardTabs(props) {
                                 {...a11yProps(0)}
                             />
                         </Tabs>
-                    }
+                    )}
                 </div>
                 <AccountButton />
             </AppBar>
@@ -205,13 +212,12 @@ export default function DashboardTabs(props) {
                 <a href="/takesurvey">Click here to take a survey</a>
             </TabPanel>
             <TabPanel value={value} index={1}>
-            <SurveyMenu />
+                <SurveyMenu />
                 <ManagerBoard />
             </TabPanel>
             <TabPanel value={value} index={2}>
                 <SurveyBuilder />
             </TabPanel>
-
         </div>
     );
 }
