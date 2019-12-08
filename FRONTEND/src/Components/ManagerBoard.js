@@ -52,12 +52,12 @@ class ManagerBoard extends React.Component {
                                     <TableCell>{survey.survey.title || survey._id.$oid}</TableCell>
                                     <TableCell align="left">
                                         {console.log('each survey')}
-                                        {console.log(survey.survey)}
+                                        {console.log(survey)}
                                         {/* 
-                                            survey is {title: surveyTitle, survey: []} when it has title
-                                            survey is [] when it has no title
+                                            survey: 
+                                            {_id:{}, survey: {}, manager:{}, manager_name: "", create_date:""}
                                         */}
-                                        <Link to={{ pathname: '/AnalyticsPage', survey: survey.survey }}>
+                                        <Link to={{ pathname: '/AnalyticsPage', survey: survey }}>
                                                 Analytics
                                         </Link>
                                     </TableCell>
