@@ -102,7 +102,7 @@ export default function DashboardTabs(props) {
 
     useEffect(() => {
         console.log(props);
-        if (props.location.state != undefined) {
+        if (props.location.state !== undefined) {
             let receivedSubmission = props.location.state.submit;
             console.log("received submission status: " + receivedSubmission);
             updateSubmit(receivedSubmission);

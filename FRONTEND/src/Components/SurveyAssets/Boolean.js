@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Form, FormLabel, Button } from "react-bootstrap";
-import { Card } from "@material-ui/core";
+// import { Form, FormLabel, Button } from "react-bootstrap";
+// import { Card } from "@material-ui/core";
 
 import Checkbox from "./Checkbox";
 
@@ -102,27 +102,27 @@ export class Boolean extends Component {
     }
 }
 
-const margin = {
-    marginBottom: "0.5em"
-};
+// const margin = {
+//     marginBottom: "0.5em"
+// };
 
-const removeBtn = {
-    marginBottom: "1em",
-    textAlign: "right"
-};
+// const removeBtn = {
+//     marginBottom: "1em",
+//     textAlign: "right"
+// };
 
-const padding = {
-    paddingLeft: "2em",
-    paddingRight: "2em"
-};
+// const padding = {
+//     paddingLeft: "2em",
+//     paddingRight: "2em"
+// };
 
-const cardStyle = {
-    display: "block",
-    maxWidth: "55em",
-    marginLeft: "auto",
-    marginRight: "auto",
-    marginTop: "3em",
-    background: "f5f5f5"
-};
+// const cardStyle = {
+//     display: "block",
+//     maxWidth: "55em",
+//     marginLeft: "auto",
+//     marginRight: "auto",
+//     marginTop: "3em",
+//     background: "f5f5f5"
+// };
 
 export default Boolean;
