@@ -1,37 +1,34 @@
 import React, { Component } from "react";
-import QuestionCard from "../Components/QuestionCard";
-import SurveyTitle from "../Components/SurveyTitle";
-import SurveyState from "../Components/SurveyState";
+import QuestionCard from "./QuestionCard";
+import SurveyTitle from "./SurveyTitle";
+import SurveyState from "./SurveyState";
 import { Container } from "react-bootstrap";
 
 export class Survey extends Component {
     state = {
         title: "Untitled Survey",
         deadline: new Date(),
-        survey: []
+        survey: [],
+        edit: true
     };
 
     addItem = o => {
         const newSurvey = {
             question: o.title,
             type: o.type,
+            options: o.options,
             id: Date.now()
         };
         this.setState({ survey: [...this.state.survey, newSurvey] });
-        console.log(this.state);
-        // axios.post('https://jsonplaceholder.typicode.com/todos', {
-        //   title: title,
-        //   completed: false
-        // })
-        //   .then(res => this.setState({
-        //     todos: [...this.state.todos, res.data]
-        //   }));
+        // console.log(this.state);
     };
 
     removeItem = id => {
+        console.log(id);
         this.setState({
             survey: [...this.state.survey.filter(s => s.id !== id)]
         });
+        console.log(this.state.survey);
     };
 
     clearSurvey = () => {
@@ -41,7 +38,9 @@ export class Survey extends Component {
     };
 
     updateTitle = t => {
-        this.state.title = t;
+        this.setState({
+            title: t
+        });
     };
 
     updateDate = date => {

@@ -17,7 +17,9 @@ const styles = theme => ({
 class QuestionCard extends React.Component {
     state = {
         title: "",
-        type: "-1"
+        type: "-1",
+        options: [],
+        count: 0
     };
 
     // hi
@@ -34,24 +36,49 @@ class QuestionCard extends React.Component {
         if (this.state.type !== "-1") {
             e.preventDefault();
             this.props.addItem(this.state);
-            this.logState();
-            this.setState({ title: "", type: "-1" });
+            this.setState({ title: "", type: "-1", options: [], count: 0 });
         } else {
             // Show warning to select an option
         }
     };
 
+    clearSurvey = e => {
+        this.props.clearSurvey.bind(this);
+        this.setState({ title: "", type: "-1", options: [], count: 0 });
+    };
+
     onChangeQ = e => {
         this.setState({ title: e.target.value });
-        this.logState();
+        // this.logState();
     };
 
     onChangeT = e => {
-        this.logState();
+        // this.logState();
         this.setState({ type: e.target.value });
-        this.logState();
+        // this.logState();
 
         // Add a box to create multiple choice
+    };
+
+    onChangeOption = (index, val) => {
+        // console.log(index + " " + val);
+        let temp = this.state.options;
+        temp[index] = val;
+        this.setState({
+            options: temp
+        });
+        // console.log(this.state.options);
+    };
+
+    onChangeNumber = e => {
+        this.logState();
+        this.setState({ count: e.target.value });
+        let temp = [];
+        for (let i = 0; i < e.target.value; i++) {
+            temp.push("Option " + (i + 1));
+        }
+        this.setState({ options: temp });
+        this.logState();
     };
 
     // Use this function to debug. Uncomment the console.log below
@@ -95,7 +122,13 @@ class QuestionCard extends React.Component {
                                     </Form.Control>
                                 </Form.Group>
 
-                                <MCMaker type={this.state.type} />
+                                <MCMaker
+                                    type={this.state.type}
+                                    options={this.state.options}
+                                    count={this.state.count}
+                                    onChangeNumber={this.onChangeNumber}
+                                    onChangeOption={this.onChangeOption}
+                                />
 
                                 <Button
                                     variant="success"
@@ -108,7 +141,7 @@ class QuestionCard extends React.Component {
                                     variant="warning"
                                     style={margin}
                                     type="reset"
-                                    onClick={this.props.clearSurvey.bind(this)}
+                                    onClick={this.clearSurvey}
                                 >
                                     Clear
                                 </Button>

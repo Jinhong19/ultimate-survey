@@ -11,7 +11,7 @@ const styles = theme => ({
         maxWidth: "55em",
         marginLeft: "auto",
         marginRight: "auto",
-        marginTop: "3em"
+        marginTop: "1em"
     }
 });
 
@@ -55,8 +55,8 @@ class SurveyTitle extends React.Component {
                             inputFontSize="26pt"
                             onFocus={this._handleFocus}
                             onFocusOut={this._handleFocusOut}
+                            style={{marginBottom: "0.5em"}}
                         />
-                        <br />
                         <h3>Survey Deadline</h3>
                         <DatePicker
                             selected={this.props.deadline}
