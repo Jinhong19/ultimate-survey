@@ -42,6 +42,12 @@ widgets.autocomplete(Survey, $);
 widgets.bootstrapslider(Survey);
 
 class App extends Component {
+    state = {
+        surveyid: "nothing",
+        survey: {},
+        questions: []
+    };
+
     onValueChanged(result) {
         console.log("value changed!");
     }
@@ -50,10 +56,61 @@ class App extends Component {
         console.log("Complete! " + result);
     }
 
+    onLoad = () => {
+        console.log("Hello");
+        console.log(this.state);
+    };
+
+    componentDidMount() {
+        // if (this.props.location !== undefined) {
+        //     if (this.props.location.state.surveyid !== undefined) {
+        //         this.setState({
+        //             surveyid: this.props.location.state.surveyid
+        //         });
+        //     }
+        // }
+        console.log(this.props.location.surveyid);
+        fetch("https://ultimate-survey.herokuapp.com/survey/employee", {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include"
+        })
+            .then(response => response.json())
+            .then(data => {
+                // console.log(JSON.parse(data));
+                let surveys = JSON.parse(data);
+
+                for (let i = 0; i < surveys.length; i++) {
+                    if (surveys[i]._id.$oid === this.props.location.surveyid) {
+                        this.setState({
+                            survey: surveys[i],
+                            questions: surveys[i].survey.survey
+                        });
+                        break;
+                    }
+                }
+
+                // this.setState({ surveys: JSON.parse(data) });
+                console.log(this.state.questions);
+            });
+    }
+
+    // componentDidMount() {
+    //     fetch("https://ultimate-survey.herokuapp.com/survey/employee", {
+    //         method: "GET",
+    //         headers: { "Content-Type": "application/json" },
+    //         credentials: "include"
+    //     })
+    //         .then(response => response.json())
+    //         .then(data => {
+    //             this.setState({ surveys: JSON.parse(data) });
+    //         });
+    // }
+
     render() {
         var model = new Survey.Model(this.props.surveyid);
         return (
-            <div className="App">
+            <div className="App" onLoad={this.onLoad}>
                 <Nav words="Survey Taker" />
                 <div className="App-header">
                     <Link to="/employeedashboard">
