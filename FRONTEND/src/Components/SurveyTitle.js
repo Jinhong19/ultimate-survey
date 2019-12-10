@@ -2,6 +2,8 @@ import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { Card, CardContent } from "@material-ui/core";
 import EditableLabel from "react-inline-editing";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const styles = theme => ({
     card: {
@@ -21,12 +23,18 @@ class SurveyTitle extends React.Component {
         this._handleFocusOut = this._handleFocusOut.bind(this);
     }
 
+    handleChange = date => {
+        this.props.updateDate(date);
+        // console.log(this.props.deadline);
+    };
+
     _handleFocus(text) {
-        console.log("Focused with text: " + text);
+        // console.log("Focused with text: " + text);
     }
 
     _handleFocusOut(text) {
-        console.log("Left editor with text: " + text);
+        // console.log("Left editor with text: " + text);
+        this.props.updateTitle(text);
     }
 
     render() {
@@ -35,7 +43,7 @@ class SurveyTitle extends React.Component {
                 <Card className={this.props.classes.card}>
                     <CardContent>
                         <EditableLabel
-                            text="Untitled Survey"
+                            text={this.props.title}
                             labelClassName="myLabelClass"
                             inputClassName="myInputClass"
                             inputWidth="100%"
@@ -47,6 +55,12 @@ class SurveyTitle extends React.Component {
                             inputFontSize="26pt"
                             onFocus={this._handleFocus}
                             onFocusOut={this._handleFocusOut}
+                        />
+                        <br />
+                        <h3>Survey Deadline</h3>
+                        <DatePicker
+                            selected={this.props.deadline}
+                            onChange={this.handleChange}
                         />
                     </CardContent>
                 </Card>

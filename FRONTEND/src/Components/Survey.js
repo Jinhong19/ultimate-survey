@@ -6,6 +6,8 @@ import { Container } from "react-bootstrap";
 
 export class Survey extends Component {
     state = {
+        title: "Untitled Survey",
+        deadline: new Date(),
         survey: []
     };
 
@@ -38,6 +40,16 @@ export class Survey extends Component {
         });
     };
 
+    updateTitle = t => {
+        this.state.title = t;
+    };
+
+    updateDate = date => {
+        this.setState({
+            deadline: date
+        });
+    };
+
     handleInput = e => {
         console.log("Hello Input");
     };
@@ -46,12 +58,19 @@ export class Survey extends Component {
         return (
             <Container>
                 <div style={margin}>
-                    <SurveyTitle />
+                    <SurveyTitle
+                        title={this.state.title}
+                        updateTitle={this.updateTitle}
+                        deadline={this.state.deadline}
+                        updateDate={this.updateDate}
+                    />
                     <QuestionCard
                         addItem={this.addItem}
                         clearSurvey={this.clearSurvey}
                     />
                     <SurveyState
+                        title={this.state.title}
+                        deadline={this.state.deadline}
                         items={this.state.survey}
                         removeItem={this.removeItem}
                     />

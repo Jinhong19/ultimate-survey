@@ -51,7 +51,7 @@ class App extends Component {
     }
 
     render() {
-        var model = new Survey.Model(this.props.json);
+        var model = new Survey.Model(this.props.surveyid);
         return (
             <div className="App">
                 <Nav words="Survey Taker" />

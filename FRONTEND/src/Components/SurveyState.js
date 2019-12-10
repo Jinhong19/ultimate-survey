@@ -17,6 +17,7 @@ export class SurveyState extends Component {
         } else if (itemList.length === 1) {
             return (
                 <div style={margin}>
+                    <h3>{this.props.title}</h3>
                     <h3>
                         The survey currently has {itemList.length} question-
                     </h3>
@@ -32,6 +33,7 @@ export class SurveyState extends Component {
         } else {
             return (
                 <div style={margin}>
+                    <h3>{this.props.title}</h3>
                     <h3>
                         The survey currently has {itemList.length} questions-
                     </h3>
@@ -40,7 +42,11 @@ export class SurveyState extends Component {
                             items={this.props.items}
                             removeItem={this.props.removeItem}
                         />
-                        <SurveyCreateButton items={this.props.items} />
+                        <SurveyCreateButton
+                            title={this.props.title}
+                            deadline={this.props.deadline}
+                            items={this.props.items}
+                        />
                     </Form>
                 </div>
             );
