@@ -76,17 +76,14 @@ class User(UserMixin):
 @cross_origin(supports_credentials=True)
 def login():
     users = mongo.db.Employees
-    body = request.get_json(force=True)
-    person = users.find_one({"email": body["username"]})
+    person = users.find_one({'email': request.get_json(force=True)['username']})
     if person:
-        if sha256_crypt.verify(body["password"], person["password"]):
+        if sha256_crypt.verify(request.get_json(force=True)['password'], person['password']):
             user_obj = User(person)
             login_user(user_obj)
-            return "it worked"
-            # return flask.jsonify({'message': 'success', 'isManager': user_obj.isManager, 'fname': user_obj.fname,
-            #                       'lname': user_obj.lname})
+            return flask.jsonify({'message': 'success', 'isManager': user_obj.isManager, 'fname': user_obj.fname,
+                                  'lname': user_obj.lname})
     return flask.jsonify({'message': "failure"})
-
 
 # Get request to logout
 @app.route('/logout')
@@ -159,15 +156,16 @@ def forgot_password():
         return flask.jsonify({'message': "Reset Password Success!"})
 
 
-#Testing mail
-@app.route("/emailSend", methods=['GET'])
-def emailSend():
-    with app.app_context():
-        msg = Message(subject="Hello",
-                      sender=app.config.get("MAIL_USERNAME"),
-                      recipients=["kwolff@umass.edu"], # replace with your email for testing
-                      body="This is a test email I sent with Gmail and Python!")
-        mail.send(msg)
+# TODO Testing mail
+# @app.route("/emailSend", methods=['GET'])
+# def emailSend():
+#     with app.app_context():
+#         msg = Message(subject="Hello",
+#                       sender=app.config.get("MAIL_USERNAME"),
+#                       recipients=["peilanwang@umass.edu"], # replace with your email for testing
+#                       body="Hello this email is sent by Gmail and Python!")
+#         mail.send(msg)
+#         return "success"
 
 # EMPLOYEE ----------------------------------------------------------------
 
