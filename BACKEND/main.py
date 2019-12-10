@@ -134,6 +134,18 @@ def change_password():
         users.update({"email": body["username"]}, {"$set": {"password": hashed_pw}}, upsert=False)
         return flask.jsonify({'message': "Reset Password Success!"})
 
+#
+# # TODO use for reset All password
+# @app.route('/resetAllPassword', methods=['Get'])
+# def changeAllPassword_toLastName():
+#     users = mongo.db.Employees
+#     cursor = mongo.db.Employees.find()
+#     for doc in cursor:
+#         users.update({"lastName": doc["lastName"]}, {"$set": {"password": sha256_crypt.encrypt(doc["lastName"])}})
+#     return "done"
+#
+#
+
 
 # reset password, and store hashed password in the database
 #input
