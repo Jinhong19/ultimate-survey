@@ -28,6 +28,7 @@ class EmployeeBoard extends React.Component {
         .then(response => response.json())
         .then(data => {
             this.setState({surveys: JSON.parse(data)})
+            // console.log(this.state)
         });
     }
     
@@ -40,7 +41,14 @@ class EmployeeBoard extends React.Component {
         else{
             var date = new Date();
             for(let i=0; i<this.state.surveys.length; i++){
-                this.state.rows[i]=createData("Survey", this.state.surveys[i].manager.$oid, "12/8/2019", date.toLocaleDateString().localeCompare("12/8/2019") <= 0, this.state.surveys[i]._id.$oid);
+                const {survey, manager_name} = this.state.surveys[i];
+                this.state.rows[i]=createData(
+                    survey.title || "Survey", 
+                    manager_name || this.state.surveys[i].manager.$oid, 
+                    survey.deadline ||"No date", 
+                    date.toLocaleDateString().localeCompare("12/8/2019") <= 0, 
+                    this.state.surveys[i]._id.$oid
+                );
             }
         }
         return (
@@ -54,21 +62,21 @@ class EmployeeBoard extends React.Component {
                     >
                         <TableHead>
                             <TableRow>
-                                <TableCell>Name</TableCell>
-                                <TableCell>Owner</TableCell>
-                                <TableCell>Due</TableCell>
-                                <TableCell>Completed</TableCell> 
-                                <TableCell>Take</TableCell>  
+                                <TableCell align = "center">Name</TableCell>
+                                <TableCell align = "center">Owner</TableCell>
+                                <TableCell align = "center">Due</TableCell>
+                                <TableCell align = "center">Completed</TableCell> 
+                                <TableCell align = "center">Take</TableCell>  
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {this.state.rows.map(row => (
                                 <TableRow>
-                                    <TableCell align = "left">{row.name}</TableCell>
-                                    <TableCell align="left">{row.owner}</TableCell>
-                                    <TableCell align="left">{row.due}</TableCell>
-                                    <TableCell align="left">{row.completed.toString()}</TableCell>
-                                    <TableCell align = "left"><SurveyTakeButton>{{surveyid: row.id}, {over: row.completed}}</SurveyTakeButton></TableCell>
+                                    <TableCell align = "center">{row.name}</TableCell>
+                                    <TableCell align="center">{row.owner}</TableCell>
+                                    <TableCell align="center">{row.due}</TableCell>
+                                    <TableCell align="center">{row.completed.toString()}</TableCell>
+                                    <TableCell align = "center"><SurveyTakeButton>{{surveyid: row.id}, {over: row.completed}}</SurveyTakeButton></TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
