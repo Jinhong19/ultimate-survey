@@ -6,3 +6,4 @@ flask_cors
 flask_login
 passlib
 datetime
+flask_mail

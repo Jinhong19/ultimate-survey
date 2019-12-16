@@ -9,6 +9,8 @@ from bson.json_util import dumps, loads  # used to convert Python MongoDB JSON t
 from flask import Flask, Response, redirect, url_for, request, session, abort
 from flask_login import LoginManager, UserMixin, login_required, login_user, logout_user
 from passlib.hash import sha256_crypt
+import random, string
+from flask_mail import Mail, Message
 import datetime
 
 
@@ -18,6 +20,15 @@ app.config.update(
     DEBUG=True,
     SECRET_KEY='the_biggest_secret'
 )
+mail_settings = {
+    "MAIL_SERVER": 'smtp.gmail.com',
+    "MAIL_PORT": 465,
+    "MAIL_USE_TLS": False,
+    "MAIL_USE_SSL": True,
+    "MAIL_USERNAME": "cs320cs320test@gmail.com",
+    "MAIL_PASSWORD": "ultimate3"
+}
+app.config.update(mail_settings)
 
 # DB connection
 mongo = PyMongo(app,
@@ -28,11 +39,15 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "login"
 
+# Mail
+mail = Mail(app)
+
 
 class User(UserMixin):
     def __init__(self, person):
         self.username = person['email']
         self._id = str(person['_id'])
+
         # check if word "manager" is in positionTitle field
         # self.isManager = "Manager" in person['positionTitle'] or "manager" in person['positionTitle']
         # check if any employees in the same company has managerId equals to person['employeeId]
@@ -42,6 +57,7 @@ class User(UserMixin):
             companyId = person['companyId']
             has_one_employee = employees.find_one({'managerId': employeeId, 'companyId': companyId}) is not None
             return has_one_employee
+
         self.isManager = isManager()
         self.fname = person['firstName']
         self.lname = person['lastName']
@@ -64,13 +80,12 @@ def login():
     users = mongo.db.Employees
     person = users.find_one({'email': request.get_json(force=True)['username']})
     if person:
-        if request.get_json(force=True)['password'] == person['password'] : # sha256_crypt.verify(request.get_json(force=True)['password'], person['password'])
+        if sha256_crypt.verify(request.get_json(force=True)['password'], person['password']):
             user_obj = User(person)
             login_user(user_obj)
             return flask.jsonify({'message': 'success', 'isManager': user_obj.isManager, 'fname': user_obj.fname,
                                   'lname': user_obj.lname})
     return flask.jsonify({'message': "failure"})
-
 
 # Get request to logout
 @app.route('/logout')
@@ -96,22 +111,77 @@ def load_user(username):
 
 
 # reset password, and store hashed password in the database
-@app.route('/resetPassword', methods=['POST'])
-def update_password():
+# what is the input
+# username : email,
+# password: old password,
+# newPassword1: first new password,
+# newPassword2: verifies newPassword1 was typed correctly
+@app.route('/changePassword', methods=['POST'])
+def change_password():
     users = mongo.db.Employees
     body = request.get_json(force=True)
     user = users.find_one({"email": body["username"]})
     if not user:
         return flask.jsonify({"message": "Username does not exist."})
-    elif not body["password"]:
+    elif not body["password"] or not body["newPassword1"] or not body["newPassword2"]:
         return flask.jsonify({"message": "Password can not be empty."})
+    elif not body["newPassword1"] == body["newPassword2"]:
+        return flask.jsonify({"message": "New passwords do not match."})
+    elif not sha256_crypt.verify(body["password"], user["password"]):
+        return flask.jsonify({"message": "Username or password doesn't exist"})
     else:
         hashed_pw = sha256_crypt.encrypt(body["password"])
         users.update({"email": body["username"]}, {"$set": {"password": hashed_pw}}, upsert=False)
         return flask.jsonify({'message': "Reset Password Success!"})
 
+#
+# # TODO use for reset All password
+# @app.route('/resetAllPassword', methods=['Get'])
+# def changeAllPassword_toLastName():
+#     users = mongo.db.Employees
+#     cursor = mongo.db.Employees.find()
+#     for doc in cursor:
+#         users.update({"lastName": doc["lastName"]}, {"$set": {"password": sha256_crypt.encrypt(doc["lastName"])}})
+#     return "done"
+#
+#
 
-# EMPLOYEE ---------------------------------------------------------------- 
+
+# reset password, and store hashed password in the database
+#input
+# username: email
+@app.route('/forgotPassword', methods=['POST'])
+def forgot_password():
+    users = mongo.db.Employees
+    body = request.get_json(force=True)
+    user = users.find_one({"email": body["username"]})
+    if not user:
+        return flask.jsonify({"message": "Username does not exist."})
+    else:
+        newPass = ''.join(random.choices(string.ascii_uppercase + string.ascii_lowercase + string.digits, k=10))
+        with app.app_context():
+            msg = Message(subject="Reset Password",
+                          sender=app.config.get("MAIL_USERNAME"),
+                          recipients=[body["username"]],
+                          body="Your new password is " + newPass + ", please reset it on the application.")
+            mail.send(msg)
+        hashed_pw = sha256_crypt.encrypt(newPass)
+        users.update({"email": body["username"]}, {"$set": {"password": hashed_pw}}, upsert=False)
+        return flask.jsonify({'message': "Reset Password Success!"})
+
+
+# TODO Testing mail
+# @app.route("/emailSend", methods=['GET'])
+# def emailSend():
+#     with app.app_context():
+#         msg = Message(subject="Hello",
+#                       sender=app.config.get("MAIL_USERNAME"),
+#                       recipients=["peilanwang@umass.edu"], # replace with your email for testing
+#                       body="Hello this email is sent by Gmail and Python!")
+#         mail.send(msg)
+#         return "success"
+
+# EMPLOYEE ----------------------------------------------------------------
 
 # GET - return responses for a certain employeeid
 # POST - pushes a survey response to the database
