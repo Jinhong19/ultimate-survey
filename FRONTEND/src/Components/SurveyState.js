@@ -14,23 +14,7 @@ export class SurveyState extends Component {
                     <h3>The survey is currently empty!</h3>
                 </div>
             );
-        } else if (itemList.length === 1) {
-            return (
-                <div style={margin}>
-                    <h3>{this.props.title}</h3>
-                    <h3>
-                        The survey currently has {itemList.length} question-
-                    </h3>
-                    <Form style={formStyle}>
-                        <StateQuestions
-                            items={this.props.items}
-                            removeItem={this.props.removeItem}
-                        />
-                        <SurveyCreateButton items={this.props.items} />
-                    </Form>
-                </div>
-            );
-        } else {
+        }else {
             return (
                 <div style={margin}>
                     <h3>{this.props.title}</h3>
