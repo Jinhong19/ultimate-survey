@@ -34,12 +34,15 @@ class SurveyTakeButton extends React.Component {
             .then(response => response.json())
             .then(data => {
                 console.log(JSON.parse(data));
+
+                // console.log(this.props.surveyid);
+
                 let surveys = JSON.parse(data);
 
                 for (let i = 0; i < surveys.length; i++) {
-                    if (surveys[i]._id.$oid === this.props.surveyid) {
+                    if (surveys[i]._id.$oid === this.props.children.over) {
                         this.setState({
-                            surveyid: this.props.surveyid
+                            surveyid: this.props.children.over
                         });
                         temp = surveys[i].survey;
                         break;
@@ -64,6 +67,9 @@ class SurveyTakeButton extends React.Component {
         } else {
             newColor = "#27AE60";
         }
+
+        console.log(this.props.children.over);
+
         return (
             <div className="text-center" style={marginBtn}>
                 <Link

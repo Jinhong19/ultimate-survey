@@ -71,20 +71,17 @@ class EmployeeBoard extends React.Component {
                         <TableBody>
                             {this.state.rows.map(row => (
                                 <TableRow>
-                                    <TableCell align="left">
+                                    <TableCell align="center">
                                         {row.name}
                                     </TableCell>
-                                    <TableCell align="left">
+                                    <TableCell align="center">
                                         {row.owner}
                                     </TableCell>
-                                    <TableCell align="left">
+                                    <TableCell align="center">
                                         {row.due}
                                     </TableCell>
-                                    <TableCell align="left">
-                                        {row.completed.toString()}
-                                    </TableCell>
-                                    <TableCell align="left">
-                                        <SurveyTakeButton surveyid={row.id}>
+                                    <TableCell align="center">
+                                        <SurveyTakeButton>
                                             {
                                                 ({ surveyid: row.id },
                                                 { over: row.completed })
