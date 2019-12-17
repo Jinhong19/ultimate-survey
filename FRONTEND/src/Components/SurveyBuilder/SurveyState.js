@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { Form } from "react-bootstrap";
-import StateQuestions from "./StateQuestions";
-import SurveyCreateButton from "../Components/SurveyCreateButton";
+import StateQuestions from "../SurveyAssets/StateQuestions";
+import SurveyCreateButton from "./SurveyCreateButton";
 
 export class SurveyState extends Component {
     render() {
         let itemList = this.props.items;
-        console.log("item List-");
-        console.log(itemList);
+        // console.log("item List-");
+        // console.log(itemList);
         if (itemList.length === 0) {
             return (
                 <div style={margin}>
@@ -25,6 +25,7 @@ export class SurveyState extends Component {
                         <StateQuestions
                             items={this.props.items}
                             removeItem={this.props.removeItem}
+                            edit={true}
                         />
                         <SurveyCreateButton items={this.props.items} />
                     </Form>
@@ -41,6 +42,7 @@ export class SurveyState extends Component {
                         <StateQuestions
                             items={this.props.items}
                             removeItem={this.props.removeItem}
+                            edit={true}
                         />
                         <SurveyCreateButton
                             title={this.props.title}
