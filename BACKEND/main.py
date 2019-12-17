@@ -117,6 +117,7 @@ def load_user(username):
 # newPassword1: first new password,
 # newPassword2: verifies newPassword1 was typed correctly
 @app.route('/changePassword', methods=['POST'])
+@cross_origin(supports_credentials=True)
 def change_password():
     users = mongo.db.Employees
     body = request.get_json(force=True)
@@ -130,9 +131,18 @@ def change_password():
     elif not sha256_crypt.verify(body["password"], user["password"]):
         return flask.jsonify({"message": "Username or password doesn't exist"})
     else:
-        hashed_pw = sha256_crypt.encrypt(body["password"])
-        users.update({"email": body["username"]}, {"$set": {"password": hashed_pw}}, upsert=False)
+        hashed_pw = sha256_crypt.encrypt(body["newPassword2"])
+        users.update({"email": body["username"]}, {"$set": {"password": hashed_pw}})
         return flask.jsonify({'message': "Reset Password Success!"})
+
+
+# Update any user's password
+# @app.route('/update', methods=['POST'])
+# def update():
+#     users = mongo.db.Employees
+#     hashed_pw = sha256_crypt.encrypt(request.get_json(force=True)["password"])
+#     users.update({"email": request.get_json(force=True)["username"]},{"$set": {"password": hashed_pw}})
+#     return "success"
 
 #
 # # TODO use for reset All password
@@ -151,6 +161,7 @@ def change_password():
 #input
 # username: email
 @app.route('/forgotPassword', methods=['POST'])
+@cross_origin(supports_credentials=True)
 def forgot_password():
     users = mongo.db.Employees
     body = request.get_json(force=True)
