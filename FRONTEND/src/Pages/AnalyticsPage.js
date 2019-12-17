@@ -57,6 +57,7 @@ class AnlyticsPage extends Component {
             var quest = {
                 question: questions[i].question,
                 type: questions[i].type,
+                options: questions[i].options,
                 responses: []
             }
             for (let j = 0; j < this.state.fetchedRes.length; j++){
