@@ -4,16 +4,9 @@ import "survey-react/survey.css";
 import logo from "../Media/logo.png";
 import Nav from "../Components/Nav";
 import "../App.css";
-import "bootstrap/dist/css/bootstrap.css";
 
 import { Link } from "react-router-dom";
 
-import "jquery-ui/themes/base/all.css";
-import "nouislider/distribute/nouislider.css";
-import "select2/dist/css/select2.css";
-import "bootstrap-slider/dist/css/bootstrap-slider.css";
-
-import "jquery-bar-rating/dist/themes/css-stars.css";
 
 import $ from "jquery";
 import "jquery-ui/ui/widgets/datepicker.js";

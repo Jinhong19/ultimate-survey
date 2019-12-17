@@ -68,17 +68,18 @@ class ManagerBoard extends React.Component {
                     >
                         <TableHead>
                             <TableRow>
-                                <TableCell>Survey Name</TableCell>
-                                <TableCell>Analytics</TableCell>
-                                <TableCell>Delete</TableCell>
+                                <TableCell align="center">Survey Name</TableCell>
+                                <TableCell align="center">Analytics</TableCell>
+                                <TableCell align="center">Delete</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {this.state.surveys.map(survey => (
                                 <TableRow>
+                                    {/*console.log(survey)*/}
                                     {/* A survey with no title will show its id */}
-                                    <TableCell>{survey.survey.title || survey._id.$oid}</TableCell>
-                                    <TableCell align="left">
+                                    <TableCell align="center">{survey.survey.title || survey._id.$oid}</TableCell>
+                                    <TableCell align="center">
                                         {/* 
                                             survey: 
                                             {_id:{}, survey: {}, manager:{}, manager_name: "", create_date:""}
