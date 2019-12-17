@@ -49,14 +49,18 @@ class AnlyticsPage extends Component {
     render() {
         //turn this.state.questions into this.props.questions 
         const survey = this.props.location.state.survey;
-        const questions = survey.survey || survey;
+        console.log(survey)
+        const questions = survey.survey.survey || survey.survey;
         //turn this.state.questions into this.props.questions 
         const questionsWithResponses = [];
+
+        console.log(questions)
 
         for (let i = 0; i < questions.length; i++){
             var quest = {
                 question: questions[i].question,
                 type: questions[i].type,
+                options: questions[i].options,
                 responses: []
             }
             for (let j = 0; j < this.state.fetchedRes.length; j++){
