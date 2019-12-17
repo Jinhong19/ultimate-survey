@@ -16,7 +16,7 @@ let newColor = 'white'
 class SurveyTakeButton extends React.Component {
     constructor(props) {
         super(props);
-        console.log(this.props.row.id);
+        console.log(this.props);
         this.state = {
             surveyid: this.props,
             over: this.props.over

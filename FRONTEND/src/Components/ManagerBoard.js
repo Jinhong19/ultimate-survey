@@ -4,9 +4,9 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
 import TableBody from "@material-ui/core/TableBody";
 import { Link } from "react-router-dom";
+import DeleteButton from "./SurveyDeleteButton"
 import { withStyles, Typography } from "@material-ui/core";
 class ManagerBoard extends React.Component {
     constructor() {
@@ -29,6 +29,34 @@ class ManagerBoard extends React.Component {
                 // console.log(this.state.surveys)
             });
     }
+
+    handleDelete = id => {
+        // delete survey
+        fetch("https://ultimate-survey.herokuapp.com/survey/manager", {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            survey_id: id
+        }),
+          credentials: "include"
+        })
+          .then(response => response.json())
+          .then(data => console.log(data));
+
+        // rerender board
+        fetch("https://ultimate-survey.herokuapp.com/survey/manager", {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include"
+        })
+        .then(response => response.json())
+        .then(data => {
+            this.setState({ surveys: JSON.parse(data) });
+            // console.log('all surveys in state')
+            // console.log(this.state.surveys)
+        });
+      };
+
     render() {
         return (
             <div className={"SurveyMenu"}>
@@ -40,17 +68,18 @@ class ManagerBoard extends React.Component {
                     >
                         <TableHead>
                             <TableRow>
-                                <TableCell>Survey Name</TableCell>
-                                <TableCell>Analytics</TableCell>
-                                <TableCell>Delete</TableCell>
+                                <TableCell align="center">Survey Name</TableCell>
+                                <TableCell align="center">Analytics</TableCell>
+                                <TableCell align="center">Delete</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {this.state.surveys.map(survey => (
                                 <TableRow>
+                                    {/*console.log(survey)*/}
                                     {/* A survey with no title will show its id */}
-                                    <TableCell>{survey.survey.title || survey._id.$oid}</TableCell>
-                                    <TableCell align="left">
+                                    <TableCell align="center">{survey.survey.title || survey._id.$oid}</TableCell>
+                                    <TableCell align="center">
                                         {/* 
                                             survey: 
                                             {_id:{}, survey: {}, manager:{}, manager_name: "", create_date:""}
@@ -59,7 +88,7 @@ class ManagerBoard extends React.Component {
                                                 Analytics
                                         </Link>
                                     </TableCell>
-                                    <TableCell> <Button> Delete </Button></TableCell>
+                                    <TableCell align="center"> <DeleteButton id={survey._id.$oid} handleDelete={this.handleDelete} /></TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
