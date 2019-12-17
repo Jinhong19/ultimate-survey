@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core";
 import Background from "../Media/back.jpeg";
-import Chart from "chart.js"; 
-
 
 const styles = theme => ({
 
@@ -26,46 +24,45 @@ class AnlyticsPage extends Component {
         super(props);
 
         this.state = {
-            responses:[],
-            data:[],
-            fetchh: "https://ultimate-survey.herokuapp.com/responses/5de94fb92f7f59f86c81530f",
-            questionObjects:[],
-            questions:[]
+            fetchedRes: [],
         }
     }
 
     componentDidMount() {
-        this.state.fetchh = "https://ultimate-survey.herokuapp.com/responses/" + this.props.location.state.survey._id.$oid;
-        console.log(this.props.location.state.survey);
-        fetch(this.state.fetchh, 
-        {method:'GET',
-        headers: {'Content-Type': 'application/json'},
-        credentials: 'include'})
-        .then(responses => responses.json())
-        .then(data => {
-            this.setState({responses: JSON.parse(data)})
-            console.log(this.state)
-        }); 
+        const _id = this.props.location.state.survey._id;
+        const fetchURL = "https://ultimate-survey.herokuapp.com/responses/" + _id.$oid;
+        fetch(fetchURL, 
+            {method:'GET',
+            headers: {'Content-Type': 'application/json'},
+            credentials: 'include'})
+            .then(responses => responses.json())
+            .then(data => {
+                this.setState({
+                    fetchedRes: JSON.parse(data)
+                })
+            }); 
+        
     }
 
     render() {
-        const allQuestions = [];
-
+        const survey = this.props.location.state.survey;
+        const questions = survey.survey || survey;
         //turn this.state.questions into this.props.questions 
-        this.state.questions = this.props.location.state.survey.survey;
-        for (let i = 0; i < this.state.questions.length; i++){
+        const questionsWithResponses = [];
+
+        for (let i = 0; i < questions.length; i++){
             var quest = {
-                question: this.state.questions[i].question,
-                type: this.state.questions[i].type,
+                question: questions[i].question,
+                type: questions[i].type,
                 responses: []
             }
-            for (let j = 0; j < this.state.responses.length; j++){
-                quest.responses.push(this.state.responses[j].body[i]);
+            for (let j = 0; j < this.state.fetchedRes.length; j++){
+                quest.responses.push(this.state.fetchedRes[j].body[i]);
             }
-            allQuestions.push(quest);
+            questionsWithResponses.push(quest);
         }
-        this.state.questionObjects = allQuestions;
-        console.log(this.state.questionObjects);
+        
+        console.log(questionsWithResponses);
 
         return (
             <div className={this.props.classes.background}>
