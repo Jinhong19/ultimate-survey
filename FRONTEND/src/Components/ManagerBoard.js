@@ -97,7 +97,7 @@ class ManagerBoard extends React.Component {
               <TableRow>
                 <TableCell align="center">Survey Name</TableCell>
                 <TableCell align="center">Completion</TableCell>
-                <TableCell align="center">Due</TableCell>
+                <TableCell align="center">Deadline</TableCell>
                 <TableCell align="center">Analytics</TableCell>
                 <TableCell align="center">Delete</TableCell>
               </TableRow>
@@ -115,8 +115,11 @@ class ManagerBoard extends React.Component {
                   </TableCell>
                   <TableCell align="center">
                     {survey.survey.deadline
-                      ? new Date(survey.survey.deadline).toDateString()
+                      ? (new Date().getTime() <= new Date(survey.survey.deadline).getTime()
+                        ? new Date(survey.survey.deadline).toDateString()
+                        : "Survey Over")
                       : "no deadline"}
+                      
                   </TableCell>
                   <TableCell align="center">
                     {/* 
