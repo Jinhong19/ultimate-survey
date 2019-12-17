@@ -14,6 +14,15 @@ export class SurveyState extends Component {
     };
 
     render() {
+        // console.log(this.state.items);
+
+        if (this.state.title === undefined) {
+            this.setState({ title: "Error! Missing title" });
+        }
+        if (this.state.items === undefined) {
+            this.setState({ items: [] });
+        }
+
         return (
             <div style={margin}>
                 <Card>
@@ -39,7 +48,8 @@ export class SurveyState extends Component {
 }
 
 const margin = {
-    marginTop: "4em"
+    marginTop: "4em",
+    marginBottom: "4em"
 };
 
 const marginBtn = {
