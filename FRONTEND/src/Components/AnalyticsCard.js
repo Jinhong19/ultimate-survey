@@ -83,10 +83,15 @@ class AnalyticsCard extends React.Component{
             }
             return <DoughnutChart data = {multChoiceInstance} title = {question} colors = {["#88cc88", "#55aa55", "#116611", "#004400", "#2d882d"]}></DoughnutChart>
         }
-        else {
-            console.log("short answer");
-            return null;
-        }
+        else if (type.localeCompare("Short Answer") == 0 || type.localeCompare("Long Answer") == 0){ 
+			let answersList = responses.map( answer => 
+					<li key = {responses.indexOf(answer)}> {answer} </li> );  
+			return( <ul> {answersList} </ul>);
+        } 
+		else { 
+			console.log("there are no analytics for this question type"); 
+			return null; 
+		}
         
     }
 
