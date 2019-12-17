@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Form, Button } from "react-bootstrap";
 import { Card, CardContent } from "@material-ui/core";
 import StateQuestions from "../SurveyAssets/StateQuestions";
+import { Link } from "react-router-dom";
 
 export class SurveyState extends Component {
     state = {
@@ -37,9 +38,14 @@ export class SurveyState extends Component {
                         edit={false}
                     />
                     <div className="text-center">
-                        <Button variant="success" style={marginBtn}>
-                            Submit
-                        </Button>
+                        <Link
+                            to={{
+                                pathname: "/dashboard",
+                                state: { submit: true }
+                            }}
+                        >
+                            <input type="submit" value="Submit" />
+                        </Link>
                     </div>
                 </Form>
             </div>
