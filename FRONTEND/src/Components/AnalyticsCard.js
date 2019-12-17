@@ -23,36 +23,29 @@ const classes=useStyles;
 class AnalyticsCard extends React.Component{
     constructor(props){
         super(props);
-        console.log(this.props.responses);
-        this.state = {
-            questionTitle: this.props.questionWithResponses.question,
-            questionResponses: this.props.responses,
-            type: this.props.questionWithResponses.type,
-            options: this.props.questionWithResponses.options
-        }
     }
 
     getChartType = () => {
-        console.log(this.state.questionResponses);
-        if(this.state.type.localeCompare("Checkbox")==0){
+        const {question, responses, options, type} = this.props.questionWithResponses;
+        if(type.localeCompare("Checkbox")==0){
            let checkbox = [];
-           for(let i = 0; i<this.state.options.length; i++){
+           for(let i = 0; i<options.length; i++){
                checkbox[i]={
-                   "label":this.state.options[i],
+                   "label":options[i],
                    "value": 0
                }
            }
            const checkboxInstance = checkbox;
-           for (let i = 0; i < this.state.questionResponses.length; i ++){
+           for (let i = 0; i < responses.length; i ++){
                for(let j = 0; j<checkboxInstance.length; j++){
-                if (this.state.questionResponses[i] == checkboxInstance[j]){
+                if (responses[i] == checkboxInstance[j]){
                     checkboxInstance[j].value++;
                 }
                }
             }
-           return <BarChart data = {checkboxInstance}></BarChart>
+           return <BarChart data = {checkboxInstance} colors = {["#88cc88", "#55aa55", "#116611", "#004400", "#2d882d"]} title = {question}></BarChart>
         }
-        else if(this.state.type.localeCompare("Yes or No")==0){
+        else if(type.localeCompare("Yes or No")==0){
             const YesOrNoInstance = 
            [{
                "label": "Yes",
@@ -62,33 +55,33 @@ class AnalyticsCard extends React.Component{
                "label": "No",
                "value": 0
            }];
-           for (let i = 0; i < this.state.questionResponses.length; i ++){
-               if (this.state.questionResponses[i] == "Yes"){
+           for (let i = 0; i < responses.length; i ++){
+               if (responses[i] == "Yes"){
                    YesOrNoInstance[0].value++;
                }
                else {
                    YesOrNoInstance[1].value++;
                }
            }
-           return <DoughnutChart data = {YesOrNoInstance} colors = {"#009933"}></DoughnutChart>
+           return <DoughnutChart data = {YesOrNoInstance} title = {question}colors = {["#88cc88", "#55aa55", "#116611", "#004400", "#2d882d"]}></DoughnutChart>
         }
-        else if(this.state.type.localeCompare("Multiple Choice")==0){
+        else if(type.localeCompare("Multiple Choice")==0){
             let multChoice = [];
-            for(let i = 0; i<this.state.options.length; i++){
+            for(let i = 0; i<options.length; i++){
                 multChoice[i]={
-                    "label": this.state.options[i],
+                    "label": options[i],
                     "value": 0
                 }
             }
             const multChoiceInstance=multChoice;
-            for (let i = 0; i < this.state.questionResponses.length; i ++){
+            for (let i = 0; i < responses.length; i ++){
                 for(let j = 0; j<multChoiceInstance.length; j++){
-                 if (this.state.questionResponses[i] == multChoiceInstance[j]){
+                 if (responses[i] == multChoiceInstance[j]){
                      multChoiceInstance[j].value++;
                  }
                 } 
             }
-            return <DoughnutChart data = {multChoiceInstance} title = {this.state.questionTitle}colors = {"#009933"}></DoughnutChart>
+            return <DoughnutChart data = {multChoiceInstance} title = {question} colors = {["#88cc88", "#55aa55", "#116611", "#004400", "#2d882d"]}></DoughnutChart>
         }
         else {
             console.log("short answer");
@@ -104,7 +97,7 @@ class AnalyticsCard extends React.Component{
             <Card className={classes.card}>
                 <CardContent>
                     <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        {this.state.questionTitle}
+                        {this.props.questionWithResponses.question}
                     </Typography>
                     <div>
                         {this.getChartType()}

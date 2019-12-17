@@ -7,7 +7,14 @@ class DoughnutChart extends React.Component {
     this.canvasRef = React.createRef();
   }
 
+  componentDidUpdate() {
+    this.myChart.data.labels = this.props.data.map(d => d.label);
+    this.myChart.data.datasets[0].data = this.props.data.map(d => d.value);
+    this.myChart.update();
+  }
+  
   componentDidMount() {
+      console.log(this.props.data);
     this.myChart = new Chart(this.canvasRef.current, {
       type: 'doughnut',
       options: {
@@ -25,6 +32,7 @@ class DoughnutChart extends React.Component {
   }
 
   render() {
+      console.log(this.props.data);
     return (
         this.myChart,
         <canvas ref={this.canvasRef} />

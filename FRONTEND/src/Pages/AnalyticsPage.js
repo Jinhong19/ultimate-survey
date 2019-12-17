@@ -53,7 +53,7 @@ class AnlyticsPage extends Component {
         const questionsWithResponses = [];
 
         for (let i = 0; i < questions.length; i++){
-            var quest = {
+            const quest = {
                 question: questions[i].question,
                 type: questions[i].type,
                 options: questions[i].options,
@@ -64,13 +64,12 @@ class AnlyticsPage extends Component {
             }
             questionsWithResponses.push(quest);
         }
-        console.log(questionsWithResponses.responses);
         return (
             <div className={this.props.classes.background}>
                 <div className={this.props.classes.container}>
-                    {questionsWithResponses.map(questionWithResponse =>
-                        <AnalyticsCard questionWithResponses={questionWithResponse} responses={questionWithResponse.responses}></AnalyticsCard>
-                    )}
+                    {questionsWithResponses.map(qwr =>
+                            <AnalyticsCard questionWithResponses = {qwr}></AnalyticsCard>
+                        )}
                     
                 </div>
             </div>
