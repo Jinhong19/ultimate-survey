@@ -104,11 +104,14 @@ class ChangePasswordCard extends Component {
             .then(response => response.json())
             .then(data => {
                 console.log(data.message);
-                 const changed = data.message === "Reset Password Success!";
+                const changed = data.message === "Reset Password Success!";
                 if(changed === true){
                     this.setState({
                         done: <ChangePost/>
                     });
+                }
+                else{
+                    alert(data.message);
                 }
             });
         };
