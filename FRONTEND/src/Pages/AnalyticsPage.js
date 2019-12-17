@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core";
 import Background from "../Media/back.jpeg";
-import AnalyticsCard from "../Components/BarChart";
+import AnalyticsCard from "../Components/AnalyticsCard";
 
 const styles = theme => ({
 
@@ -25,8 +25,7 @@ class AnlyticsPage extends Component {
         super(props);
 
         this.state = {
-            fetchedRes: [],
-            questsWithResponses: []
+            fetchedRes: []
         }
     }
 
@@ -42,7 +41,8 @@ class AnlyticsPage extends Component {
                 this.setState({
                     fetchedRes: JSON.parse(data)
                 })
-            }); 
+                console.log(this.state.fetchedRes);
+            });
         
     }
 
@@ -53,8 +53,7 @@ class AnlyticsPage extends Component {
         const questions = survey.survey.survey || survey.survey;
         //turn this.state.questions into this.props.questions 
         const questionsWithResponses = [];
-
-        console.log(questions)
+        console.log(this.state.fetchedRes);
 
         for (let i = 0; i < questions.length; i++){
             var quest = {
@@ -68,14 +67,13 @@ class AnlyticsPage extends Component {
             }
             questionsWithResponses.push(quest);
         }
-        this.setState({questsWithResponses: questionsWithResponses});
-        console.log(this.state.questsWithResponses);
+        console.log(questionsWithResponses);
 
         return (
             <div className={this.props.classes.background}>
                 <div className={this.props.classes.container}>
-                    {this.state.questsWithResponses.map(questionWithResponses =>
-                        <AnalyticsCard questionWithResponse={questionWithResponses}></AnalyticsCard>
+                    {questionsWithResponses.map(questionWithResponse =>
+                        <AnalyticsCard questionWithResponses={questionWithResponse}>questionWithResponse.responses</AnalyticsCard>
                     )}
                     
                 </div>
