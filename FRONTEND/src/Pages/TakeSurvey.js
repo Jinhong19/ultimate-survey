@@ -44,6 +44,7 @@ class App extends Component {
     }
 
     render() {
+        console.log(this.props);
         var model = new Survey.Model(this.props.surveyid);
         return (
             <div className="App">

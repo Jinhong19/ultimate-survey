@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withStyles } from "@material-ui/core";
 import Background from "../Media/back.jpeg";
 import Chart from "chart.js"; 
+import AnalyticsCard from '../Components/AnalyticsCard';
 
 
 const styles = theme => ({
@@ -48,10 +49,8 @@ class AnlyticsPage extends Component {
         }); 
     }
 
-    render() {
+    addQuestions = () =>{
         const allQuestions = [];
-
-        //turn this.state.questions into this.props.questions 
         this.state.questions = this.props.location.state.survey.survey;
         for (let i = 0; i < this.state.questions.length; i++){
             var quest = {
@@ -65,12 +64,20 @@ class AnlyticsPage extends Component {
             allQuestions.push(quest);
         }
         this.state.questionObjects = allQuestions;
-        console.log(this.state.questionObjects);
+        console.log(this.state.questions);
 
+    }
+    render() {
+
+        //turn this.state.questions into this.props.questions 
+        
         return (
             <div className={this.props.classes.background}>
                 <div className={this.props.classes.container}>
-                    hello
+                    {this.addQuestions}
+                    {this.state.questions.map(quest =>(
+                        <AnalyticsCard questionTitle={quest.question.$oid} questionResponses={this.state.responses} type={quest.type.$oid} options={quest.options.$oid}></AnalyticsCard>
+                    ))}
                 </div>
             </div>
         );

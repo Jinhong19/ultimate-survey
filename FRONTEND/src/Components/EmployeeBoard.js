@@ -76,7 +76,7 @@ class EmployeeBoard extends React.Component {
                                     <TableCell align="center">{row.owner}</TableCell>
                                     <TableCell align="center">{row.due}</TableCell>
                                     <TableCell align="center">{row.completed.toString()}</TableCell>
-                                    <TableCell align = "center"><SurveyTakeButton>{{surveyid: row.id}, {over: row.completed}}</SurveyTakeButton></TableCell>
+                                    <TableCell align = "center"><SurveyTakeButton surveyid={row.id} over={row.completed}></SurveyTakeButton></TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
