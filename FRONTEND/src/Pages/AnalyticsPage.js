@@ -41,7 +41,6 @@ class AnlyticsPage extends Component {
                 this.setState({
                     fetchedRes: JSON.parse(data)
                 })
-                console.log(this.state.fetchedRes);
             });
         
     }
@@ -49,11 +48,9 @@ class AnlyticsPage extends Component {
     render() {
         //turn this.state.questions into this.props.questions 
         const survey = this.props.location.state.survey;
-        console.log(survey)
         const questions = survey.survey.survey || survey.survey;
         //turn this.state.questions into this.props.questions 
         const questionsWithResponses = [];
-        console.log(this.state.fetchedRes);
 
         for (let i = 0; i < questions.length; i++){
             var quest = {
@@ -67,13 +64,12 @@ class AnlyticsPage extends Component {
             }
             questionsWithResponses.push(quest);
         }
-        console.log(questionsWithResponses);
-
+        console.log(questionsWithResponses.responses);
         return (
             <div className={this.props.classes.background}>
                 <div className={this.props.classes.container}>
                     {questionsWithResponses.map(questionWithResponse =>
-                        <AnalyticsCard questionWithResponses={questionWithResponse}>questionWithResponse.responses</AnalyticsCard>
+                        <AnalyticsCard questionWithResponses={questionWithResponse} responses={questionWithResponse.responses}></AnalyticsCard>
                     )}
                     
                 </div>
