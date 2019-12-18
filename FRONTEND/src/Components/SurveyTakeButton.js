@@ -18,7 +18,7 @@ class SurveyTakeButton extends React.Component {
         super(props);
         // console.log(this.props.over);
         this.state = {
-            surveyid: this.props,
+            surveyid: this.props.surveyid,
             over: this.props.over
         };
     }

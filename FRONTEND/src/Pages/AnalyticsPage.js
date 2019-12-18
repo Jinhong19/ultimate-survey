@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core";
 import Background from "../Media/back.jpeg";
+import AnalyticsCard from "../Components/AnalyticsCard";
 
 const styles = theme => ({
 
@@ -24,7 +25,7 @@ class AnlyticsPage extends Component {
         super(props);
 
         this.state = {
-            fetchedRes: [],
+            fetchedRes: []
         }
     }
 
@@ -40,21 +41,19 @@ class AnlyticsPage extends Component {
                 this.setState({
                     fetchedRes: JSON.parse(data)
                 })
-            }); 
+            });
         
     }
 
     render() {
+        //turn this.state.questions into this.props.questions 
         const survey = this.props.location.state.survey;
-        console.log(survey)
         const questions = survey.survey.survey || survey.survey;
         //turn this.state.questions into this.props.questions 
         const questionsWithResponses = [];
 
-        console.log(questions)
-
         for (let i = 0; i < questions.length; i++){
-            var quest = {
+            const quest = {
                 question: questions[i].question,
                 type: questions[i].type,
                 options: questions[i].options,
@@ -65,13 +64,13 @@ class AnlyticsPage extends Component {
             }
             questionsWithResponses.push(quest);
         }
-        
-        console.log(questionsWithResponses);
-
         return (
             <div className={this.props.classes.background}>
                 <div className={this.props.classes.container}>
-                    hello
+                    {questionsWithResponses.map(qwr =>
+                            <AnalyticsCard questionWithResponses = {qwr}></AnalyticsCard>
+                        )}
+                    
                 </div>
             </div>
         );
