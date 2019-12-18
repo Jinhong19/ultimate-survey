@@ -42,9 +42,6 @@ class LandingPage extends React.Component {
                     alt="company logo"
                 />
                 <LoginCard />
-                <Typography align="center" variant="h4">
-                    For development: <a href="/Dashboard">Dashboard</a>
-                </Typography>
             </div>
         );
     }
