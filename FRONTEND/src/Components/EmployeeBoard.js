@@ -6,51 +6,48 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import SurveyTakeButton from "../Components/SurveyTakeButton";
 import TableBody from "@material-ui/core/TableBody";
-const createData = (name, owner, due, id) => {
-    return { name, owner, due, id}
-  }
-let surveyid = ""
-let over  = true
+const createData = (name, owner, due, completed, id) => {
+    return { name, owner, due, completed, id };
+};
+let surveyid = "";
+let over = true;
 class EmployeeBoard extends React.Component {
     constructor() {
         super();
         this.state = {
             surveys: [],
             rows: []
-        }
+        };
     }
-    
+
     componentDidMount() {
-        fetch("https://ultimate-survey.herokuapp.com/survey/employee", 
-        {method:'GET',
-        headers: {'Content-Type': 'application/json'},
-        credentials: 'include'})
-        .then(response => response.json())
-        .then(data => {
-            this.setState({surveys: JSON.parse(data)})
-            // console.log(this.state)
-        });
+        fetch("https://ultimate-survey.herokuapp.com/survey/employee", {
+            method: "GET",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include"
+        })
+            .then(response => response.json())
+            .then(data => {
+                this.setState({ surveys: JSON.parse(data) });
+            });
     }
-    
-    
 
     render() {
-        if(this.state.surveys.length==0){
+        if (this.state.surveys.length == 0) {
             this.state.rows = [];
-        }
-        else{
+        } else {
             var curDate = new Date();
-            for(let i=0; i<this.state.surveys.length; i++){
-                const {survey, manager_name} = this.state.surveys[i];
-                const deadline = new Date(survey.deadline)
-                this.state.rows[i]=createData(
-                    survey.title || "Survey", 
-                    manager_name || this.state.surveys[i].manager.$oid, 
-                    survey.deadline 
-                    ? (curDate.getTime() <= deadline.getTime()
-                        ? deadline.toDateString()
-                        : "Survey Over")
-                    : "no date", 
+            for (let i = 0; i < this.state.surveys.length; i++) {
+                const { survey, manager_name } = this.state.surveys[i];
+                const deadline = new Date(survey.deadline);
+                this.state.rows[i] = createData(
+                    survey.title || "Survey",
+                    manager_name || this.state.surveys[i].manager.$oid,
+                    survey.deadline
+                        ? curDate.getTime() <= deadline.getTime()
+                            ? deadline.toDateString()
+                            : "Survey Over"
+                        : "no date",
                     this.state.surveys[i]._id.$oid
                 );
             }
@@ -62,23 +59,35 @@ class EmployeeBoard extends React.Component {
                         className={"Surveys"}
                         size="small"
                         aria-label="a dense table"
-                        
                     >
                         <TableHead>
                             <TableRow>
-                                <TableCell align = "center">Name</TableCell>
-                                <TableCell align = "center">Owner</TableCell>
-                                <TableCell align = "center">Due</TableCell>
-                                <TableCell align = "center">Take</TableCell>  
+                                <TableCell align="center">Name</TableCell>
+                                <TableCell align="center">Owner</TableCell>
+                                <TableCell align="center">Due</TableCell>
+                                <TableCell align="center">Take</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
                             {this.state.rows.map(row => (
                                 <TableRow>
-                                    <TableCell align = "center">{row.name}</TableCell>
-                                    <TableCell align="center">{row.owner}</TableCell>
-                                    <TableCell align="center">{row.due}</TableCell>
-                                    <TableCell align = "center"><SurveyTakeButton>{{surveyid: row.id}, {over: row.completed}}</SurveyTakeButton></TableCell>
+                                    <TableCell align="center">
+                                        {row.name}
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        {row.owner}
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        {row.due}
+                                    </TableCell>
+                                    <TableCell align="center">
+                                        <SurveyTakeButton>
+                                            {
+                                                ({ surveyid: row.id },
+                                                { over: row.completed })
+                                            }
+                                        </SurveyTakeButton>
+                                    </TableCell>
                                 </TableRow>
                             ))}
                         </TableBody>
