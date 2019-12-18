@@ -125,9 +125,7 @@ export default function DashboardTabs(props) {
 
     const updateUser = data => {
         setUser({
-            _id: data._id,
-            firstName: data.firstName,
-            lastName: data.lastName,
+            fname: data.firstName,
             isManager: data.isManager
         });
     };
