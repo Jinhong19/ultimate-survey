@@ -1,6 +1,5 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import { Link } from 'react-router-dom';
 
 class SurveyCreateButton extends React.Component {
     render() {
@@ -26,22 +25,18 @@ class SurveyCreateButton extends React.Component {
             })
                 .then(response => response.json())
                 .then(data => console.log(data));
-
-            window.location.reload();
         };
 
         return (
             <div className="text-center" style={marginBtn}>
-                <Link to={{pathname: '/dashboard', state: {submit: true}}}>
-                    <Button
-                        onClick={handleCreate}
-                        size="lg"
-                        variant="success"
-                        // href="/"
-                    >
-                        Create
-                    </Button>
-                </Link>
+                <Button
+                    onClick={handleCreate}
+                    size="lg"
+                    variant="success"
+                    // href="/"
+                >
+                    Create
+                </Button>
             </div>
         );
     }
